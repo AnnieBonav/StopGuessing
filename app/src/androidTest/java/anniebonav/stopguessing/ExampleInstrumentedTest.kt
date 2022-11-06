@@ -1,4 +1,4 @@
-package anniebonav.stopguessing0
+package anniebonav.stopguessing
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("anniebonav.stopguessing0", appContext.packageName)
+        assertEquals("anniebonav.stopguessing", appContext.packageName)
     }
 }

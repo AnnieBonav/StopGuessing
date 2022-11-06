@@ -1,4 +1,4 @@
-package anniebonav.stopguessing0
+package anniebonav.stopguessing
 
 import android.annotation.SuppressLint
 import android.content.Intent

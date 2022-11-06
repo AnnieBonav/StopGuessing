@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'anniebonav.stopguessing0'
+    namespace 'anniebonav.stopguessing'
     compileSdk 32
 
     defaultConfig {
-        applicationId "anniebonav.stopguessing0"
+        applicationId "anniebonav.stopguessing"
         minSdk 21
         targetSdk 32
         versionCode 1
