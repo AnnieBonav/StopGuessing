@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePageActivity"
+    android:background="@color/teal_0">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"
+        />
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:text="Welcome to"
+        android:textAlignment="center"
+        android:textColor="@color/black_9"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+         />
+
+    <TextView
+        android:id="@+id/stopGuessingTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Stop Guessing!"
+        android:textAlignment="center"
+        android:textColor="@color/black_9"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
+    <Button
+        android:id="@+id/seeIngredientsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:backgroundTint="@color/teal_9"
+        android:text="See Ingredients"
+        android:onClick="goToSeeIngredients"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/leftMargin"
+        app:layout_constraintEnd_toEndOf="@+id/rightMargin"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/seeMealPlansButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingVertical="12dp"
+        android:backgroundTint="@color/teal_9"
+        android:text="See Meal PLans"
+        app:layout_constraintTop_toBottomOf="@+id/seeIngredientsButton"
+        app:layout_constraintStart_toStartOf="@+id/leftMargin"
+        app:layout_constraintEnd_toEndOf="@+id/rightMargin"
+        >
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IngredientsActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <TextView
+        android:id="@+id/ingredientsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="Here are your ingredients"
+        android:textAlignment="center"
+        android:textColor="@color/black_9"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredientsList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/ingredientsTitle"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="@id/leftMargin"
+        app:layout_constraintEnd_toEndOf="@+id/rightMargin"
+        tools:listitem="@layout/item_ingredient" />
+
+    <View
+        android:id="@+id/decoration1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginBottom="-20dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
