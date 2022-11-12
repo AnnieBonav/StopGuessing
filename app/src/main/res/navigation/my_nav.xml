@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/addIngredientFragment">
+
+    <fragment
+        android:id="@+id/addIngredientFragment"
+        android:name="anniebonav.stopguessing.AddIngredientFragment"
+        android:label="fragment_add_ingredient"
+        tools:layout="@layout/fragment_add_ingredient" >
+        <action
+            android:id="@+id/action_addIngredientFragment_to_deleteIngredientFragment"
+            app:destination="@id/deleteIngredientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteIngredientFragment"
+        android:name="anniebonav.stopguessing.DeleteIngredientFragment"
+        android:label="fragment_delete_ingredient"
+        tools:layout="@layout/fragment_delete_ingredient" >
+        <action
+            android:id="@+id/action_deleteIngredientFragment_to_addIngredientFragment"
+            app:destination="@id/addIngredientFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/ingredientsActivity"
+        android:name="anniebonav.stopguessing.IngredientsActivity"
+        android:label="activity_see_ingredients"
+        tools:layout="@layout/activity_see_ingredients" />
+</navigation>

@@ -41,4 +41,8 @@ class HomePageActivity : AppCompatActivity() {
     fun goToSeeIngredients(view: View){
         startActivity(Intent(this, IngredientsActivity::class.java))
     }
+
+    fun gotoNavActivity(view: View){
+        startActivity(Intent(this, NavigationActivity::class.java))
+    }
 }
