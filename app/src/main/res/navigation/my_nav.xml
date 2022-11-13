@@ -21,7 +21,9 @@
         tools:layout="@layout/fragment_delete_ingredient" >
         <action
             android:id="@+id/action_deleteIngredientFragment_to_addIngredientFragment"
-            app:destination="@id/addIngredientFragment" />
+            app:destination="@id/addIngredientFragment"
+            app:popUpTo="@id/addIngredientFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/ingredientsActivity"

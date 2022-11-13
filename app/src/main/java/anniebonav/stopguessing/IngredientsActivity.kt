@@ -37,4 +37,6 @@ class IngredientsActivity : AppCompatActivity() {
         val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         toast.show()
     }
+
+
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:textSize="20dp"
-        android:text="Add Ingredient Fragment"
+        android:text="Delete Ingredient Fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:id="@+id/goAddIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to delete Ingredient"
+        android:text="Go to Add Ingredient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
