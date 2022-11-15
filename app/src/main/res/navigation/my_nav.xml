@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/addIngredientFragment">
+    app:startDestination="@id/ingredientsFragment">
 
     <fragment
         android:id="@+id/addIngredientFragment"
         android:name="anniebonav.stopguessing.AddIngredientFragment"
         android:label="fragment_add_ingredient"
-        tools:layout="@layout/fragment_add_ingredient" >
+        tools:layout="@layout/fragment_add_ingredient">
         <action
             android:id="@+id/action_addIngredientFragment_to_deleteIngredientFragment"
             app:destination="@id/deleteIngredientFragment" />
@@ -18,16 +18,16 @@
         android:id="@+id/deleteIngredientFragment"
         android:name="anniebonav.stopguessing.DeleteIngredientFragment"
         android:label="fragment_delete_ingredient"
-        tools:layout="@layout/fragment_delete_ingredient" >
+        tools:layout="@layout/fragment_delete_ingredient">
         <action
             android:id="@+id/action_deleteIngredientFragment_to_addIngredientFragment"
             app:destination="@id/addIngredientFragment"
             app:popUpTo="@id/addIngredientFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <activity
-        android:id="@+id/ingredientsActivity"
-        android:name="anniebonav.stopguessing.RecyclerActivity"
-        android:label="activity_see_ingredients"
-        tools:layout="@layout/activity_ingredients" />
+    <fragment
+        android:id="@+id/ingredientsFragment"
+        android:name="anniebonav.stopguessing.IngredientsFragment"
+        android:label="fragment_ingredients"
+        tools:layout="@layout/fragment_ingredients" />
 </navigation>

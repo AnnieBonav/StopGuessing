@@ -5,55 +5,58 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [IngredientsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class IngredientsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var ingredientsList: RecyclerView
+    private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
+    private val ingredientsAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ingredientsList = view.findViewById(R.id.ingredientsList)
+        ingredientsList.adapter = ingredientsAdapter
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        /*
+        val addIngredientsButton = view?.findViewById<Button>(R.id.addIngredientButton)
+        addIngredientsButton?.setOnClickListener{
+            println("Should be here")
+            val textBoolean = view?.findViewById<TextView>(R.id.workingBoolean)
+            if(textBoolean?.text == "false"){
+                textBoolean.text = "true";
+            }else if (textBoolean?.text == "true"){
+                textBoolean.text = "false";
+            }
+
+            findNavController().navigate(R.id.action_ingredientsFragment_to_addIngredientFragment)
+        }*/
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ingredients, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment IngredientsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            IngredientsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun onIngredientClicked(ingredientName: String){
+        duplicateIngredient(ingredientName)
     }
+
+    private fun duplicateIngredient(ingredientName: String){
+        toast("Duplicated $ingredientName")
+        ingredientsAdapter.addIngredient(ingredientName)
+    }
+
+    private fun toast(text: String){
+        //val context = this
+        val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
 }

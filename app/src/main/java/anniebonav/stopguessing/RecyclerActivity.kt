@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 class RecyclerActivity : AppCompatActivity() {
     private lateinit var ingredientsList: RecyclerView
     private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
-    private val adapter = Adapter(initialIngredientsNames, this::onIngredientClicked)
+    private val ingredientsListAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ingredients)
+        setContentView(R.layout.activity_recycler)
         ingredientsList = findViewById(R.id.ingredientsList)
-        ingredientsList.adapter = adapter
+        ingredientsList.adapter = ingredientsListAdapter
     }
 
     private fun onIngredientClicked(ingredientName: String){
@@ -25,7 +25,7 @@ class RecyclerActivity : AppCompatActivity() {
 
     private fun duplicateIngredient(ingredientName: String){
         toast("Duplicated $ingredientName")
-        adapter.addIngredient(ingredientName)
+        ingredientsListAdapter.addIngredient(ingredientName)
     }
 
     private fun toast(text: String){

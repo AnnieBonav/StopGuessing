@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class Adapter (private var ingredientsNames: List<String>, private val onIngredientClick: IngredientClickFunction): RecyclerView.Adapter<ViewHolder>(){
+class IngredientsListAdapter (private var ingredientsNames: List<String>, private val onIngredientClick: IngredientClickFunction): RecyclerView.Adapter<ViewHolder>(){
     fun addIngredient(ingredientName: String){
         ingredientsNames = ingredientsNames.plus(ingredientName)
         val position = ingredientsNames.count() -1
