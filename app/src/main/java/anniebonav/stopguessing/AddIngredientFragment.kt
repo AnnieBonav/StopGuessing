@@ -20,15 +20,9 @@ class AddIngredientFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_ingredient, container, false)
 
-        val button = view.findViewById<Button>(R.id.goDeleteIngredientButton)
+        val button = view.findViewById<Button>(R.id.goBackIngredientsFromAdd)
         button.setOnClickListener{
-            val textBoolean = view?.findViewById<TextView>(R.id.booleanIngredients)
-            if(textBoolean?.text == "false"){
-                textBoolean?.text = "true";
-            }else{
-                textBoolean?.text = "false";
-            }
-            findNavController().navigate(R.id.action_addIngredientFragment_to_deleteIngredientFragment)
+            findNavController().navigate(R.id.action_addIngredientFragment_to_ingredientsFragment)
         }
 
         return view

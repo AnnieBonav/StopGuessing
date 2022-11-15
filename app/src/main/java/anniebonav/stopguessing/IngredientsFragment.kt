@@ -31,14 +31,12 @@ class IngredientsFragment : Fragment() {
 
         val addIngredientsButton = view?.findViewById<Button>(R.id.goToAddIngredientsFragment)
         addIngredientsButton?.setOnClickListener{
-            val textBoolean = view?.findViewById<TextView>(R.id.boolView)
-            if(textBoolean?.text == "false"){
-                textBoolean?.text = "true";
-            }else{
-                textBoolean?.text = "false";
-            }
-
             findNavController().navigate(R.id.action_ingredientsFragment_to_addIngredientFragment)
+        }
+
+        val deleteIngredientsButton = view?.findViewById<Button>(R.id.goToDeleteIngredientsFragment)
+        deleteIngredientsButton?.setOnClickListener{
+            findNavController().navigate(R.id.action_ingredientsFragment_to_deleteIngredientFragment)
         }
         // Inflate the layout for this fragment
         return view

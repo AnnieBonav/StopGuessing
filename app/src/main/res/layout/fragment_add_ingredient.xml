@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/goDeleteIngredientButton"
+        android:id="@+id/goBackIngredientsFromAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to delete Ingredient"
+        android:text="Go back to Ingredient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

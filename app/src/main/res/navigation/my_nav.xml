@@ -11,8 +11,8 @@
         android:label="fragment_add_ingredient"
         tools:layout="@layout/fragment_add_ingredient">
         <action
-            android:id="@+id/action_addIngredientFragment_to_deleteIngredientFragment"
-            app:destination="@id/deleteIngredientFragment" />
+            android:id="@+id/action_addIngredientFragment_to_ingredientsFragment"
+            app:destination="@id/ingredientsFragment" />
     </fragment>
     <fragment
         android:id="@+id/deleteIngredientFragment"
@@ -20,10 +20,8 @@
         android:label="fragment_delete_ingredient"
         tools:layout="@layout/fragment_delete_ingredient">
         <action
-            android:id="@+id/action_deleteIngredientFragment_to_addIngredientFragment"
-            app:destination="@id/addIngredientFragment"
-            app:popUpTo="@id/addIngredientFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_deleteIngredientFragment_to_ingredientsFragment"
+            app:destination="@id/ingredientsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ingredientsFragment"
@@ -33,5 +31,8 @@
         <action
             android:id="@+id/action_ingredientsFragment_to_addIngredientFragment"
             app:destination="@id/addIngredientFragment" />
+        <action
+            android:id="@+id/action_ingredientsFragment_to_deleteIngredientFragment"
+            app:destination="@id/deleteIngredientFragment" />
     </fragment>
 </navigation>

@@ -16,9 +16,9 @@ class DeleteIngredientFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_delete_ingredient, container, false)
-        val button = view.findViewById<Button>(R.id.goAddIngredientButton)
+        val button = view.findViewById<Button>(R.id.goBackIngredientsFromDelete)
         button.setOnClickListener{
-            findNavController().navigate(R.id.action_deleteIngredientFragment_to_addIngredientFragment)
+            findNavController().navigate(R.id.action_deleteIngredientFragment_to_ingredientsFragment)
         }
 
         return view
