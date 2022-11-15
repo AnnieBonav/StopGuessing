@@ -27,7 +27,7 @@
     </fragment>
     <activity
         android:id="@+id/ingredientsActivity"
-        android:name="anniebonav.stopguessing.IngredientsActivity"
+        android:name="anniebonav.stopguessing.RecyclerActivity"
         android:label="activity_see_ingredients"
-        tools:layout="@layout/activity_see_ingredients" />
+        tools:layout="@layout/activity_ingredients" />
 </navigation>

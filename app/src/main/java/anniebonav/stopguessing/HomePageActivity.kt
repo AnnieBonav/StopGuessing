@@ -39,10 +39,10 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     fun goToSeeIngredients(view: View){
-        startActivity(Intent(this, IngredientsActivity::class.java))
+        startActivity(Intent(this, RecyclerActivity::class.java))
     }
 
     fun gotoNavActivity(view: View){
-        startActivity(Intent(this, NavigationActivity::class.java))
+        startActivity(Intent(this, IngredientsActivity::class.java))
     }
 }

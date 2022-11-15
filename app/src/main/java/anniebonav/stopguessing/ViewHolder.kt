@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 
-class IngredientViewHolder (view: View, private val onClick: IngredientClickFunction): RecyclerView.ViewHolder(view){
+class ViewHolder (view: View, private val onClick: IngredientClickFunction): RecyclerView.ViewHolder(view){
     private val ingredientButton: Button
     init{
         ingredientButton = view as Button

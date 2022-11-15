@@ -1,42 +1,27 @@
 package anniebonav.stopguessing
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-//Added tutorial
-import android.annotation.SuppressLint
-import android.os.Build
-import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 
 class IngredientsActivity : AppCompatActivity() {
-    private lateinit var ingredientsList: RecyclerView
-    private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
-    private val ingredientsAdapter = IngredientsAdapter(initialIngredientsNames, this::onIngredientClicked)
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_see_ingredients)
-        ingredientsList = findViewById(R.id.ingredientsList)
-        ingredientsList.adapter = ingredientsAdapter
+        setContentView(R.layout.activity_navigation)
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        setupActionBarWithNavController(navController)
     }
 
-    private fun onIngredientClicked(ingredientName: String){
-        duplicateIngredient(ingredientName)
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-    private fun duplicateIngredient(ingredientName: String){
-        toast("Duplicated $ingredientName")
-        ingredientsAdapter.addIngredient(ingredientName)
-    }
-
-    private fun toast(text: String){
-        val context = this
-        val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
-        toast.show()
-    }
-
-
 }
