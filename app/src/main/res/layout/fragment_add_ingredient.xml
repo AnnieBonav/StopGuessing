@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddIngredientFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/addIngredientTitle"
         android:layout_width="wrap_content"
@@ -24,7 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to delete Ingredient"
-        android:onClick="goToNextFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

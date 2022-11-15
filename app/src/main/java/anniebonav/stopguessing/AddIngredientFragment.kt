@@ -34,18 +34,6 @@ class AddIngredientFragment : Fragment() {
         return view
     }
 
-    fun goToNextFragment(){
-        val textBoolean = view?.findViewById<TextView>(R.id.booleanIngredients)
-        if(textBoolean?.text == "false"){
-            textBoolean?.text = "true";
-        }else{
-            textBoolean?.text = "false";
-        }
-        findNavController().navigate(R.id.action_addIngredientFragment_to_deleteIngredientFragment)
-        //val toast = Toast.makeText(context, "I was clicked", Toast.LENGTH_SHORT)
-        //toast.show()
-    }
-
     fun toastMe(){
         val toast = Toast.makeText(context, "I am a toast", Toast.LENGTH_SHORT)
         toast.show()

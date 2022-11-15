@@ -12,10 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class IngredientsFragment : Fragment() {
-
     private lateinit var ingredientsList: RecyclerView
     private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
     private val ingredientsAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,22 +27,23 @@ class IngredientsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*
-        val addIngredientsButton = view?.findViewById<Button>(R.id.addIngredientButton)
+        val view = inflater.inflate(R.layout.fragment_ingredients, container, false)
+
+        val addIngredientsButton = view?.findViewById<Button>(R.id.goToAddIngredientsFragment)
         addIngredientsButton?.setOnClickListener{
-            println("Should be here")
-            val textBoolean = view?.findViewById<TextView>(R.id.workingBoolean)
+            val textBoolean = view?.findViewById<TextView>(R.id.boolView)
             if(textBoolean?.text == "false"){
-                textBoolean.text = "true";
-            }else if (textBoolean?.text == "true"){
-                textBoolean.text = "false";
+                textBoolean?.text = "true";
+            }else{
+                textBoolean?.text = "false";
             }
 
             findNavController().navigate(R.id.action_ingredientsFragment_to_addIngredientFragment)
-        }*/
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ingredients, container, false)
+        return view
     }
+
 
     private fun onIngredientClicked(ingredientName: String){
         duplicateIngredient(ingredientName)

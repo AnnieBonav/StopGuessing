@@ -29,5 +29,9 @@
         android:id="@+id/ingredientsFragment"
         android:name="anniebonav.stopguessing.IngredientsFragment"
         android:label="fragment_ingredients"
-        tools:layout="@layout/fragment_ingredients" />
+        tools:layout="@layout/fragment_ingredients">
+        <action
+            android:id="@+id/action_ingredientsFragment_to_addIngredientFragment"
+            app:destination="@id/addIngredientFragment" />
+    </fragment>
 </navigation>
