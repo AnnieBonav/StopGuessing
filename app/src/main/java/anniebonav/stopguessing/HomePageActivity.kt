@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.Button
 
 class HomePageActivity : AppCompatActivity() {
-    //private var myDb = DatabaseHandler(this)
+    private var databaseHandler = DatabaseHandler(this)
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +40,10 @@ class HomePageActivity : AppCompatActivity() {
 
     }
 
+    public fun GetDatabaseHandler():DatabaseHandler{
+        return databaseHandler
+    }
+
     fun goToSeeIngredients(view: View){
         startActivity(Intent(this, IngredientsActivity::class.java))
     }
@@ -49,6 +53,6 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     fun gotoNavActivity(view: View){
-        startActivity(Intent(this, IngredientsActivity::class.java))
+        startActivity(Intent(this, TestDatabaseActivity::class.java))
     }
 }
