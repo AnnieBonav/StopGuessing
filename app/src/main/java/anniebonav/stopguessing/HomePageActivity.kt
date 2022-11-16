@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Button
 
 class HomePageActivity : AppCompatActivity() {
+    //private var myDb = DatabaseHandler(this)
+
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,10 @@ class HomePageActivity : AppCompatActivity() {
 
     fun goToSeeIngredients(view: View){
         startActivity(Intent(this, RecyclerActivity::class.java))
+    }
+
+    fun goToMealPlan(view: View){
+        startActivity(Intent(this, MealPlansActivity::class.java))
     }
 
     fun gotoNavActivity(view: View){

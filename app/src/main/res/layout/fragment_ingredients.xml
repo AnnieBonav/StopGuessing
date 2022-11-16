@@ -37,20 +37,21 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredientsList"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="250dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/ingredientsTitle"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="@id/leftMargin"
         app:layout_constraintEnd_toEndOf="@+id/rightMargin"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/leftMargin"
+        app:layout_constraintTop_toBottomOf="@id/ingredientsTitle"
         tools:listitem="@layout/item_ingredient" />
 
     <Button
         android:id="@+id/goToAddIngredientsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to add ingredinets fragment"
+        android:text="Go to add ingredients fragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +61,8 @@
         android:id="@+id/goToDeleteIngredientsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE ingredinets fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="DELETE ingredients fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/goToAddIngredientsFragment" />
@@ -75,5 +76,15 @@
         android:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/messagesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Information"
+        app:layout_constraintEnd_toStartOf="@+id/rightMargin"
+        app:layout_constraintStart_toStartOf="@+id/leftMargin"
+        app:layout_constraintTop_toBottomOf="@+id/goToDeleteIngredientsFragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

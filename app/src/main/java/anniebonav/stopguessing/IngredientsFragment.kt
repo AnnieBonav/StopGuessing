@@ -6,21 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.coroutines.coroutineContext
 
 class IngredientsFragment : Fragment() {
     private lateinit var ingredientsList: RecyclerView
     private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
     private val ingredientsAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
 
+    //private var myDb = DatabaseHandler(requireContext())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ingredientsList = view.findViewById(R.id.ingredientsList)
         ingredientsList.adapter = ingredientsAdapter
+
+        /*
+        val messagesText = view.findViewById<TextView>(R.id.messagesTextView).apply {
+            text = myDb.listOfMessages().toString()
+        }*/
     }
 
     override fun onCreateView(

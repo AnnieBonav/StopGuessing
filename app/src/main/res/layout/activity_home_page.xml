@@ -76,6 +76,7 @@
         android:paddingVertical="12dp"
         android:backgroundTint="@color/teal_9"
         android:text="See Meal PLans"
+        android:onClick="goToMealPlan"
         app:layout_constraintTop_toBottomOf="@+id/seeIngredientsButton"
         app:layout_constraintStart_toStartOf="@+id/leftMargin"
         app:layout_constraintEnd_toEndOf="@+id/rightMargin"
