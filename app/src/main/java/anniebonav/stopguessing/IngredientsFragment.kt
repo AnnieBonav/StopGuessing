@@ -59,10 +59,11 @@ class IngredientsFragment : Fragment() {
             findNavController().navigate(R.id.action_ingredientsFragment_to_addIngredientFragment)
         }
 
+        /*
         val deleteIngredientsButton = view?.findViewById<Button>(R.id.goToDeleteIngredientsFragment)
         deleteIngredientsButton?.setOnClickListener{
             findNavController().navigate(R.id.action_ingredientsFragment_to_deleteIngredientFragment)
-        }
+        }*/
         // Inflate the layout for this fragment
         return view
     }

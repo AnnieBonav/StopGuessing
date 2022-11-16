@@ -37,7 +37,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredientsRecycler"
         android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_height="450dp"
         android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -51,22 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Ingredient"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="500dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
          />
 
-    <Button
-        android:id="@+id/goToDeleteIngredientsFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="DELETE ingredients fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addIngredientButton" />
 
     <View
         android:id="@+id/decoration1"
