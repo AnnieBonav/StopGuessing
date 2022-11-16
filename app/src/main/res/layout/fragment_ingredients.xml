@@ -30,32 +30,33 @@
         android:textColor="@color/black_9"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ingredientsList"
+        android:id="@+id/ingredientsRecycler"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="@+id/rightMargin"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/leftMargin"
         app:layout_constraintTop_toBottomOf="@id/ingredientsTitle"
+        app:layout_constraintStart_toStartOf="@id/leftMargin"
+        app:layout_constraintEnd_toEndOf="@+id/rightMargin"
         tools:listitem="@layout/item_ingredient" />
 
     <Button
-        android:id="@+id/goToAddIngredientsFragment"
+        android:id="@+id/addIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to add ingredients fragment"
+        android:text="Add Ingredient"
+        android:layout_marginTop="300dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ingredientsList" />
+         />
 
     <Button
         android:id="@+id/goToDeleteIngredientsFragment"
@@ -65,7 +66,7 @@
         android:text="DELETE ingredients fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goToAddIngredientsFragment" />
+        app:layout_constraintTop_toBottomOf="@id/addIngredientButton" />
 
     <View
         android:id="@+id/decoration1"
@@ -76,15 +77,5 @@
         android:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/messagesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Information"
-        app:layout_constraintEnd_toStartOf="@+id/rightMargin"
-        app:layout_constraintStart_toStartOf="@+id/leftMargin"
-        app:layout_constraintTop_toBottomOf="@+id/goToDeleteIngredientsFragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

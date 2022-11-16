@@ -15,14 +15,14 @@ import kotlin.coroutines.coroutineContext
 
 class IngredientsFragment : Fragment() {
     private lateinit var ingredientsList: RecyclerView
-    private val initialIngredientsNames = listOf("Apple", "Pear", "Cucumber", "Salad", "Chicken")
+    private val initialIngredientsNames = listOf("Apple")
     private val ingredientsAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
 
     //private var myDb = DatabaseHandler(requireContext())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ingredientsList = view.findViewById(R.id.ingredientsList)
+        ingredientsList = view.findViewById(R.id.ingredientsRecycler)
         ingredientsList.adapter = ingredientsAdapter
 
         /*
@@ -37,7 +37,7 @@ class IngredientsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_ingredients, container, false)
 
-        val addIngredientsButton = view?.findViewById<Button>(R.id.goToAddIngredientsFragment)
+        val addIngredientsButton = view?.findViewById<Button>(R.id.addIngredientButton)
         addIngredientsButton?.setOnClickListener{
             findNavController().navigate(R.id.action_ingredientsFragment_to_addIngredientFragment)
         }

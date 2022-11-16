@@ -41,7 +41,7 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     fun goToSeeIngredients(view: View){
-        startActivity(Intent(this, RecyclerActivity::class.java))
+        startActivity(Intent(this, IngredientsActivity::class.java))
     }
 
     fun goToMealPlan(view: View){
