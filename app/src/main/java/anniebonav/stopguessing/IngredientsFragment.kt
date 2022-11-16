@@ -1,6 +1,8 @@
 package anniebonav.stopguessing
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +20,26 @@ class IngredientsFragment : Fragment() {
     private val initialIngredientsNames = listOf("Apple")
     private val ingredientsAdapter = IngredientsListAdapter(initialIngredientsNames, this::onIngredientClicked)
 
-    //private var myDb = DatabaseHandler(requireContext())
+
+    private lateinit var myDb: DatabaseHandler
+
+    /*
+    private fun saveIngredient(view: View){
+        val ingredientName = view.findViewById<EditText>(R.id.ingredientNameInput).text.toString()
+        myDb.insertData(ingredientName)
+        toast(ingredientName);
+        //startActivity(Intent(this,TestDatabaseActivity::class.java))
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ingredientsList = view.findViewById(R.id.ingredientsRecycler)
         ingredientsList.adapter = ingredientsAdapter
 
+        /*
+        view.findViewById<Button>(R.id.addIngredientButton).setOnClickListener{
+            saveIngredient(view);
+        }*/
         /*
         val messagesText = view.findViewById<TextView>(R.id.messagesTextView).apply {
             text = myDb.listOfMessages().toString()
@@ -36,6 +51,8 @@ class IngredientsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_ingredients, container, false)
+
+        myDb = DatabaseHandler(activity as IngredientsActivity) //Activity exists inside of oncreate
 
         val addIngredientsButton = view?.findViewById<Button>(R.id.addIngredientButton)
         addIngredientsButton?.setOnClickListener{
