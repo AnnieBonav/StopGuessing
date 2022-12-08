@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.anniebonav.stopguessingm3.databinding.FragmentSecondBinding
+import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
-class SecondFragment : Fragment() {
-
-    private var _binding: FragmentSecondBinding? = null
+class MealPlansFragment : Fragment() {
+    private var _binding: FragmentMealPlansBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -21,7 +20,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -29,8 +28,8 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        binding.seeMealPlansButton.setOnClickListener {
+            findNavController().navigate(R.id.action_mealPlansFragment_to_FirstFragment)
         }
     }
 
