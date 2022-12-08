@@ -4,10 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MealPlansAdapter (private var ingredientsNames: List<String>, private val onIngredientClick: MPClickFunction): RecyclerView.Adapter<ViewHolder>(){
+class MealPlansAdapter (private var mpNames: List<String>, private val onIngredientClick: MPClickFunction): RecyclerView.Adapter<ViewHolder>(){
+
+    fun AddIngredients(ingredients: MutableList<String>){
+
+    }
+
     fun addIngredient(ingredientName: String){
-        ingredientsNames = ingredientsNames.plus(ingredientName)
-        val position = ingredientsNames.count() -1
+        mpNames = mpNames.plus(ingredientName)
+        val position = mpNames.count() -1
         this.notifyItemInserted(position)
     }
 
@@ -19,11 +24,11 @@ class MealPlansAdapter (private var ingredientsNames: List<String>, private val 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ingredientName = ingredientsNames[position]
+        val ingredientName = mpNames[position]
         holder.display(ingredientName)
     }
 
     override fun getItemCount(): Int {
-        return ingredientsNames.count()
+        return mpNames.count()
     }
 }

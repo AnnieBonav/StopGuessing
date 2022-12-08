@@ -44,6 +44,8 @@ class MealPlansFragment : Fragment() {
         return binding.root
     }
 
+
+
     private fun onMPClicked(ingredientName: String){
         duplicateIngredient(ingredientName)
     }
@@ -61,6 +63,9 @@ class MealPlansFragment : Fragment() {
 
     fun SaveMealPlan(view: View){
         myDb.insertData(view.findViewById<EditText>(R.id.mpNameInput).text.toString())
+        var currentMPNumber = myDb.GetMPAmount()
+        var newMealPlan = myDb.getMealPlan(currentMPNumber)
+        duplicateIngredient(newMealPlan)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

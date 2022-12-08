@@ -13,6 +13,29 @@ class DatabaseHandler(context: Context):SQLiteOpenHelper(context, dbName, null, 
         private const val objectName = "_text"
     }
 
+    fun getMealPlan(index: Int): String{
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("select $objectName from $tableName where $id = $index", null)
+        //val i = cursor.getColumnIndex(objectName);
+        while (cursor.moveToNext()) {
+            val i = cursor.getColumnIndex(objectName);
+            if (i >= 0)
+                return cursor.getString(i)
+        }
+        return ""
+    }
+
+    public fun GetMPAmount(): Int{
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) from $tableName", null)
+        while (cursor.moveToNext()) {
+            val i = cursor.getColumnIndex("COUNT(*)");
+            if (i >= 0)
+                return cursor.getInt(i)
+        }
+        return 0
+    }
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE IF NOT EXISTS $tableName ($id INTEGER PRIMARY KEY, $objectName VARCHAR(30));")
     }
