@@ -13,6 +13,7 @@ import android.view.MenuItem
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private var databaseHandler = DatabaseHandler(this)
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -36,6 +37,10 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }
+    }
+
+    public fun GetDatabaseHandler():DatabaseHandler{
+        return databaseHandler
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
