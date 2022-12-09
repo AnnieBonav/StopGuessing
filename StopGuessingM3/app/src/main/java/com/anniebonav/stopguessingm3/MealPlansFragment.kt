@@ -12,14 +12,14 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
+import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 
 //Database stuff
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 
 class MealPlansFragment : Fragment() {
-    private var _binding: FragmentMealPlansBinding? = null
+    private var _binding: FragmentMealplansBinding? = null
     private lateinit var myDb: DatabaseHandler
 
 
@@ -40,13 +40,15 @@ class MealPlansFragment : Fragment() {
     ): View? {
         val myContext = activity as MainActivity
 
-        _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
+        _binding = FragmentMealplansBinding.inflate(inflater, container, false)
         myDb = DatabaseHandler(myContext)
 
+
+        /*
         val addMealPlan = binding.addMealPlan
         addMealPlan?.setOnClickListener(){
             SaveMealPlan(binding.root)
-        }
+        }*/
 
         //RECYCLER
         mealPlansRecycler = binding.mpRecycler
@@ -69,8 +71,11 @@ class MealPlansFragment : Fragment() {
             Log.d("User", "MyUser: $myUser   Users: $users")
         }.start()
 
-        mealplansArrayList.add(MealPlanModel("Annie", "Bonavides", 1, 2))
-        mealplansArrayList.add(MealPlanModel("Ana", "Aguilar", 3, 4))
+        mealplansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+        mealplansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
+        mealplansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
+        mealplansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
+        mealplansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
         val mpAdapter = MealPlansAdapter(myContext, mealplansArrayList)
         val linearLayoutManager = LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false)
         mealPlansRecycler.layoutManager = linearLayoutManager
@@ -96,19 +101,21 @@ class MealPlansFragment : Fragment() {
         //toast.show()
     }
 
+    /*
     fun SaveMealPlan(view: View){
         myDb.insertData(view.findViewById<EditText>(R.id.mpNameInput).text.toString())
         var currentMPNumber = myDb.GetMPAmount()
         var newMealPlan = myDb.getMealPlan(currentMPNumber)
         duplicateIngredient(newMealPlan)
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
         binding.seeMealPlansButton.setOnClickListener {
             findNavController().navigate(R.id.action_mealPlansFragment_to_FirstFragment)
-        }
+        }*/
     }
 
     override fun onDestroyView() {

@@ -12,7 +12,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@android:drawable/ic_menu_search"
         app:startIconContentDescription="@string/delete_icon"
-        app:endIconMode="clear_text">
+        app:endIconMode="clear_text"
+        android:paddingBottom="12dp">
 
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"

@@ -19,6 +19,9 @@ class MealPlansAdapter (private val context: Context, mealplansArrayList: ArrayL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: MealPlanModel = mealplansArrayList[position]
         holder.mealplanNameTV.setText(model.getName())
+        holder.mealplanDescriptionTV.setText(model.getDescription())
+        holder.mealplanEditButton.setText("Edit")
+        holder.mealplanDeleteButton.setText("Delete")
     }
 
     init {
