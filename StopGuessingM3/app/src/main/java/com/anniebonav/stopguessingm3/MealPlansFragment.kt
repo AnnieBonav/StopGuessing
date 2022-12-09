@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,25 +13,34 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
+//Database stuff
+import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
     private lateinit var myDb: DatabaseHandler
 
 
+    //Recycler
     private lateinit var mealPlansRecycler: RecyclerView
     private val initialMealPlans = listOf("MealPlan1", "MealPlan2", "MealPlan3")
     private val mpAdapter = MealPlansAdapter(initialMealPlans, this::onMPClicked)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    //New database
+    private val DATABASE_MP: String = "USER_DATABASE"
+
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val myContext = activity as MainActivity
+
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
-        myDb = DatabaseHandler(activity as MainActivity)
+        myDb = DatabaseHandler(myContext)
 
         val addMealPlan = binding.addMealPlan
         addMealPlan?.setOnClickListener(){
@@ -40,6 +50,24 @@ class MealPlansFragment : Fragment() {
         //RECYCLER
         mealPlansRecycler = binding.mpRecycler
         mealPlansRecycler.adapter = mpAdapter
+
+        //New database
+
+        val db = Room.databaseBuilder(
+            myContext, UserDatabase::class.java, DATABASE_MP
+        ).build()
+
+        val userDao = db.userDao()
+        val myUser = User(0, "Annie", "Bonavides")
+
+        //
+
+        Thread {
+            userDao.insertAll(myUser)
+            val users: List<User> = userDao.getAll()
+            Log.d("User", "MyUser: $myUser   Users: $users")
+        }.start()
+
 
         return binding.root
     }
