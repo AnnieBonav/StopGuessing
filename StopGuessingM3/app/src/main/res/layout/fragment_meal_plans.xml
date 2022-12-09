@@ -56,11 +56,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="@id/leftMargin"
         app:layout_constraintEnd_toEndOf="@+id/rightMargin"
-        tools:listitem="@layout/item_meal_plan" />
+        tools:listitem="@layout/item_mealplan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,8 +25,8 @@ class MealPlansFragment : Fragment() {
 
     //Recycler
     private lateinit var mealPlansRecycler: RecyclerView
-    private val initialMealPlans = listOf("MealPlan1", "MealPlan2", "MealPlan3")
-    private val mpAdapter = MealPlansAdapter(initialMealPlans, this::onMPClicked)
+    val mealplansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
+    //private val initialMealPlans = listOf("MealPlan1", "MealPlan2", "MealPlan3")
 
     //New database
     private val DATABASE_MP: String = "USER_DATABASE"
@@ -49,7 +50,7 @@ class MealPlansFragment : Fragment() {
 
         //RECYCLER
         mealPlansRecycler = binding.mpRecycler
-        mealPlansRecycler.adapter = mpAdapter
+        //mealPlansRecycler.adapter = mpAdapter
 
         //New database
 
@@ -68,6 +69,12 @@ class MealPlansFragment : Fragment() {
             Log.d("User", "MyUser: $myUser   Users: $users")
         }.start()
 
+        mealplansArrayList.add(MealPlanModel("Annie", "Bonavides", 1, 2))
+        mealplansArrayList.add(MealPlanModel("Ana", "Aguilar", 3, 4))
+        val mpAdapter = MealPlansAdapter(myContext, mealplansArrayList)
+        val linearLayoutManager = LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false)
+        mealPlansRecycler.layoutManager = linearLayoutManager
+        mealPlansRecycler.adapter = mpAdapter
 
         return binding.root
     }
@@ -80,7 +87,7 @@ class MealPlansFragment : Fragment() {
 
     private fun duplicateIngredient(ingredientName: String){
         //toast("Duplicated $ingredientName")
-        mpAdapter.addIngredient(ingredientName)
+        //mpAdapter.addIngredient(ingredientName)
     }
 
     private fun toast(text: String){

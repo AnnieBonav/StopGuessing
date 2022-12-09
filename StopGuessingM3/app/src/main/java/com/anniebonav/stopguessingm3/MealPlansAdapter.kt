@@ -1,11 +1,32 @@
 package com.anniebonav.stopguessingm3
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MealPlansAdapter (private var mpNames: List<String>, private val onIngredientClick: MPClickFunction): RecyclerView.Adapter<ViewHolder>(){
+class MealPlansAdapter (private val context: Context, mealplansArrayList: ArrayList<MealPlanModel>): RecyclerView.Adapter<ViewHolder>(){
+    private val mealplansArrayList: ArrayList<MealPlanModel>
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        //val context = parent.context
+        //val inflater = LayoutInflater.from(context)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_mealplan, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val model: MealPlanModel = mealplansArrayList[position]
+        holder.mealplanNameTV.setText(model.getName())
+    }
+
+    init {
+        this.mealplansArrayList = mealplansArrayList
+    }
+
+    /*
+    //private var mpNames: List<String>, private val onIngredientClick: MPClickFunction
     fun AddIngredients(ingredients: MutableList<String>){
 
     }
@@ -15,20 +36,9 @@ class MealPlansAdapter (private var mpNames: List<String>, private val onIngredi
         val position = mpNames.count() -1
         this.notifyItemInserted(position)
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.item_meal_plan, parent, false)
-        return ViewHolder(view, onIngredientClick)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ingredientName = mpNames[position]
-        holder.display(ingredientName)
-    }
+    */
 
     override fun getItemCount(): Int {
-        return mpNames.count()
+        return mealplansArrayList.size
     }
 }
