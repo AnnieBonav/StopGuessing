@@ -6,26 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MealPlansAdapter (private val context: Context, mealplansArrayList: ArrayList<MealPlanModel>): RecyclerView.Adapter<ViewHolder>(){
-    private val mealplansArrayList: ArrayList<MealPlanModel>
+class MealPlanAdapter (private val context: Context, _mealPlansArrayList: ArrayList<MealPlanModel>): RecyclerView.Adapter<ViewHolder>(){
+    private val _mealPlansArrayList: ArrayList<MealPlanModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        //val context = parent.context
-        //val inflater = LayoutInflater.from(context)
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_mealplan, parent, false)
+        val context = parent.context
+        val inflater = LayoutInflater.from(context)
+        val view: View = inflater.inflate(R.layout.item_mealplan, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val model: MealPlanModel = mealplansArrayList[position]
-        holder.mealplanNameTV.setText(model.getName())
-        holder.mealplanDescriptionTV.setText(model.getDescription())
-        holder.mealplanEditButton.setText("Edit")
-        holder.mealplanDeleteButton.setText("Delete")
+        val model: MealPlanModel = _mealPlansArrayList[position]
+        holder.mealPlanNameLabel.setText(model.getName())
+        holder.mealPlanDescriptionLabel.setText(model.getDescription())
+        holder.mealPlanEditButton.setText("Edit")
+        holder.mealPlanDeleteButton.setText("Delete")
     }
 
     init {
-        this.mealplansArrayList = mealplansArrayList
+        this._mealPlansArrayList = _mealPlansArrayList
     }
 
     /*
@@ -42,6 +42,6 @@ class MealPlansAdapter (private val context: Context, mealplansArrayList: ArrayL
     */
 
     override fun getItemCount(): Int {
-        return mealplansArrayList.size
+        return _mealPlansArrayList.size
     }
 }

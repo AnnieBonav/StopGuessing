@@ -1,20 +1,20 @@
 package com.anniebonav.stopguessingm3
 
-class MealPlanModel (private var mealplanName: String, private var mealplanDescription: String, private var mealsAmount: Int, private var snacksAmount: Int) {
+class MealPlanModel (private var mealPlanName: String, private var mealPlanDescription: String, private var mealsAmount: Int, private var snacksAmount: Int) {
     fun getName(): String {
-        return mealplanName
+        return mealPlanName
     }
 
     fun setName(name: String) {
-        this.mealplanName = name
+        this.mealPlanName = name
     }
 
     fun getDescription(): String {
-        return mealplanDescription
+        return mealPlanDescription
     }
 
     fun setDescription(description: String) {
-        this.mealplanDescription = description
+        this.mealPlanDescription = description
     }
 
     fun getMealsAmount():Int {

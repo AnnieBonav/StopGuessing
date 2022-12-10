@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private var databaseHandler = DatabaseHandler(this)
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -40,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
-
-    public fun GetDatabaseHandler():DatabaseHandler{
-        return databaseHandler
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

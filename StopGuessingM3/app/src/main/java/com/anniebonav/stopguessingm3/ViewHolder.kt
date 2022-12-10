@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 //private val onClick: MPClickFunction
 class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
-    public val mealplanNameTV: TextView
-    public val mealplanDescriptionTV: TextView
-    public val mealplanEditButton: Button
-    public val mealplanDeleteButton: Button
-    //private val mealplanCard: MaterialCardView
+    val mealPlanNameLabel: TextView
+    val mealPlanDescriptionLabel: TextView
+    val mealPlanEditButton: Button
+    val mealPlanDeleteButton: Button
+
     init{
-        mealplanNameTV = itemView.findViewById(R.id.mealplanTitle)
-        mealplanDescriptionTV = itemView.findViewById(R.id.mealplanDescription)
-        mealplanEditButton = itemView.findViewById(R.id.mealplanEdit)
-        mealplanDeleteButton = itemView.findViewById(R.id.mealplanDelete)
+        mealPlanNameLabel = itemView.findViewById(R.id.mealplanTitle)
+        mealPlanDescriptionLabel = itemView.findViewById(R.id.mealplanDescription)
+        mealPlanEditButton = itemView.findViewById(R.id.mealplanEdit)
+        mealPlanDeleteButton = itemView.findViewById(R.id.mealplanDelete)
     }
 }

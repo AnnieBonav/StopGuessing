@@ -7,29 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 
 //Database stuff
-import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealplansBinding? = null
-    private lateinit var myDb: DatabaseHandler
-
+    private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
 
     //Recycler
-    private lateinit var mealPlansRecycler: RecyclerView
-    val mealplansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
+    private lateinit var _mealPlansRecycler: RecyclerView
+    val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
     //private val initialMealPlans = listOf("MealPlan1", "MealPlan2", "MealPlan3")
 
-    //New database
-    private val DATABASE_MP: String = "USER_DATABASE"
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -41,8 +33,6 @@ class MealPlansFragment : Fragment() {
         val myContext = activity as MainActivity
 
         _binding = FragmentMealplansBinding.inflate(inflater, container, false)
-        myDb = DatabaseHandler(myContext)
-
 
         /*
         val addMealPlan = binding.addMealPlan
@@ -51,35 +41,35 @@ class MealPlansFragment : Fragment() {
         }*/
 
         //RECYCLER
-        mealPlansRecycler = binding.mpRecycler
-        //mealPlansRecycler.adapter = mpAdapter
-
-        //New database
+        _mealPlansRecycler = binding.mpRecycler
 
         val db = Room.databaseBuilder(
-            myContext, UserDatabase::class.java, DATABASE_MP
+            myContext, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()
 
-        val userDao = db.userDao()
-        val myUser = User(0, "Annie", "Bonavides")
+        val mealPlanDao = db.mealPlanDao()
+        val newMealPlan1 = MealPlan(0, "Annie", "Bonavides", 0, 0)
+        val newMealPlan2 = MealPlan(0, "wefwfefef", "Aguilar", 1, 1)
 
         //
 
         Thread {
-            userDao.insertAll(myUser)
-            val users: List<User> = userDao.getAll()
-            Log.d("User", "MyUser: $myUser   Users: $users")
+            mealPlanDao.insertAll(newMealPlan1, newMealPlan2)
+            val users: List<MealPlan> = mealPlanDao.getAll()
+            Log.d("User", "MyUser: $newMealPlan1   Users: $users")
         }.start()
 
-        mealplansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
-        mealplansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
-        mealplansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
-        mealplansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
-        mealplansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
-        val mpAdapter = MealPlansAdapter(myContext, mealplansArrayList)
+        mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+        mealPlansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
+        mealPlansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
+        mealPlansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
+        mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+
+        val mpAdapter = MealPlanAdapter(myContext, mealPlansArrayList)
         val linearLayoutManager = LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false)
-        mealPlansRecycler.layoutManager = linearLayoutManager
-        mealPlansRecycler.adapter = mpAdapter
+
+        _mealPlansRecycler.layoutManager = linearLayoutManager
+        _mealPlansRecycler.adapter = mpAdapter
 
         return binding.root
     }
