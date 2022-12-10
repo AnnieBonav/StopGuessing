@@ -30,7 +30,7 @@ class AddMealPlanFragment : Fragment() {
 
     private val _addMPViewModel: UIViewModelAddMealPlan by viewModels()
 
-    private lateinit var viewModel: UIViewModelAddMealPlan
+    //private lateinit var viewModel: UIViewModelAddMealPlan
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +38,9 @@ class AddMealPlanFragment : Fragment() {
     ): View? {
         val context = activity as MainActivity
         val mainViewModel = ViewModelProvider(context)
-        //changed for _binding
         _binding = FragmentAddMealPlanBinding.inflate(inflater, container,false)
-        viewModel = ViewModelProvider(this).get(UIViewModelAddMealPlan::class.java)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.textVariable = viewModel
+        binding.textVariable = _addMPViewModel
 
         /*
         _addMPViewModel.currentMealPlanName.observe(viewLifecycleOwner, {
@@ -91,7 +89,7 @@ class AddMealPlanFragment : Fragment() {
 
     fun SaveMealPlan(view: View, context: Context, mealPlanDao: MealPlanDao){
         val changeName = "Now I am"
-        _addMPViewModel.currentMealPlanName.value = changeName
+        //_addMPViewModel.currentMealPlanName.value = changeName
         Log.d("PLEASE", _addMPViewModel.currentMealPlanName.value.toString())
     }
 
