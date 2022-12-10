@@ -40,38 +40,7 @@ class AddMealPlanFragment : Fragment() {
         val mainViewModel = ViewModelProvider(context)
         _binding = FragmentAddMealPlanBinding.inflate(inflater, container,false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.textVariable = _addMPViewModel
-
-        /*
-        _addMPViewModel.currentMealPlanName.observe(viewLifecycleOwner, {
-            when(it){
-                is String -> binding.editTextInput.setText(it)
-            }
-        })*/
-
-        /*
-        _addMPViewModel.editTextContent.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context, it, Toast.LENGTH_LONG)
-        })*/
-
-        /*
-        _addMPViewModel.currentMealPlanName.observe(viewLifecycleOwner, Observer{
-            //Toast.makeText(context, it, Toast.LENGTH_SHORT)
-        })
-
-        val testTextView = binding.testTextView
-        val testTextInput = binding.editTextInput
-
-        val nameObserver = Observer<String> { newMealPlanName ->
-            testTextView.text = newMealPlanName
-        }
-
-        val textObserver = Observer<String> { newEditText ->
-            testTextInput.setText(newEditText)
-        }*/
-
-        //_addMPViewModel.currentMealPlanName.observe(context, nameObserver)
-        //_addMPViewModel.currentMealPlanName.observe(context, textObserver)
+        binding.mpViewModel = _addMPViewModel
 
         val db = Room.databaseBuilder(
             context, MealPlanDatabase::class.java, _mealPlansDatabase

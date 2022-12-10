@@ -12,20 +12,16 @@ class UIViewModelAddMealPlan : ViewModel() {
         MutableLiveData<String>()
     }
 
-    //@Bindable
-    val editTextContent = MutableLiveData<String>()
+    val currentMealPlanDescription: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
+    val currentMealsAmount: MutableLiveData<String> by lazy {
+        MutableLiveData<String>() //TODO Will use them as strings to be able to
+    }
 
-    /*
-    val _currentMealPlanName: LiveData<String>
-        get() = _currentMealPlanName*/
-
-    /*
-    @Bindable
-    val editTextContent: MutableLiveData<String>()
-
-    private val _displayedEditTextContnt = MutableLiveData<String>()
-    val displayedEditTextContent: LiveData<String>
-    get() = _displayedEditTextContnt*/
+    val currentSnacksAmount: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
 }
