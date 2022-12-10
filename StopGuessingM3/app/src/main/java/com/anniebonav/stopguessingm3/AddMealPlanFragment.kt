@@ -9,11 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
+import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 import com.anniebonav.stopguessingm3.databinding.FragmentAddMealPlanBinding
+import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -23,80 +28,75 @@ class AddMealPlanFragment : Fragment() {
 
     private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
 
-    //LIVE DATA
-    private val model: UIViewModelAddMealPlan by viewModels()
+    private val _addMPViewModel: UIViewModelAddMealPlan by viewModels()
 
-    //private lateinit var _mealPlanNameInput: TextInputEditText
+    private lateinit var viewModel: UIViewModelAddMealPlan
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val myContext = activity as MainActivity
+        val context = activity as MainActivity
+        val mainViewModel = ViewModelProvider(context)
+        //changed for _binding
+        _binding = FragmentAddMealPlanBinding.inflate(inflater, container,false)
+        viewModel = ViewModelProvider(this).get(UIViewModelAddMealPlan::class.java)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.textVariable = viewModel
 
-        _binding = FragmentAddMealPlanBinding.inflate(inflater, container, false)
-        val view = inflater.inflate(R.layout.fragment_add_meal_plan, container, false)
-        //Database
+        /*
+        _addMPViewModel.currentMealPlanName.observe(viewLifecycleOwner, {
+            when(it){
+                is String -> binding.editTextInput.setText(it)
+            }
+        })*/
+
+        /*
+        _addMPViewModel.editTextContent.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_LONG)
+        })*/
+
+        /*
+        _addMPViewModel.currentMealPlanName.observe(viewLifecycleOwner, Observer{
+            //Toast.makeText(context, it, Toast.LENGTH_SHORT)
+        })
+
+        val testTextView = binding.testTextView
+        val testTextInput = binding.editTextInput
+
+        val nameObserver = Observer<String> { newMealPlanName ->
+            testTextView.text = newMealPlanName
+        }
+
+        val textObserver = Observer<String> { newEditText ->
+            testTextInput.setText(newEditText)
+        }*/
+
+        //_addMPViewModel.currentMealPlanName.observe(context, nameObserver)
+        //_addMPViewModel.currentMealPlanName.observe(context, textObserver)
+
         val db = Room.databaseBuilder(
-            myContext, MealPlanDatabase::class.java, _mealPlansDatabase
+            context, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()
 
         val mealPlanDao = db.mealPlanDao()
 
         val addMealPlan = binding.addMealPlan
         addMealPlan?.setOnClickListener(){
-            SaveMealPlan(view, myContext, mealPlanDao)
+            SaveMealPlan(binding.root, context, mealPlanDao)
         }
 
-
-
-        //LIVE DATA
-
-        val testTextView = binding.testTextView
-        val nameObserver = Observer<String> { newMealPlanName ->
-            // Update the UI, in this case, a TextView.
-            testTextView.text = newMealPlanName
-        }
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        model.currentMealPlanName.observe(myContext, nameObserver)
         return binding.root
     }
 
     fun SaveMealPlan(view: View, context: Context, mealPlanDao: MealPlanDao){
-        val changeName = "Now I am super cool"
-        model.currentMealPlanName.value = changeName
-
-
-
-        /*Log.d("Meal Plan", "Entered meal plan")
-        val mealPlanName = view.findViewById<TextInputLayout>(R.id.mealPlanNameInput)
-        val textEdit = mealPlanName.editText?.text.toString()
-
-        val actualText = view.findViewById<TextInputEditText>(R.id.actualText)
-        var smt = actualText.text.toString()
-        //smt = mealPlanName.editText?.text.toString()
-
-        val toast = Toast.makeText(context, textEdit, Toast.LENGTH_SHORT)
-        toast.show()
-        Log.d("Meal Plans", textEdit)
-        //val newMealPlan = MealPlan(0, mealPlanName, "Aguilar", 1, 1)
-*/
-        /*
-        Thread {
-            mealPlanDao.insertAll(newMealPlan)
-            val users: List<MealPlan> = mealPlanDao.getAll()
-            Log.d("User", "MyUser: $newMealPlan   Users: $users")
-        }.start()*/
+        val changeName = "Now I am"
+        _addMPViewModel.currentMealPlanName.value = changeName
+        Log.d("PLEASE", _addMPViewModel.currentMealPlanName.value.toString())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /* Maybe reuse for dab
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }*/
     }
 
     override fun onDestroyView() {
