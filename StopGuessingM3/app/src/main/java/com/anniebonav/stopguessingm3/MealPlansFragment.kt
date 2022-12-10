@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 
 //Database stuff
@@ -20,8 +21,6 @@ class MealPlansFragment : Fragment() {
     //Recycler
     private lateinit var _mealPlansRecycler: RecyclerView
     val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
-    //private val initialMealPlans = listOf("MealPlan1", "MealPlan2", "MealPlan3")
-
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -34,12 +33,6 @@ class MealPlansFragment : Fragment() {
 
         _binding = FragmentMealplansBinding.inflate(inflater, container, false)
 
-        /*
-        val addMealPlan = binding.addMealPlan
-        addMealPlan?.setOnClickListener(){
-            SaveMealPlan(binding.root)
-        }*/
-
         //RECYCLER
         _mealPlansRecycler = binding.mpRecycler
 
@@ -48,13 +41,12 @@ class MealPlansFragment : Fragment() {
         ).build()
 
         val mealPlanDao = db.mealPlanDao()
-        val newMealPlan1 = MealPlan(0, "Annie", "Bonavides", 0, 0)
-        val newMealPlan2 = MealPlan(0, "wefwfefef", "Aguilar", 1, 1)
+        val newMealPlan1 = MealPlan(0, "Test", "This should be added", 0, 0)
 
         //
 
         Thread {
-            mealPlanDao.insertAll(newMealPlan1, newMealPlan2)
+            mealPlanDao.insertAll(newMealPlan1)
             val users: List<MealPlan> = mealPlanDao.getAll()
             Log.d("User", "MyUser: $newMealPlan1   Users: $users")
         }.start()
@@ -73,8 +65,6 @@ class MealPlansFragment : Fragment() {
 
         return binding.root
     }
-
-
 
     private fun onMPClicked(ingredientName: String){
         duplicateIngredient(ingredientName)
@@ -102,10 +92,9 @@ class MealPlansFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-        binding.seeMealPlansButton.setOnClickListener {
-            findNavController().navigate(R.id.action_mealPlansFragment_to_FirstFragment)
-        }*/
+        binding.addFab.setOnClickListener {
+            findNavController().navigate(R.id.action_MealPlansFragment_to_AddMealPlanFragment)
+        }
     }
 
     override fun onDestroyView() {
