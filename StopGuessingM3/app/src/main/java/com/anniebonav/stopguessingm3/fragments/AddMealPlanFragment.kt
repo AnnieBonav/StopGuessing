@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan

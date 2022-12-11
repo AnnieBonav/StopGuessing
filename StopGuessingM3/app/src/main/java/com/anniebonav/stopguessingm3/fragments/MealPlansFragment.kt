@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 
 //Database stuff
 import androidx.room.Room
+import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
