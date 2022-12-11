@@ -33,23 +33,11 @@ class MealPlansFragment : Fragment() {
 
         _binding = FragmentMealplansBinding.inflate(inflater, container, false)
 
-        //RECYCLER
         _mealPlansRecycler = binding.mpRecycler
 
         val db = Room.databaseBuilder(
             myContext, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()
-
-        val mealPlanDao = db.mealPlanDao()
-        val newMealPlan1 = MealPlan(0, "Test", "This should be added", 0, 0)
-
-        //
-
-        Thread {
-            mealPlanDao.insertAll(newMealPlan1)
-            val users: List<MealPlan> = mealPlanDao.getAll()
-            Log.d("User", "MyUser: $newMealPlan1   Users: $users")
-        }.start()
 
         mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
         mealPlansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))

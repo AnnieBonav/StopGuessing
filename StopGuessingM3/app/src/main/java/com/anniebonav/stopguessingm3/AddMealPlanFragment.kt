@@ -30,8 +30,6 @@ class AddMealPlanFragment : Fragment() {
 
     private val _addMPViewModel: UIViewModelAddMealPlan by viewModels()
 
-    //private lateinit var viewModel: UIViewModelAddMealPlan
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,9 +55,12 @@ class AddMealPlanFragment : Fragment() {
     }
 
     fun SaveMealPlan(view: View, context: Context, mealPlanDao: MealPlanDao){
-        val changeName = "Now I am"
-        //_addMPViewModel.currentMealPlanName.value = changeName
-        Log.d("PLEASE", _addMPViewModel.currentMealPlanName.value.toString())
+        val mealPlan = MealPlan(null, _addMPViewModel.currentMealPlanName.value.toString(), _addMPViewModel.currentMealPlanDescription.value.toString(), _addMPViewModel.currentMealsAmount.value!!.toInt(), _addMPViewModel.currentSnacksAmount.value!!.toInt())
+        Thread {
+            mealPlanDao.insertAll(mealPlan)
+            val users: List<MealPlan> = mealPlanDao.getAll()
+            Log.d("User", "MyUser: $mealPlan   Users: $users")
+        }.start()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
