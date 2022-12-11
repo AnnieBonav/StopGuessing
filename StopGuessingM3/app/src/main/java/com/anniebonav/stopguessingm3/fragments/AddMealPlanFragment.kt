@@ -35,6 +35,7 @@ class AddMealPlanFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mpViewModel = _addMPViewModel
 
+        
         val db = Room.databaseBuilder(
             context, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()

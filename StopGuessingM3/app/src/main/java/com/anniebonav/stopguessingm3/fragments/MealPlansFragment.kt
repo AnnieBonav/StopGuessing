@@ -36,15 +36,14 @@ class MealPlansFragment : Fragment() {
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
-        val db = Room.databaseBuilder(
+        val mpDao = MealPlanDatabase.getDatabase(myContext).mealPlanDao()
+        /*val db = Room.databaseBuilder(
             myContext, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()
-
-        val mealPlanDao = db.mealPlanDao()
+        val mealPlanDao = db.mealPlanDao()*/
 
         Thread {
-            val currentMealPlans = mealPlanDao.getAll()
-
+            val currentMealPlans = mpDao.getAll()
             Log.d("Please", "Meals: $currentMealPlans")
         }.start()
 
