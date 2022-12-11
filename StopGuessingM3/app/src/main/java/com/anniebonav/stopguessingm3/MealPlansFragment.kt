@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
-import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 
 //Database stuff
 import androidx.room.Room
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
+import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
 class MealPlansFragment : Fragment() {
-    private var _binding: FragmentMealplansBinding? = null
+    private var _binding: FragmentMealPlansBinding? = null
     private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
 
     //Recycler
@@ -32,7 +32,7 @@ class MealPlansFragment : Fragment() {
     ): View? {
         val myContext = activity as MainActivity
 
-        _binding = FragmentMealplansBinding.inflate(inflater, container, false)
+        _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
 
         _mealPlansRecycler = binding.mpRecycler
 

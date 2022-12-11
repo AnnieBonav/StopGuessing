@@ -32,7 +32,7 @@
         android:id="@+id/MealPlansFragment"
         android:name="com.anniebonav.stopguessingm3.MealPlansFragment"
         android:label="Meal Plans"
-        tools:layout="@layout/fragment_mealplans">
+        tools:layout="@layout/fragment_meal_plans">
         <action
             android:id="@+id/action_MealPlansFragment_to_AddMealPlanFragment"
             app:destination="@id/AddMealPlanFragment" />
