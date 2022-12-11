@@ -1,8 +1,5 @@
 package com.anniebonav.stopguessingm3.data
 
-import android.widget.EditText
-import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 

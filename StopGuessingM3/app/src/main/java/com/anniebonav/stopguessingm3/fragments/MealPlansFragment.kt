@@ -9,13 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
-
-//Database stuff
-import androidx.room.Room
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
-import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
