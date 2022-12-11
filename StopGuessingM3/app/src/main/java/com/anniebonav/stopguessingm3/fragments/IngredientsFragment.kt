@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.anniebonav.stopguessingm3.databinding.FragmentSecondBinding
+import com.anniebonav.stopguessingm3.R
+import com.anniebonav.stopguessingm3.databinding.FragmentIngredientsBinding
 
-class SecondFragment : Fragment() {
-
-    private var _binding: FragmentSecondBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+class IngredientsFragment : Fragment() {
+    private var _binding: FragmentIngredientsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +18,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         return binding.root
 
     }

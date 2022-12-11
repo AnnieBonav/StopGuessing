@@ -1,13 +1,16 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.recycler
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.anniebonav.stopguessingm3.R
+import com.anniebonav.stopguessingm3.data.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlanModel
 
-class MealPlanAdapter (private val context: Context, _mealPlansArrayList: ArrayList<MealPlanModel>): RecyclerView.Adapter<ViewHolder>(){
-    private val _mealPlansArrayList: ArrayList<MealPlanModel>
+class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>): RecyclerView.Adapter<ViewHolder>(){
+    private val _mealPlansArrayList: List<MealPlan>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
@@ -17,9 +20,9 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val model: MealPlanModel = _mealPlansArrayList[position]
-        holder.mealPlanNameLabel.setText(model.getName())
-        holder.mealPlanDescriptionLabel.setText(model.getDescription())
+        val model: MealPlan = _mealPlansArrayList[position]
+        holder.mealPlanNameLabel.setText(model.mealPlanName)
+        holder.mealPlanDescriptionLabel.setText(model.mealPlanDescription)
         holder.mealPlanEditButton.setText("Edit")
         holder.mealPlanDeleteButton.setText("Delete")
     }

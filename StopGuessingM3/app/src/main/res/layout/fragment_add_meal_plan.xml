@@ -5,13 +5,13 @@
     <data>
         <variable
             name="mpViewModel"
-            type="com.anniebonav.stopguessingm3.UIViewModelAddMealPlan"/>
+            type="com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMealPlanFragment">
+    tools:context=".fragments.AddMealPlanFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/mealPlanNameInput"

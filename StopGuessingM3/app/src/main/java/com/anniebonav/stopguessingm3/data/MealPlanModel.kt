@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.data
 
 class MealPlanModel (private var mealPlanName: String, private var mealPlanDescription: String, private var mealsAmount: Int, private var snacksAmount: Int) {
     fun getName(): String {

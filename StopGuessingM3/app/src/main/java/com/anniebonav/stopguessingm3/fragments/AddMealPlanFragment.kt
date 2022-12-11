@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -7,20 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
-import androidx.navigation.fragment.findNavController
-import androidx.room.Room
-import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
+import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.data.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlanDao
+import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan
 import com.anniebonav.stopguessingm3.databinding.FragmentAddMealPlanBinding
-import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class AddMealPlanFragment : Fragment() {
     private var _binding: FragmentAddMealPlanBinding? = null
@@ -40,11 +34,7 @@ class AddMealPlanFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mpViewModel = _addMPViewModel
 
-        val db = Room.databaseBuilder(
-            context, MealPlanDatabase::class.java, _mealPlansDatabase
-        ).build()
-
-        val mealPlanDao = db.mealPlanDao()
+        val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
         val addMealPlan = binding.addMealPlan
         addMealPlan?.setOnClickListener(){
