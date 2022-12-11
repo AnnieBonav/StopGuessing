@@ -32,18 +32,14 @@ class MealPlansFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val myContext = activity as MainActivity
+        val context = activity as MainActivity
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
-        val mpDao = MealPlanDatabase.getDatabase(myContext).mealPlanDao()
-        /*val db = Room.databaseBuilder(
-            myContext, MealPlanDatabase::class.java, _mealPlansDatabase
-        ).build()
-        val mealPlanDao = db.mealPlanDao()*/
+        val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
         Thread {
-            val currentMealPlans = mpDao.getAll()
+            val currentMealPlans = mealPlanDao.getAll()
             Log.d("Please", "Meals: $currentMealPlans")
         }.start()
 
@@ -57,8 +53,8 @@ class MealPlansFragment : Fragment() {
         mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
 
 
-        val mpAdapter = MealPlanAdapter(myContext, mealPlansArrayList)
-        val linearLayoutManager = LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false)
+        val mpAdapter = MealPlanAdapter(context, mealPlansArrayList)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         _mealPlansRecycler.layoutManager = linearLayoutManager
         _mealPlansRecycler.adapter = mpAdapter
