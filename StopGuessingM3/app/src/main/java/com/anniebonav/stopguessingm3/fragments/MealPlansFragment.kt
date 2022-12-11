@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
@@ -14,6 +16,8 @@ import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
+import com.anniebonav.stopguessingm3.data.UIViewModelMealPlans
+import com.anniebonav.stopguessingm3.data.ViewModelFactoryMealPlansUI
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
 class MealPlansFragment : Fragment() {
@@ -32,6 +36,11 @@ class MealPlansFragment : Fragment() {
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
+        val mealPlansFactory = ViewModelFactoryMealPlansUI(context);
+        val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
+
+
+
         val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
         Thread {
@@ -49,11 +58,15 @@ class MealPlansFragment : Fragment() {
         mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
 
 
-        val mpAdapter = MealPlanAdapter(context, mealPlansArrayList)
+        //val mpAdapter = MealPlanAdapter(context, mealPlansArrayList)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         _mealPlansRecycler.layoutManager = linearLayoutManager
-        _mealPlansRecycler.adapter = mpAdapter
+        //_mealPlansRecycler.adapter = mpAdapter
+
+        model.currentMealPlans.observe(context, Observer { mealPlans ->
+            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans)
+        })
 
         return binding.root
     }

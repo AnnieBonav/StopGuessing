@@ -11,6 +11,7 @@ import com.anniebonav.stopguessingm3.data.MealPlanDao
 abstract class MealPlanDatabase : RoomDatabase() {
     abstract fun mealPlanDao(): MealPlanDao
 
+
     companion object {
         private var INSTANCE: MealPlanDatabase? = null
         fun getDatabase(context: Context): MealPlanDatabase {
