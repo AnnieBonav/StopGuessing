@@ -2,7 +2,6 @@ package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,8 @@ import com.anniebonav.stopguessingm3.databinding.FragmentMealplansBinding
 
 //Database stuff
 import androidx.room.Room
+import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
+import com.anniebonav.stopguessingm3.data.MealPlanModel
 
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealplansBinding? = null

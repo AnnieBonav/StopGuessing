@@ -1,4 +1,4 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

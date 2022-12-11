@@ -5,7 +5,7 @@
     <data>
         <variable
             name="mpViewModel"
-            type="com.anniebonav.stopguessingm3.UIViewModelAddMealPlan"/>
+            type="com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

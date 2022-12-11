@@ -1,11 +1,11 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.recycler
 
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
+import com.anniebonav.stopguessingm3.R
+
 //private val onClick: MPClickFunction
 class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
     val mealPlanNameLabel: TextView
