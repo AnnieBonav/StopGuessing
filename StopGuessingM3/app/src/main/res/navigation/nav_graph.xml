@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MealPlansFragment">
+
+    <fragment
+        android:id="@+id/AddMealPlanFragment"
+        android:name="com.anniebonav.stopguessingm3.AddMealPlanFragment"
+        android:label="Add Meal Plan"
+        tools:layout="@layout/fragment_add_meal_plan">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_AddMealPlanFragment_to_MealPlansFragment"
+            app:destination="@id/MealPlansFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.anniebonav.stopguessingm3.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/AddMealPlanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/MealPlansFragment"
+        android:name="com.anniebonav.stopguessingm3.MealPlansFragment"
+        android:label="Meal Plans"
+        tools:layout="@layout/fragment_mealplans">
+        <action
+            android:id="@+id/action_MealPlansFragment_to_AddMealPlanFragment"
+            app:destination="@id/AddMealPlanFragment" />
+    </fragment>
+</navigation>
