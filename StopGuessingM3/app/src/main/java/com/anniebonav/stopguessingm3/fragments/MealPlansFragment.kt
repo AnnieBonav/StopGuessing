@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.room.Room
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
+import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
@@ -22,32 +24,39 @@ class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
     private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
 
-    //Recycler
     private lateinit var _mealPlansRecycler: RecyclerView
-    val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
 
-    // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val myContext = activity as MainActivity
-
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
-
         _mealPlansRecycler = binding.mpRecycler
 
         val db = Room.databaseBuilder(
             myContext, MealPlanDatabase::class.java, _mealPlansDatabase
         ).build()
 
+        val mealPlanDao = db.mealPlanDao()
+
+        Thread {
+            val currentMealPlans = mealPlanDao.getAll()
+
+            Log.d("Please", "Meals: $currentMealPlans")
+        }.start()
+
+
+        val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
+
         mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
         mealPlansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
         mealPlansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
         mealPlansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
         mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+
 
         val mpAdapter = MealPlanAdapter(myContext, mealPlansArrayList)
         val linearLayoutManager = LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false)
