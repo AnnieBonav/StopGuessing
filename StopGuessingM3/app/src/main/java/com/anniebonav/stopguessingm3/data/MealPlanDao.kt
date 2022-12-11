@@ -10,7 +10,6 @@ import androidx.room.util.DBUtil
 
 @Dao
 interface MealPlanDao {
-
     @Query("SELECT * FROM mealplan")
     fun getAll(): List<MealPlan>
 
@@ -24,5 +23,5 @@ interface MealPlanDao {
     fun insertAll(vararg users: MealPlan)
 
     @Delete
-    fun delete(user: MealPlan)
+    fun delete(mealPlan: MealPlan)
 }

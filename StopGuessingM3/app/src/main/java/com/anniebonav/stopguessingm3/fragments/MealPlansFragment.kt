@@ -39,8 +39,6 @@ class MealPlansFragment : Fragment() {
         val mealPlansFactory = ViewModelFactoryMealPlansUI(context);
         val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
 
-
-
         val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
         Thread {
