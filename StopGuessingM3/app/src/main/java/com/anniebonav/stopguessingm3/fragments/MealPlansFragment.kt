@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
+import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.data.MealPlanModel
 import com.anniebonav.stopguessingm3.data.UIViewModelMealPlans
@@ -22,11 +23,9 @@ import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
-    private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
-
     private lateinit var _mealPlansRecycler: RecyclerView
-
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _mealPlanDAO: MealPlanDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,44 +37,45 @@ class MealPlansFragment : Fragment() {
 
         val mealPlansFactory = ViewModelFactoryMealPlansUI(context);
         val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
-
-        val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        _mealPlanDAO = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         Thread {
-            val currentMealPlans = mealPlanDao.getAll()
+            //TODO: Make this better than using thread everywhere
+            val currentMealPlans = _mealPlanDAO.getAll()
             Log.d("Please", "Meals: $currentMealPlans")
         }.start()
 
-
-        val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()
-
-        mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
-        mealPlansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
-        mealPlansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
-        mealPlansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
-        mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
-
-
-        //val mpAdapter = MealPlanAdapter(context, mealPlansArrayList)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
         _mealPlansRecycler.layoutManager = linearLayoutManager
-        //_mealPlansRecycler.adapter = mpAdapter
 
         model.currentMealPlans.observe(context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans)
+            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked)
         })
 
         return binding.root
     }
 
-    private fun onMPClicked(ingredientName: String){
-        duplicateIngredient(ingredientName)
+    private fun createInitialMealPlans(){
+        //TODO: whenever the app is started for the first time, there should be a baseline of meal plans to work with
+        /*
+        val mealPlansArrayList: ArrayList<MealPlanModel> = ArrayList<MealPlanModel>()mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+        mealPlansArrayList.add(MealPlanModel("Day to day plan", "This is the plan I use on the days I do not go to the gym.", 3, 4))
+        mealPlansArrayList.add(MealPlanModel("Summer body", "This is the plan I use on to cut and cardio.", 2, 4))
+        mealPlansArrayList.add(MealPlanModel("Mexican ingredients", "Esta es la versión mexicana de mi plan.", 3, 4))
+        mealPlansArrayList.add(MealPlanModel("Gym Time plan", "This is the plan I use on the days I go to the gym.", 1, 2))
+        */
     }
 
-    private fun duplicateIngredient(ingredientName: String){
-        //toast("Duplicated $ingredientName")
-        //mpAdapter.addIngredient(ingredientName)
+    private fun onMPDeleteClicked(mealPlanId: Int){
+        deleteIngredient(mealPlanId)
+    }
+
+    private fun deleteIngredient(mealPlanId: Int){
+        Thread{
+            _mealPlanDAO.deleteMealPlan(mealPlanId)
+            //toast(_mealPlanDAO.getMealPlan(mealPlanId).mealPlanName)
+        }.start()
+        //TODO: Add toast
     }
 
     private fun toast(text: String){

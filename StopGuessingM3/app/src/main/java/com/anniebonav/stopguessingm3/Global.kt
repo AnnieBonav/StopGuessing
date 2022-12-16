@@ -1,3 +1,3 @@
 package com.anniebonav.stopguessingm3
 
-typealias MPClickFunction = (String) -> Unit
+typealias MPDeleteClickFunction = (Int) -> Unit
