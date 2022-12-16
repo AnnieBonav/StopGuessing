@@ -8,33 +8,32 @@
     <fragment
         android:id="@+id/AddMealPlanFragment"
         android:name="com.anniebonav.stopguessingm3.fragments.AddMealPlanFragment"
-        android:label="Add Meal Plan"
+        android:label="Add a Meal Plan"
         tools:layout="@layout/fragment_add_meal_plan">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_AddMealPlanFragment_to_MealPlansFragment"
             app:destination="@id/MealPlansFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/IngredientsFragment"
         android:name="com.anniebonav.stopguessingm3.fragments.IngredientsFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Stop Guessing"
         tools:layout="@layout/fragment_ingredients">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/AddMealPlanFragment" />
+            android:id="@+id/action_IngredientsFragment_to_MealPlansFragment"
+            app:destination="@id/MealPlansFragment" />
     </fragment>
     <fragment
         android:id="@+id/MealPlansFragment"
         android:name="com.anniebonav.stopguessingm3.fragments.MealPlansFragment"
-        android:label="Meal Plans"
+        android:label="Stop Guessing"
         tools:layout="@layout/fragment_meal_plans">
         <action
             android:id="@+id/action_MealPlansFragment_to_AddMealPlanFragment"
             app:destination="@id/AddMealPlanFragment" />
+        <action
+            android:id="@+id/action_MealPlansFragment_to_IngredientsFragment"
+            app:destination="@id/IngredientsFragment" />
     </fragment>
 </navigation>

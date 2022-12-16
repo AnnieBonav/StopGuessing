@@ -10,6 +10,6 @@ class ViewModelFactoryMealPlansUI(var context: Context): ViewModelProvider.Facto
         if(modelClass.isAssignableFrom(UIViewModelMealPlans::class.java)){
             return UIViewModelMealPlans(context) as T
         }
-        throw IllegalArgumentException("Unkmown ViewModel class")
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
