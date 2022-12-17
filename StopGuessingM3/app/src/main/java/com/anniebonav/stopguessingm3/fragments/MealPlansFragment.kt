@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -81,12 +82,17 @@ class MealPlansFragment : Fragment() {
 
     private fun onMPCardClicked(mealPlanId: Int){
         openMealPlan(mealPlanId)
-        toast(mealPlanId.toString())
+        //toast(mealPlanId.toString())
     }
 
     private fun openMealPlan(mealPlanId: Int){
         //TODO: Open fragment, fill fragment with the selected card information
-        findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment)
+        //val selectedMealPlan = 1
+        val selectedMealPlan = "Annie"
+        //val bundle = Bundle()
+        //bundle.putString("key1", "Annie")
+        val bundle = bundleOf("selectedMealPlan" to selectedMealPlan)
+        findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment, bundle)
     }
 
     private fun toast(text: String){
