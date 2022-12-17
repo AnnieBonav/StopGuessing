@@ -24,8 +24,8 @@ import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
-    private lateinit var _mealPlansRecycler: RecyclerView
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _mealPlansRecycler: RecyclerView
     private lateinit var _mealPlanDAO: MealPlanDao
 
     override fun onCreateView(
@@ -86,6 +86,7 @@ class MealPlansFragment : Fragment() {
 
     private fun openMealPlan(mealPlanId: Int){
         //TODO: Open fragment, fill fragment with the selected card information
+        findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment)
     }
 
     private fun toast(text: String){
@@ -94,13 +95,6 @@ class MealPlansFragment : Fragment() {
         toast.show()
     }
 
-    /*
-    fun SaveMealPlan(view: View){
-        myDb.insertData(view.findViewById<EditText>(R.id.mpNameInput).text.toString())
-        var currentMPNumber = myDb.GetMPAmount()
-        var newMealPlan = myDb.getMealPlan(currentMPNumber)
-        duplicateIngredient(newMealPlan)
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
