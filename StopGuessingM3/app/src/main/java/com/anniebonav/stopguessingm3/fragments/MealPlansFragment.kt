@@ -86,12 +86,7 @@ class MealPlansFragment : Fragment() {
     }
 
     private fun openMealPlan(mealPlanId: Int){
-        //TODO: Open fragment, fill fragment with the selected card information
-        //val selectedMealPlan = 1
-        val selectedMealPlan = "Annie"
-        //val bundle = Bundle()
-        //bundle.putString("key1", "Annie")
-        val bundle = bundleOf("selectedMealPlan" to selectedMealPlan)
+        val bundle = bundleOf("selectedMealPlan" to mealPlanId)
         findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment, bundle)
     }
 

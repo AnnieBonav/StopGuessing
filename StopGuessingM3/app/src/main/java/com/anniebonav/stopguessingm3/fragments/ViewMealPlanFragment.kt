@@ -33,18 +33,12 @@ class ViewMealPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //var myArguments = arguments
-        var selectedMealPlan = arguments?.getString("selectedMealPlan").toString()
-        Log.d("Tags", selectedMealPlan)
-        //var myArg = myArguments?.getString(selectedMealPlan)
-        //var myArg = myArguments!!.getString("key1", "default")
-        //Log.d("Tags", "$myArg")
-        //val text = arguments?.getString("selectedMealPlan")
-        //val arg = arguments?.selectedMealPlan
+        var selectedMealPlan = arguments?.getInt("selectedMealPlan").toString()
+        Log.d("Tags", "$selectedMealPlan")
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
-        binding.mealPlanName.text = selectedMealPlan
+        //binding.mealPlanName.text = selectedMealPlan
         //selectedMealPlan = "Annie"
         //toast(selectedMealPlan!!)
         return binding.root

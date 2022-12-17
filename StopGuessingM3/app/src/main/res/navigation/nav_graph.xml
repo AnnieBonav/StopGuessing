@@ -49,6 +49,6 @@
             app:destination="@id/MealPlansFragment" />
         <argument
             android:name="selectedMealPlan"
-            app:argType="string" />
+            app:argType="integer" />
     </fragment>
 </navigation>
