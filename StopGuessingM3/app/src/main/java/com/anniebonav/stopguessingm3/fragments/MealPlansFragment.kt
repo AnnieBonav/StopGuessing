@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +50,7 @@ class MealPlansFragment : Fragment() {
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
         model.currentMealPlans.observe(context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked)
+            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked, this::onMPCardClicked)
         })
 
         return binding.root
@@ -78,10 +79,19 @@ class MealPlansFragment : Fragment() {
         //TODO: Add toast
     }
 
+    private fun onMPCardClicked(mealPlanId: Int){
+        openMealPlan(mealPlanId)
+        toast(mealPlanId.toString())
+    }
+
+    private fun openMealPlan(mealPlanId: Int){
+        //TODO: Open fragment, fill fragment with the selected card information
+    }
+
     private fun toast(text: String){
-        val context = this
-        //val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
-        //toast.show()
+        val context = activity as MainActivity
+        val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
+        toast.show()
     }
 
     /*
