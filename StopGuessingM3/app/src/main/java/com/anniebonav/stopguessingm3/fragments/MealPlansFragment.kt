@@ -50,7 +50,7 @@ class MealPlansFragment : Fragment() {
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
         model.currentMealPlans.observe(context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked, this::onMPCardClicked)
+            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked, this::onMPCardClicked, this::onMPEditClicked)
         })
 
         return binding.root
@@ -89,6 +89,15 @@ class MealPlansFragment : Fragment() {
     private fun openMealPlan(mealPlanId: Int){
         val bundle = bundleOf("selectedMealPlan" to mealPlanId)
         findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment, bundle)
+    }
+
+    private fun onMPEditClicked(mealPlanId: Int ){
+        editMealPlan(mealPlanId)
+    }
+
+    private fun editMealPlan(mealPlanId: Int){
+        val bundle = bundleOf("selectedMealPlan" to mealPlanId)
+        findNavController().navigate(R.id.action_MealPlansFragment_to_AddMealPlanFragment, bundle)
     }
 
     private fun toast(text: String){

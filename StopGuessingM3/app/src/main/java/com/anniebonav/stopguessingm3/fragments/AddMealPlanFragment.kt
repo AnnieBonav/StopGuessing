@@ -33,12 +33,19 @@ class AddMealPlanFragment : Fragment() {
         val context = activity as MainActivity
         val mainViewModel = ViewModelProvider(context)
         _binding = FragmentAddMealPlanBinding.inflate(inflater, container,false)
+
+        if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
+            binding.crudActionButton.text = "Update Meal Plan"
+        }else{
+            binding.crudActionButton.text = "Create Meal Plan"
+        }
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mpViewModel = _addMPViewModel
 
         val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
-        val addMealPlan = binding.addMealPlan
+        val addMealPlan = binding.crudActionButton
         addMealPlan?.setOnClickListener(){
             SaveMealPlan(binding.root, context, mealPlanDao)
         }
