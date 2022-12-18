@@ -13,9 +13,8 @@ interface MealPlanDao {
     @Query("SELECT * FROM mealplan")
     fun getAll(): List<MealPlan>
 
-    /*
     @Query("SELECT * FROM mealplan WHERE uid = :mealPlanId")
-    fun getMealPlanName(mealPlanId: Int)*/
+    fun getMealPlan(mealPlanId: Int): MealPlan
 
     @Query("SELECT * FROM mealplan")
     fun getAllLiveData(): LiveData<List<MealPlan>>
@@ -28,4 +27,7 @@ interface MealPlanDao {
 
     @Query("DELETE FROM mealplan WHERE uid = :mealPlanId")
     fun deleteMealPlan(mealPlanId: Int)
+
+    @Delete
+    fun delete(mealPlan: MealPlan)
 }

@@ -8,27 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
+import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.databinding.FragmentViewMealPlanBinding
 import kotlinx.coroutines.selects.select
 
 class ViewMealPlanFragment : Fragment() {
     private var _binding: FragmentViewMealPlanBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _mealPlanDAO: MealPlanDao
 
-    private var selectedMealPlan: String? = null
-
-    /*
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-        if(arguments!=null){
-            //selectedMealPlan = arguments?.getString("selectedMealPlan").toString()
-            //Log.d("Tag", arguments?.getString("selectedMealPlan")!!)
-            if(selectedMealPlan is String){
-                Log.d("See", selectedMealPlan!!)
-            }
-        }
-    }*/
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +28,10 @@ class ViewMealPlanFragment : Fragment() {
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
+        _mealPlanDAO = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        Thread{
+            //_mealPlanDAO.get
+        }
         //binding.mealPlanName.text = selectedMealPlan
         //selectedMealPlan = "Annie"
         //toast(selectedMealPlan!!)

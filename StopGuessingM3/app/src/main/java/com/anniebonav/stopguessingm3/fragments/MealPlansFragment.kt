@@ -1,6 +1,8 @@
 package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.Fragment
@@ -16,11 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.MealPlanDatabase
 import com.anniebonav.stopguessingm3.R
-import com.anniebonav.stopguessingm3.data.MealPlanDao
+import com.anniebonav.stopguessingm3.data.*
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
-import com.anniebonav.stopguessingm3.data.MealPlanModel
-import com.anniebonav.stopguessingm3.data.UIViewModelMealPlans
-import com.anniebonav.stopguessingm3.data.ViewModelFactoryMealPlansUI
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 
 class MealPlansFragment : Fragment() {
@@ -74,15 +73,17 @@ class MealPlansFragment : Fragment() {
 
     private fun deleteIngredient(mealPlanId: Int){
         Thread{
-            _mealPlanDAO.deleteMealPlan(mealPlanId)
-            //toast(_mealPlanDAO.getMealPlan(mealPlanId).mealPlanName)
+            val deletedMealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
+            _mealPlanDAO.delete(deletedMealPlan)
+
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(activity as MainActivity, "${deletedMealPlan.mealPlanName} successfully deleted", Toast.LENGTH_SHORT).show()
+            }
         }.start()
-        //TODO: Add toast
     }
 
     private fun onMPCardClicked(mealPlanId: Int){
         openMealPlan(mealPlanId)
-        //toast(mealPlanId.toString())
     }
 
     private fun openMealPlan(mealPlanId: Int){

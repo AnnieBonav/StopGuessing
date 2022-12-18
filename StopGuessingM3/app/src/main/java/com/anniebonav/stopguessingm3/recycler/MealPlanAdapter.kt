@@ -35,19 +35,6 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<M
         this._mealPlansArrayList = _mealPlansArrayList
     }
 
-    /*
-    //private var mpNames: List<String>, private val onIngredientClick: MPClickFunction
-    fun AddIngredients(ingredients: MutableList<String>){
-
-    }
-
-    fun addIngredient(ingredientName: String){
-        mpNames = mpNames.plus(ingredientName)
-        val position = mpNames.count() -1
-        this.notifyItemInserted(position)
-    }
-    */
-
     override fun getItemCount(): Int {
         return _mealPlansArrayList.size
     }
