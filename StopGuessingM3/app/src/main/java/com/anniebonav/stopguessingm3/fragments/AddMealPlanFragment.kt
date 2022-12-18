@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan
@@ -51,11 +53,15 @@ class AddMealPlanFragment : Fragment() {
             val users: List<MealPlan> = mealPlanDao.getAll()
             Log.d("User", "MyUser: $mealPlan   Users: $users")
         }.start()
+
+        findNavController().navigate(R.id.action_AddMealPlanFragment_to_MealPlansFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    //TODO: Need to fix the size of teh card, because it changes iwth the description (as it should) but it makes it cropped after a few lines
 
     override fun onDestroyView() {
         super.onDestroyView()

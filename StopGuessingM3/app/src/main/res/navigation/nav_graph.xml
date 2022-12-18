@@ -35,5 +35,20 @@
         <action
             android:id="@+id/action_MealPlansFragment_to_IngredientsFragment"
             app:destination="@id/IngredientsFragment" />
+        <action
+            android:id="@+id/action_MealPlansFragment_to_viewMealPlanFragment"
+            app:destination="@id/viewMealPlanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewMealPlanFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.ViewMealPlanFragment"
+        android:label="Meal Plan"
+        tools:layout="@layout/fragment_view_meal_plan" >
+        <action
+            android:id="@+id/action_viewMealPlanFragment_to_MealPlansFragment"
+            app:destination="@id/MealPlansFragment" />
+        <argument
+            android:name="selectedMealPlan"
+            app:argType="integer" />
     </fragment>
 </navigation>
