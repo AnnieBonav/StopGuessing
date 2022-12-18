@@ -1,11 +1,7 @@
 package com.anniebonav.stopguessingm3.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.RoomSQLiteQuery
+import androidx.room.*
 import androidx.room.util.DBUtil
 
 @Dao
@@ -30,4 +26,7 @@ interface MealPlanDao {
 
     @Delete
     fun delete(mealPlan: MealPlan)
+
+    @Update
+    fun update(vararg users: MealPlan)
 }

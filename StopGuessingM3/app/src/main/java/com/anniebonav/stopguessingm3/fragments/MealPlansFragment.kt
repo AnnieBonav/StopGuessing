@@ -88,7 +88,7 @@ class MealPlansFragment : Fragment() {
 
     private fun openMealPlan(mealPlanId: Int){
         val bundle = bundleOf("selectedMealPlan" to mealPlanId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_viewMealPlanFragment, bundle)
+        findNavController().navigate(R.id.action_MealPlansFragment_to_ViewMealPlanFragment, bundle)
     }
 
     private fun onMPEditClicked(mealPlanId: Int ){
@@ -97,7 +97,7 @@ class MealPlansFragment : Fragment() {
 
     private fun editMealPlan(mealPlanId: Int){
         val bundle = bundleOf("selectedMealPlan" to mealPlanId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_AddMealPlanFragment, bundle)
+        findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment, bundle)
     }
 
     private fun toast(text: String){
@@ -111,7 +111,7 @@ class MealPlansFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addFab.setOnClickListener {
-            findNavController().navigate(R.id.action_MealPlansFragment_to_AddMealPlanFragment)
+            findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment)
         }
     }
 

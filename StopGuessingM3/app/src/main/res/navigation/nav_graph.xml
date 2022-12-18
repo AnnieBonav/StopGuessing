@@ -6,13 +6,13 @@
     app:startDestination="@id/MealPlansFragment">
 
     <fragment
-        android:id="@+id/AddMealPlanFragment"
-        android:name="com.anniebonav.stopguessingm3.fragments.AddMealPlanFragment"
-        android:label="Add a Meal Plan"
-        tools:layout="@layout/fragment_add_meal_plan">
+        android:id="@+id/InteractsMealPlanFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.InteractsMealPlanFragment"
+        android:label="Meal Plan Handling"
+        tools:layout="@layout/fragment_interacts_meal_plan">
 
         <action
-            android:id="@+id/action_AddMealPlanFragment_to_MealPlansFragment"
+            android:id="@+id/action_InteractsMealPlanFragment_to_MealPlansFragment"
             app:destination="@id/MealPlansFragment" />
     </fragment>
     <fragment
@@ -30,22 +30,22 @@
         android:label="Stop Guessing"
         tools:layout="@layout/fragment_meal_plans">
         <action
-            android:id="@+id/action_MealPlansFragment_to_AddMealPlanFragment"
-            app:destination="@id/AddMealPlanFragment" />
+            android:id="@+id/action_MealPlansFragment_to_InteractsMealPlanFragment"
+            app:destination="@id/InteractsMealPlanFragment" />
         <action
             android:id="@+id/action_MealPlansFragment_to_IngredientsFragment"
             app:destination="@id/IngredientsFragment" />
         <action
-            android:id="@+id/action_MealPlansFragment_to_viewMealPlanFragment"
-            app:destination="@id/viewMealPlanFragment" />
+            android:id="@+id/action_MealPlansFragment_to_ViewMealPlanFragment"
+            app:destination="@id/ViewMealPlanFragment" />
     </fragment>
     <fragment
-        android:id="@+id/viewMealPlanFragment"
+        android:id="@+id/ViewMealPlanFragment"
         android:name="com.anniebonav.stopguessingm3.fragments.ViewMealPlanFragment"
         android:label="Meal Plan"
         tools:layout="@layout/fragment_view_meal_plan" >
         <action
-            android:id="@+id/action_viewMealPlanFragment_to_MealPlansFragment"
+            android:id="@+id/action_ViewMealPlanFragment_to_MealPlansFragment"
             app:destination="@id/MealPlansFragment" />
         <argument
             android:name="selectedMealPlan"
