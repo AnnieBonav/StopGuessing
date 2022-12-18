@@ -23,18 +23,19 @@ class ViewMealPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var selectedMealPlan = arguments?.getInt("selectedMealPlan").toString()
-        Log.d("Tags", "$selectedMealPlan")
+        var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
+        Log.d("Tags", "$selectedMealPlanId")
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
         _mealPlanDAO = MealPlanDatabase.getDatabase(context).mealPlanDao()
         Thread{
-            //_mealPlanDAO.get
-        }
-        //binding.mealPlanName.text = selectedMealPlan
-        //selectedMealPlan = "Annie"
-        //toast(selectedMealPlan!!)
+            val selectedMealPlan = _mealPlanDAO.getMealPlan(selectedMealPlanId!!)
+            binding.mealPlanName.text = selectedMealPlan.mealPlanName
+            binding.mealPlanDescription.text = selectedMealPlan.mealPlanDescription
+            binding.mealsNumber.text = selectedMealPlan.mealsAmount.toString()
+            binding.snacksNumber.text = selectedMealPlan.snacksAmount.toString()
+        }.start()
         return binding.root
     }
 
@@ -43,5 +44,4 @@ class ViewMealPlanFragment : Fragment() {
         val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         toast.show()
     }
-
 }
