@@ -43,17 +43,25 @@ class MealPlansFragment : Fragment() {
 
         Thread {
             //TODO: Make this better than using thread everywhere
-            val currentMealPlans = _mealPlanDAO.getAll()
+            val currentMealPlans = _mealPlanDAO.getMealPlans()
             Log.d("Please", "Meals: $currentMealPlans")
         }.start()
 
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
         model.currentMealPlans.observe(context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMPDeleteClicked, this::onMPCardClicked, this::onMPEditClicked)
+            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanEditClicked)
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.addFab.setOnClickListener {
+            findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment)
+        }
     }
 
     private fun createInitialMealPlans(){
@@ -67,22 +75,7 @@ class MealPlansFragment : Fragment() {
         */
     }
 
-    private fun onMPDeleteClicked(mealPlanId: Int){
-        deleteIngredient(mealPlanId)
-    }
-
-    private fun deleteIngredient(mealPlanId: Int){
-        Thread{
-            val deletedMealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
-            _mealPlanDAO.delete(deletedMealPlan)
-
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${deletedMealPlan.mealPlanName} successfully deleted", Toast.LENGTH_SHORT).show()
-            }
-        }.start()
-    }
-
-    private fun onMPCardClicked(mealPlanId: Int){
+    private fun onMealPlanCardClicked(mealPlanId: Int){
         openMealPlan(mealPlanId)
     }
 
@@ -91,7 +84,7 @@ class MealPlansFragment : Fragment() {
         findNavController().navigate(R.id.action_MealPlansFragment_to_ViewMealPlanFragment, bundle)
     }
 
-    private fun onMPEditClicked(mealPlanId: Int ){
+    private fun onMealPlanEditClicked(mealPlanId: Int ){
         editMealPlan(mealPlanId)
     }
 
@@ -100,19 +93,19 @@ class MealPlansFragment : Fragment() {
         findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment, bundle)
     }
 
-    private fun toast(text: String){
-        val context = activity as MainActivity
-        val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
-        toast.show()
+    private fun onMealPlanDeleteClicked(mealPlanId: Int){
+        deleteMealPlan(mealPlanId)
     }
 
+    private fun deleteMealPlan(mealPlanId: Int){
+        Thread{
+            val deletedMealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
+            _mealPlanDAO.delete(deletedMealPlan)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.addFab.setOnClickListener {
-            findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment)
-        }
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(activity as MainActivity, "${deletedMealPlan.mealPlanName} successfully deleted!", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
     }
 
     override fun onDestroyView() {

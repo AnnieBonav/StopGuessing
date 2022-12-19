@@ -16,7 +16,6 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<M
     private val _mealPlansArrayList: List<MealPlan>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
         val inflater = LayoutInflater.from(context)
         val view: View = inflater.inflate(R.layout.item_mealplan, parent, false)
         return ViewHolder(view, onDeleteClick, onCardClick, onEditClicked)

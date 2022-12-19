@@ -7,7 +7,7 @@ import androidx.room.util.DBUtil
 @Dao
 interface MealPlanDao {
     @Query("SELECT * FROM mealplan")
-    fun getAll(): List<MealPlan>
+    fun getMealPlans(): List<MealPlan>
 
     @Query("SELECT * FROM mealplan WHERE uid = :mealPlanId")
     fun getMealPlan(mealPlanId: Int): MealPlan

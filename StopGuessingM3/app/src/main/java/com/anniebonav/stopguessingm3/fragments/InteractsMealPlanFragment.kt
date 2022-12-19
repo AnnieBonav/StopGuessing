@@ -25,22 +25,17 @@ import kotlinx.coroutines.selects.select
 class InteractsMealPlanFragment : Fragment() {
     private var _binding: FragmentInteractsMealPlanBinding? = null
     private val binding get() = _binding!!
-
-    private val _mealPlansDatabase: String = "MEALPLANS_DATABASE"
-
-    private val _addMPViewModel: UIViewModelAddMealPlan by viewModels()
-    var listener: (()->Unit)? = null
+    private val _mealPlanViewModel: UIViewModelAddMealPlan by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val context = activity as MainActivity
-        val mainViewModel = ViewModelProvider(context)
         _binding = FragmentInteractsMealPlanBinding.inflate(inflater, container,false)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.mpViewModel = _addMPViewModel
+        binding.mpViewModel = _mealPlanViewModel
 
         val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
 
@@ -50,10 +45,10 @@ class InteractsMealPlanFragment : Fragment() {
             Thread{
                 val selectedMealPlan = mealPlanDao.getMealPlan(selectedMealPlanId!!)
                 Handler(Looper.getMainLooper()).post {
-                    _addMPViewModel.currentMealPlanName.value = selectedMealPlan.mealPlanName
-                    _addMPViewModel.currentMealPlanDescription.value = selectedMealPlan.mealPlanDescription
-                    _addMPViewModel.currentMealsAmount.value = selectedMealPlan.mealsAmount.toString()
-                    _addMPViewModel.currentSnacksAmount.value = selectedMealPlan.snacksAmount.toString()
+                    _mealPlanViewModel.currentMealPlanName.value = selectedMealPlan.mealPlanName
+                    _mealPlanViewModel.currentMealPlanDescription.value = selectedMealPlan.mealPlanDescription
+                    _mealPlanViewModel.currentMealsAmount.value = selectedMealPlan.mealsAmount.toString()
+                    _mealPlanViewModel.currentSnacksAmount.value = selectedMealPlan.snacksAmount.toString()
                 }
             }.start()
 
@@ -68,18 +63,16 @@ class InteractsMealPlanFragment : Fragment() {
             }
         }
 
-
-
         return binding.root
     }
 
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
-        val mealPlan = MealPlan(null, _addMPViewModel.currentMealPlanName.value.toString(), _addMPViewModel.currentMealPlanDescription.value.toString(), _addMPViewModel.currentMealsAmount.value!!.toInt(), _addMPViewModel.currentSnacksAmount.value!!.toInt())
+        val mealPlan = MealPlan(null, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
 
         Thread {
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${mealPlan.mealPlanName} successfully created", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity as MainActivity, "${mealPlan.mealPlanName} successfully created!", Toast.LENGTH_SHORT).show()
             }
         }.start()
 
@@ -87,22 +80,18 @@ class InteractsMealPlanFragment : Fragment() {
     }
 
     fun UpdateMealPlan(mealPlanDao: MealPlanDao, selectedMealPLanId: Int){
-        val mealPlan = MealPlan(selectedMealPLanId, _addMPViewModel.currentMealPlanName.value.toString(), _addMPViewModel.currentMealPlanDescription.value.toString(), _addMPViewModel.currentMealsAmount.value!!.toInt(), _addMPViewModel.currentSnacksAmount.value!!.toInt())
+        val mealPlan = MealPlan(selectedMealPLanId, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
 
         Thread {
             mealPlanDao.update(mealPlan)
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${mealPlan.mealPlanName} successfully updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity as MainActivity, "${mealPlan.mealPlanName} successfully updated!", Toast.LENGTH_SHORT).show()
             }
         }.start()
 
         //TODO: IN general, add data proof and stuff related to the database
 
         findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     //TODO: Need to fix the size of teh card, because it changes iwth the description (as it should) but it makes it cropped after a few lines
