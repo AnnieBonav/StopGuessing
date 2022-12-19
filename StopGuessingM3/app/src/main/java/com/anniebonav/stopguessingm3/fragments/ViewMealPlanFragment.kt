@@ -17,31 +17,27 @@ import kotlinx.coroutines.selects.select
 class ViewMealPlanFragment : Fragment() {
     private var _binding: FragmentViewMealPlanBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
-    private lateinit var _mealPlanDAO: MealPlanDao
+    private lateinit var _mealPlanDao: MealPlanDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
-        Log.d("Tags", "$selectedMealPlanId")
+
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
-        _mealPlanDAO = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        _mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
+
         Thread{
-            val selectedMealPlan = _mealPlanDAO.getMealPlan(selectedMealPlanId!!)
+            val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)
             binding.mealPlanName.text = selectedMealPlan.mealPlanName
             binding.mealPlanDescription.text = selectedMealPlan.mealPlanDescription
             binding.mealsNumber.text = selectedMealPlan.mealsAmount.toString()
             binding.snacksNumber.text = selectedMealPlan.snacksAmount.toString()
         }.start()
-        return binding.root
-    }
 
-    private fun toast(text: String){
-        val context = activity as MainActivity
-        val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
-        toast.show()
+        return binding.root
     }
 }

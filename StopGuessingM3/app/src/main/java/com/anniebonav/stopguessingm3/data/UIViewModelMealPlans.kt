@@ -9,11 +9,9 @@ import com.anniebonav.stopguessingm3.MealPlanDatabase
 
 class UIViewModelMealPlans(var context: Context): ViewModel() {
     private val db:MealPlanDatabase = MealPlanDatabase.getDatabase(context)
-    //val currentMealPlans: LiveData<List<MealPlan>> = db.mealPlanDao().getAllLiveData()
     val currentMealPlans: LiveData<List<MealPlan>> = db.mealPlanDao().getAllLiveData()
 
     fun insertMealPlan(mealPlan: MealPlan){
         db.mealPlanDao().insertAll(mealPlan)
     }
-
 }

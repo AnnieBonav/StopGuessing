@@ -11,6 +11,5 @@ data class MealPlan(
     @ColumnInfo(name = "description") val mealPlanDescription: String?,
     @ColumnInfo(name = "mealsAmount") val mealsAmount: Int?,
     @ColumnInfo(name = "snacksAmount") val snacksAmount: Int?,
-
     //@ColumnInfo(name = "snacksAmount") val dateCreated: Date?
 )

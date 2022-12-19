@@ -11,7 +11,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AddMealPlanFragment">
+    tools:context=".fragments.InteractsMealPlanFragment">
 
     <TextView
         android:id="@+id/mealPlanInstruction"
@@ -40,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"/>
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -113,13 +112,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/addMealPlan"
+            android:id="@+id/crudActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintTop_toBottomOf="@+id/mealTagInput"
-            android:text="Add Meal Plan"
+            android:text="Action - Meal Plan"
             />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
