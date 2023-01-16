@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -9,11 +10,15 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.NavDirections
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var _bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -30,14 +35,30 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        /*
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
-        }*/
+        //Bottom navigation
+        _bottomNavigationView = binding.bottomNavigation
+        _bottomNavigationView.setOnItemSelectedListener{ item ->
+            Log.d("Navigation", "Inside setOnClick")
+            when(item.itemId){
+                R.id.home->{
+                    navController.navigate(R.id.HomeFragment)
+                    true
+                }
 
+                R.id.meals->{
+                    navController.navigate(R.id.BlueprintsFragment)
+                    true
+                }
 
+                R.id.ingredients->{
+                    navController.navigate(R.id.IngredientsFragment)
+                    true
+                }
+                else ->{
+                    false
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

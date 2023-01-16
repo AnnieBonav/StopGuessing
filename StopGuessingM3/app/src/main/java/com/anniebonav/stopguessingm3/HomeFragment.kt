@@ -12,7 +12,6 @@ import com.anniebonav.stopguessingm3.databinding.FragmentHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
-    private lateinit var _bottomNavigationView: BottomNavigationView
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
 
@@ -21,11 +20,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val context = activity as MainActivity
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        _bottomNavigationView = binding.bottomNavigation
 
         // Inflate the layout for this fragment
         return binding.root
@@ -39,27 +35,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_MealPlansFragment)
         }
 
-        _bottomNavigationView.setOnItemSelectedListener{ item ->
-            Log.d("Navigation", "Inside setOnClick")
-            when(item.itemId){
-                R.id.home->{
-                    Log.d("Navigation", "Navigating home")
-                    true
-                }
-
-                R.id.meals->{
-                    Log.d("Navigation", "Navigating")
-                    findNavController().navigate(R.id.action_HomeFragment_to_BlueprintsFragment)
-                    true
-                }
-
-                R.id.ingredients->{
-                    true
-                }
-                else ->{
-                    false
-                }
-            }
-        }
+        /**/
     }
 }

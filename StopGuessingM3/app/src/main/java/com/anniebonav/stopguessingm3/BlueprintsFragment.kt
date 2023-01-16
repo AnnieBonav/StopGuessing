@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +23,11 @@ class BlueprintsFragment : Fragment() {
         _binding = FragmentBlueprintsBinding.inflate(inflater, container, false)
 
         _bottomNavigationView = binding.bottomNavigation
+        var selectedId = _bottomNavigationView.selectedItemId
+        Log.d("Selected item", "$selectedId")
 
-        _bottomNavigationView.setOnClickListener{ item ->
-            when(item.id){
+        _bottomNavigationView.setOnItemSelectedListener{ item ->
+            when(item.itemId){
                 R.id.home->{
                     findNavController().navigate(R.id.action_BlueprintsFragment_to_HomeFragment)
                     true
