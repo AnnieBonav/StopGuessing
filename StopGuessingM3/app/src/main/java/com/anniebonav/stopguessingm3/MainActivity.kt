@@ -80,8 +80,14 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.meals->{
+                    var selectedTab =_tabsNavigationView.selectedTabPosition
+                    if(selectedTab == 0){
+                        navController.navigate(R.id.BlueprintsFragment) // I know 0 is blueprint
+                    }else{
+                        navController.navigate(R.id.MealPlansFragment) // I know 0 is blueprint
+                    }
+
                     _tabsNavigationView.visibility = View.VISIBLE
-                    navController.navigate(R.id.BlueprintsFragment)
                     _topBarView.text = "Meals"
 
                     true

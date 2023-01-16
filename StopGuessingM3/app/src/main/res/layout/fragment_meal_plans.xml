@@ -6,15 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MealPlansFragment">
 
-    <include layout="@layout/search_bar_main"
-        android:id="@id/searchBar"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mpRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
