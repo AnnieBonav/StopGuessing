@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Annie Bonavides HOME"
+        android:text="This is our super cool home. It should display the selected meal plan"
         ></TextView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
