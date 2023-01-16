@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MealPlansFragment">
+    app:startDestination="@id/blueprintsFragment">
 
     <fragment
         android:id="@+id/InteractsMealPlanFragment"
@@ -51,4 +51,9 @@
             android:name="selectedMealPlan"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/blueprintsFragment"
+        android:name="com.anniebonav.stopguessingm3.BlueprintsFragment"
+        android:label="fragment_blueprints"
+        tools:layout="@layout/fragment_blueprints" />
 </navigation>
