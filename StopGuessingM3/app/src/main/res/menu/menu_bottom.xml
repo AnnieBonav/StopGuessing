@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/page1"
+    <item android:id="@+id/home"
         android:enabled = "true"
         android:icon = "@drawable/icon_selection"
         android:title = "Home" >
     </item>
 
-    <item android:id="@+id/page2"
+    <item android:id="@+id/meals"
         android:enabled = "true"
         android:icon = "@drawable/icon_selection"
         android:title = "Meals" >
     </item>
 
-    <item android:id="@+id/page3"
+    <item android:id="@+id/ingredients"
         android:enabled = "true"
         android:icon = "@drawable/icon_selection"
         android:title = "Ingredients" >
