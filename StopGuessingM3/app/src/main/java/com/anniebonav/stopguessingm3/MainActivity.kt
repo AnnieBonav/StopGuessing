@@ -10,15 +10,20 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.navigation.NavDirections
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var _bottomNavigationView: BottomNavigationView
+    private lateinit var _tabsNavigationView: TabLayout
+    private lateinit var _topBarView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +36,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         //setSupportActionBar(binding.toolbar) //Can access toolbar without FindViewById because we have defined binding as the bind with AppVarConfiguration
-        val topBar = findViewById<TextView>(R.id.topBar)
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         //appBarConfiguration = AppBarConfiguration(navController.graph)
         //setupActionBarWithNavController(navController, appBarConfiguration)
+
+
+        //Personal Top Bar
+        _topBarView = binding.topBar
+
+        //Tabs navigation
+        _tabsNavigationView = binding.mealsTabs
+        _tabsNavigationView.visibility = View.GONE
+        _tabsNavigationView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if(tab?.text.toString() == "Meal Plans"){
+                    navController.navigate(R.id.MealPlansFragment)
+                }
+                else if(tab?.text.toString() == "Blueprints"){
+                    navController.navigate(R.id.BlueprintsFragment)
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
 
         //Bottom navigation
         _bottomNavigationView = binding.bottomNavigation
@@ -43,20 +72,26 @@ class MainActivity : AppCompatActivity() {
             Log.d("Navigation", "Inside setOnClick")
             when(item.itemId){
                 R.id.home->{
+                    _tabsNavigationView.visibility = View.GONE
                     navController.navigate(R.id.HomeFragment)
-                    topBar.text = "Home"
+                    _topBarView.text = "Home"
+
                     true
                 }
 
                 R.id.meals->{
+                    _tabsNavigationView.visibility = View.VISIBLE
                     navController.navigate(R.id.BlueprintsFragment)
-                    topBar.text = "Meals"
+                    _topBarView.text = "Meals"
+
                     true
                 }
 
                 R.id.ingredients->{
+                    _tabsNavigationView.visibility = View.GONE
                     navController.navigate(R.id.IngredientsFragment)
-                    topBar.text = "Ingredients"
+                    _topBarView.text = "Ingredients"
+
                     true
                 }
                 else ->{
