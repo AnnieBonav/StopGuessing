@@ -26,8 +26,8 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_IngredientsFragment_to_MealPlansFragment)
+        binding.addFab.setOnClickListener {
+            findNavController().navigate(R.id.action_IngredientsFragment_to_InteractsIngredientFragment)
         }
     }
 
