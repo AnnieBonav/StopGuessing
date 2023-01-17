@@ -39,7 +39,7 @@ class MealPlansFragment : Fragment() {
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
-        val mealPlansFactory = ViewModelFactoryMealPlansUI(context);
+        val mealPlansFactory = ViewModelFactoryUI(context);
         val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
 
         _mealPlanDAO = StopGuessingDatabase.getDatabase(context).mealPlanDao()

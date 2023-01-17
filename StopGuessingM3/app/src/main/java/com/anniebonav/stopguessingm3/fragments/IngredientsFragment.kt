@@ -20,7 +20,7 @@ import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.data.UIViewModelIngredients
-import com.anniebonav.stopguessingm3.data.ViewModelFactoryIngredientsUI
+import com.anniebonav.stopguessingm3.data.ViewModelFactoryUI
 import com.anniebonav.stopguessingm3.databinding.FragmentIngredientsBinding
 import com.anniebonav.stopguessingm3.recycler.IngredientAdapter
 
@@ -39,7 +39,7 @@ class IngredientsFragment : Fragment() {
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         _ingredientsRecycler = binding.ingredientsRecycler
 
-        val ingredientsFactory = ViewModelFactoryIngredientsUI(context);
+        val ingredientsFactory = ViewModelFactoryUI(context);
         val model = ViewModelProvider(context, ingredientsFactory).get(UIViewModelIngredients::class.java)
 
         _ingredientDAO = StopGuessingDatabase.getDatabase(context).ingredientDao()
