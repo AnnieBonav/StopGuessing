@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity//(tableName = "mealplans")
 data class MealPlan(
     @PrimaryKey(autoGenerate = true) val uid: Int?, //TODO probably can change thsi to be without the val and only the autogenerate + true
     @ColumnInfo(name = "name") val mealPlanName: String?,

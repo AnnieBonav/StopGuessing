@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.anniebonav.stopguessingm3.MainActivity
-import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.databinding.FragmentViewMealPlanBinding
@@ -28,7 +28,7 @@ class ViewMealPlanFragment : Fragment() {
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
-        _mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        _mealPlanDao = StopGuessingDatabase.getDatabase(context).mealPlanDao()
 
         Thread{
             val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)

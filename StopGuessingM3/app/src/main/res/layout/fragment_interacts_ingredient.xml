@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="mpViewModel"
+            name="ingredientsViewModel"
             type="com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan"/>
     </data>
 
@@ -36,7 +36,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@={mpViewModel.currentMealPlanName}"
+            android:text="@={ingredientsViewModel.currentMealPlanName}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"/>
@@ -52,7 +52,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@={mpViewModel.currentMealPlanDescription}"
+            android:text="@={ingredientsViewModel.currentMealPlanDescription}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"/>
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:inputType="number"
-            android:text="@={mpViewModel.currentMealsAmount}" />
+            android:text="@={ingredientsViewModel.currentMealsAmount}" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:inputType="text"
-            android:text="@={mpViewModel.currentSnacksAmount}"/>
+            android:text="@={ingredientsViewModel.currentSnacksAmount}"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

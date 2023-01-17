@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
-import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlanDao
@@ -37,7 +37,7 @@ class InteractsMealPlanFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mpViewModel = _mealPlanViewModel
 
-        val mealPlanDao = MealPlanDatabase.getDatabase(context).mealPlanDao()
+        val mealPlanDao = StopGuessingDatabase.getDatabase(context).mealPlanDao()
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")

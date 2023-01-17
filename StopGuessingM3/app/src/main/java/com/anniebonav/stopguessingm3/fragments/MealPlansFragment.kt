@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
-import com.anniebonav.stopguessingm3.MealPlanDatabase
+import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.*
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
@@ -43,7 +43,8 @@ class MealPlansFragment : Fragment() {
 
         val mealPlansFactory = ViewModelFactoryMealPlansUI(context);
         val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
-        _mealPlanDAO = MealPlanDatabase.getDatabase(context).mealPlanDao()
+
+        _mealPlanDAO = StopGuessingDatabase.getDatabase(context).mealPlanDao()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         _mealPlansRecycler.layoutManager = linearLayoutManager
