@@ -81,7 +81,7 @@ class BlueprintsFragment : Fragment() {
 
     private fun openBlueprint(blueprintId: Int){
         val bundle = bundleOf("selectedBlueprint" to blueprintId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_ViewMealPlanFragment, bundle) //TODO change to blueprint
+        findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment, bundle) //TODO change to blueprint
     }
 
     private fun onBlueprintEditClicked(blueprintId: Int ){
@@ -89,8 +89,8 @@ class BlueprintsFragment : Fragment() {
     }
 
     private fun editBlueprint(blueprintId: Int){
-        val bundle = bundleOf("selectedMealPlan" to blueprintId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment, bundle) //Change
+        val bundle = bundleOf("selectedBlueprint" to blueprintId)
+        findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment, bundle) //Change
     }
 
     private fun onBlueprintDeleteClicked(blueprintId: Int){
