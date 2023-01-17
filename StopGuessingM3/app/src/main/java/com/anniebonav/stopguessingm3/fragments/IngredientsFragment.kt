@@ -92,7 +92,7 @@ class IngredientsFragment : Fragment() {
 
     private fun openIngredient(ingredientId: Int){
         val bundle = bundleOf("selectedIngredient" to ingredientId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_ViewMealPlanFragment, bundle)
+        findNavController().navigate(R.id.action_IngredientsFragment_to_InteractsIngredientFragment, bundle)
     }
 
     private fun onIngredientEditClicked(ingredientId: Int ){
@@ -101,7 +101,7 @@ class IngredientsFragment : Fragment() {
 
     private fun editIngredient(ingredientId: Int){
         val bundle = bundleOf("selectedIngredient" to ingredientId)
-        findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment, bundle)
+        findNavController().navigate(R.id.action_IngredientsFragment_to_InteractsIngredientFragment, bundle)
     }
 
     private fun onIngredientDeleteClicked(ingredientId: Int){
