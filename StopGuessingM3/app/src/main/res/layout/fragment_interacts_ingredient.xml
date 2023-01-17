@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ingredientsViewModel"
-            type="com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan"/>
+            type="com.anniebonav.stopguessingm3.data.UIViewModelInteractIngredient"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@={ingredientsViewModel.currentMealPlanName}"
+            android:text="@={ingredientsViewModel.currentIngredientName}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"/>
@@ -52,7 +52,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@={ingredientsViewModel.currentMealPlanDescription}"
+            android:text="@={ingredientsViewModel.currentIngredientCategory}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"/>
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:inputType="number"
-            android:text="@={ingredientsViewModel.currentMealsAmount}" />
+            android:text="@={ingredientsViewModel.currentIngredientAmount}" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:inputType="text"
-            android:text="@={ingredientsViewModel.currentSnacksAmount}"/>
+            android:text="@={ingredientsViewModel.currentIngredientMeasurement}"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

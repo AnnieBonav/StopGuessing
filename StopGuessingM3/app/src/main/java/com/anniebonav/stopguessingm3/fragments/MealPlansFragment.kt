@@ -28,10 +28,9 @@ import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+
     private lateinit var _mealPlansRecycler: RecyclerView
     private lateinit var _mealPlanDAO: MealPlanDao
-
-    lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,18 +58,6 @@ class MealPlansFragment : Fragment() {
                 createInitialMealPlans()
             }
         }.start()
-
-
-        /*
-        // First try on having a search field
-        searchView = binding.root.findViewById(R.id.searchBar)
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if(_mealPlanDAO.getMealPlans().contains(query)){
-                    _mealPlansRecycler.adapter.filter(query)
-                }
-            }
-        })*/
 
         return binding.root
     }

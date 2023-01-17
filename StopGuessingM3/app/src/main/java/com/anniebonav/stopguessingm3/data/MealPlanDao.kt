@@ -2,7 +2,6 @@ package com.anniebonav.stopguessingm3.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.room.util.DBUtil
 
 @Dao
 interface MealPlanDao {

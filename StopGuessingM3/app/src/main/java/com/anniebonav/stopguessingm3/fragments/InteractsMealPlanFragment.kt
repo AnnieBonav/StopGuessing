@@ -1,17 +1,14 @@
 package com.anniebonav.stopguessingm3.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
@@ -20,7 +17,6 @@ import com.anniebonav.stopguessingm3.data.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlanDao
 import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan
 import com.anniebonav.stopguessingm3.databinding.FragmentInteractsMealPlanBinding
-import kotlinx.coroutines.selects.select
 
 class InteractsMealPlanFragment : Fragment() {
     private var _binding: FragmentInteractsMealPlanBinding? = null
