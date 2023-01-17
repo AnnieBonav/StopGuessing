@@ -3,6 +3,7 @@ package com.anniebonav.stopguessingm3
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,8 +34,8 @@ class InteractsIngredientFragment : Fragment() {
         val ingredientDao = StopGuessingDatabase.getDatabase(context).ingredientDao()
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating an ingredient and not adding one. This way I reuse my View Model.
-            var selectedIngredientId = arguments?.getInt("selectedMealPlan")
-            binding.crudActionButton.text = "Update Meal Plan"
+            var selectedIngredientId = arguments?.getInt("selectedIngredient")
+            binding.crudActionButton.text = "Update Ingredient"
             Thread{
                 val selectedIngredient = ingredientDao.getIngredient(selectedIngredientId!!)
                 Handler(Looper.getMainLooper()).post {
@@ -46,20 +47,20 @@ class InteractsIngredientFragment : Fragment() {
             }.start()
 
             binding.crudActionButton.setOnClickListener(){
-                UpdateMealPlan(ingredientDao, selectedIngredientId!!)
+                UpdateIngredient(ingredientDao, selectedIngredientId!!)
             }
         }else{
-            binding.crudActionButton.text = "Create Meal Plan"
+            binding.crudActionButton.text = "Add Ingredient"
 
             binding.crudActionButton.setOnClickListener(){
                 CreateIngredient(ingredientDao)
             }
         }
-        // Inflate the layout for this fragment
         return binding.root
     }
 
     fun CreateIngredient(ingredientDAO: IngredientDAO){
+        Log.d("Database", "Enters create ingredient")
         val ingredient = Ingredient(null, _ingredientViewModel.currentIngredientName.value.toString(), _ingredientViewModel.currentIngredientCategory.value.toString(), _ingredientViewModel.currentIngredientAmount.value!!.toInt(), _ingredientViewModel.currentIngredientMeasurement.value.toString())
 
         Thread {
@@ -69,10 +70,10 @@ class InteractsIngredientFragment : Fragment() {
             }
         }.start()
 
-        findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+        findNavController().navigate(R.id.action_InteractsIngredientFragment_to_IngredientsFragment)
     }
 
-    fun UpdateMealPlan(ingredientDAO: IngredientDAO, selectedIngredientId: Int){
+    fun UpdateIngredient(ingredientDAO: IngredientDAO, selectedIngredientId: Int){
         val ingredient = Ingredient(selectedIngredientId, _ingredientViewModel.currentIngredientName.value.toString(), _ingredientViewModel.currentIngredientCategory.value.toString(), _ingredientViewModel.currentIngredientAmount.value!!.toInt(), _ingredientViewModel.currentIngredientMeasurement.value.toString())
 
         Thread {
@@ -84,7 +85,7 @@ class InteractsIngredientFragment : Fragment() {
 
         //TODO: IN general, add data proof and stuff related to the database
 
-        findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+        findNavController().navigate(R.id.action_InteractsIngredientFragment_to_IngredientsFragment)
     }
 
     override fun onDestroyView() {
