@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
-import com.anniebonav.stopguessingm3.data.MealPlan
-import com.anniebonav.stopguessingm3.data.MealPlanDao
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan
 import com.anniebonav.stopguessingm3.databinding.FragmentInteractsMealPlanBinding
 

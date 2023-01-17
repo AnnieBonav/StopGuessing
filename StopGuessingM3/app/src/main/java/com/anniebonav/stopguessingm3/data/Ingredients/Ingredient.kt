@@ -11,5 +11,4 @@ data class Ingredient(
     @ColumnInfo(name = "category") val ingredientCategory: String?,
     @ColumnInfo(name = "amount") val ingredientAmount: Int?,
     @ColumnInfo(name = "measurement") val ingredientMeasurement: String?,
-    //@ColumnInfo(name = "snacksAmount") val dateCreated: Date?
 )

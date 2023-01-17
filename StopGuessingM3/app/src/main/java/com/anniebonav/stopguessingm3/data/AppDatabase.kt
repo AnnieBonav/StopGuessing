@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
-import com.anniebonav.stopguessingm3.data.MealPlan
-import com.anniebonav.stopguessingm3.data.MealPlanDao
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 
 @Database(entities = [MealPlan::class, Ingredient::class], version = 1)
 abstract class StopGuessingDatabase : RoomDatabase() {

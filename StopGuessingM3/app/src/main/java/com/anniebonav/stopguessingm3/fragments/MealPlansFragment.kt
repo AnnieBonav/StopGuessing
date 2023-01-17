@@ -3,16 +3,13 @@ package com.anniebonav.stopguessingm3.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +18,8 @@ import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.*
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 

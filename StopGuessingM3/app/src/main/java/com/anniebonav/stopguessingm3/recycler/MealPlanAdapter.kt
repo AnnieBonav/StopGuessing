@@ -9,7 +9,7 @@ import com.anniebonav.stopguessingm3.MPDeleteClickFunction
 import com.anniebonav.stopguessingm3.MPEditClickFunction
 import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
-import com.anniebonav.stopguessingm3.data.MealPlan
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 
 class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClicked: MPEditClickFunction): RecyclerView.Adapter<ViewHolder>(){
     private val _mealPlansArrayList: List<MealPlan>

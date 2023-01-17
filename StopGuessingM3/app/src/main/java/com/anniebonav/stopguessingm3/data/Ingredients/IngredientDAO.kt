@@ -21,7 +21,7 @@ interface IngredientDAO {
     fun insertAll(vararg ingredients: Ingredient)
 
     @Query("DELETE FROM ingredient WHERE uid = :ingredientId")
-    fun deleteMealPlan(ingredientId: Int)
+    fun deleteIngredient(ingredientId: Int)
 
     @Delete
     fun delete(ingredient: Ingredient)
