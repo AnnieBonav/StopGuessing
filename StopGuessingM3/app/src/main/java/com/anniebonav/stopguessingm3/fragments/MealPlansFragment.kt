@@ -40,7 +40,7 @@ class MealPlansFragment : Fragment() {
         _mealPlansRecycler = binding.mpRecycler
 
         val mealPlansFactory = ViewModelFactoryUI(context);
-        val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModelMealPlans::class.java)
+        val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModel::class.java)
 
         _mealPlanDAO = StopGuessingDatabase.getDatabase(context).mealPlanDao()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

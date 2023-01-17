@@ -35,7 +35,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={blueprintsViewModel.currentBlueprintName}"
+                android:text="@={blueprintsViewModel.name}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"/>
@@ -51,7 +51,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={blueprintsViewModel.currentBlueprintBreakfastUnits}"
+                android:text="@={blueprintsViewModel.breakfastUnits}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:inputType="number"
-                android:text="@={blueprintsViewModel.currentBlueprintLunchUnits}" />
+                android:text="@={blueprintsViewModel.lunchUnits}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:inputType="number"
-                android:text="@={blueprintsViewModel.currentBlueprintDinnerUnits}"/>
+                android:text="@={blueprintsViewModel.dinnerUnits}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:inputType="number"
-                android:text="@={blueprintsViewModel.currentBlueprintMorningSnackUnits}"/>
+                android:text="@={blueprintsViewModel.morningSnackUnits}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:inputType="number"
-                android:text="@={blueprintsViewModel.currentBlueprintEveningSnackUnits}"/>
+                android:text="@={blueprintsViewModel.eveningSnackUnits}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

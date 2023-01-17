@@ -3,14 +3,20 @@ package com.anniebonav.stopguessingm3.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.room.Dao
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
+import com.anniebonav.stopguessingm3.data.Blueprints.Blueprint
+import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.data.UIViewModelInteractBlueprint
 import com.anniebonav.stopguessingm3.databinding.FragmentInteractsBlueprintsBinding
 
@@ -18,6 +24,7 @@ class InteractsBlueprintsFragment : Fragment() {
     private var _binding: FragmentInteractsBlueprintsBinding? = null
     private val binding get() = _binding!!
     private val _blueprintViewModel: UIViewModelInteractBlueprint by viewModels()
+        //private lateinit var blueprintDao: BlueprintDAO //Can do code cleanup
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,31 +36,67 @@ class InteractsBlueprintsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.blueprintsViewModel = _blueprintViewModel
 
-        val blueprintDao = StopGuessingDatabase.getDatabase(context).ingredientDao()
-        /*
-        if(arguments != null){ //If I am sending arguments, it means that I am updating an ingredient and not adding one. This way I reuse my View Model.
-            var selectedIngredientId = arguments?.getInt("selectedIngredient")
-            binding.crudActionButton.text = "Update Ingredient"
+        val blueprintDao = StopGuessingDatabase.getDatabase(context).blueprintDao()
+
+        if(arguments != null){ //If I am sending arguments, it means that I am updating a blueprint and not adding one. This way I reuse my View Model.
+            var selectedBlueprintId = arguments?.getInt("selectedBlueprint")
+            binding.crudActionButton.text = "Update Blueprint"
             Thread{
-                val selectedIngredient = ingredientDao.getIngredient(selectedIngredientId!!)
+                val selectedBlueprint = blueprintDao.getBlueprint(selectedBlueprintId!!)
                 Handler(Looper.getMainLooper()).post {
-                    _ingredientViewModel.currentIngredientName.value = selectedIngredient.ingredientName
-                    _ingredientViewModel.currentIngredientCategory.value = selectedIngredient.ingredientCategory
-                    _ingredientViewModel.currentIngredientAmount.value = selectedIngredient.ingredientAmount.toString()
-                    _ingredientViewModel.currentIngredientMeasurement.value = selectedIngredient.ingredientMeasurement
+                    //.name and .breakfast come from the UIViewModelInteractBlueprint = and .name .breakfastUnits (from selectedBlueprint) are the Blueprint.kt values
+                    _blueprintViewModel.name.value = selectedBlueprint.name
+                    _blueprintViewModel.breakfastUnits.value = selectedBlueprint.breakfastUnits.toString()
+                    _blueprintViewModel.lunchUnits.value = selectedBlueprint.lunchUnits.toString()
+                    _blueprintViewModel.dinnerUnits.value = selectedBlueprint.dinnerUnits.toString()
+                    _blueprintViewModel.morningSnackUnits.value = selectedBlueprint.morningSnackUnits.toString()
+                    _blueprintViewModel.eveningSnackUnits.value = selectedBlueprint.eveningSnackUnits.toString()
                 }
             }.start()
 
             binding.crudActionButton.setOnClickListener(){
-                UpdateIngredient(ingredientDao, selectedIngredientId!!)
+                UpdateBlueprint(blueprintDao, selectedBlueprintId!!)
             }
         }else{
-            binding.crudActionButton.text = "Add Ingredient"
+            binding.crudActionButton.text = "Add Blueprint"
 
             binding.crudActionButton.setOnClickListener(){
-                CreateIngredient(ingredientDao)
+                CreateBlueprint(blueprintDao)
             }
-        }*/
+        }
         return binding.root
+    }
+
+    fun CreateBlueprint(blueprintDAO: BlueprintDAO){
+        val blueprint = Blueprint(null, _blueprintViewModel.name.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
+
+        Thread {
+            blueprintDAO.insertAll(blueprint)
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(activity as MainActivity, "${blueprint.name} successfully created!", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
+
+        findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
+    }
+
+    fun UpdateBlueprint(blueprintDAO: BlueprintDAO, selectedBlueprintId: Int){
+        val blueprint = Blueprint(selectedBlueprintId, _blueprintViewModel.name.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
+
+        Thread {
+            blueprintDAO.update(blueprint)
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(activity as MainActivity, "${blueprint.name} successfully updated!", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
+
+        //TODO: IN general, add data proof and stuff related to the database
+
+        findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -4,27 +4,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class UIViewModelInteractBlueprint: ViewModel() {
-    val currentBlueprintName: MutableLiveData<String> by lazy {
+    val name: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val currentBlueprintBreakfastUnits: MutableLiveData<String> by lazy {
+    val breakfastUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val currentBlueprintLunchUnits: MutableLiveData<String> by lazy {
+    val lunchUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val currentBlueprintDinnerUnits: MutableLiveData<String> by lazy {
+    val dinnerUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val currentBlueprintMorningSnackUnits: MutableLiveData<String> by lazy {
+    val morningSnackUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val currentBlueprintEveningSnackUnits: MutableLiveData<String> by lazy {
+    val eveningSnackUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 }

@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_BlueprintsFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_BlueprintsFragment_to_InteractsBlueprintsFragment"
+            app:destination="@id/InteractsBlueprintsFragment" />
     </fragment>
     <fragment
         android:id="@+id/HomeFragment"
@@ -85,5 +88,13 @@
         <action
             android:id="@+id/action_InteractsIngredientFragment_to_IngredientsFragment"
             app:destination="@id/IngredientsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/InteractsBlueprintsFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.InteractsBlueprintsFragment"
+        android:label="InteractsBlueprintsFragment" >
+        <action
+            android:id="@+id/action_InteractsBlueprintsFragment_to_BlueprintsFragment"
+            app:destination="@id/BlueprintsFragment" />
     </fragment>
 </navigation>
