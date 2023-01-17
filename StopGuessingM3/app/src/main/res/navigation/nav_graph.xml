@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/InteractsIngredientFragment"
-        android:name="com.anniebonav.stopguessingm3.InteractsIngredientFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.InteractsIngredientFragment"
         android:label="InteractsIngredientFragment" >
         <action
             android:id="@+id/action_InteractsIngredientFragment_to_IngredientsFragment"

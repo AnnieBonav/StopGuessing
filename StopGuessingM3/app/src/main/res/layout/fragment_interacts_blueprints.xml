@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="blueprintsViewModel"
+            type="com.anniebonav.stopguessingm3.data.UIViewModelInteractBlueprint"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.InteractsBlueprintsFragment">
+
+        <TextView
+            android:id="@+id/blueprintInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="16dp"
+            android:text="Fill-out your Blueprint's Information"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/md_theme_light_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Blueprint Name"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintInstruction"
+            app:startIconContentDescription="@string/delete_icon"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={blueprintsViewModel.currentBlueprintName}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintBreakfastUnitsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Breakfast Units"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintNameInput"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={blueprintsViewModel.currentBlueprintBreakfastUnits}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginHorizontal="16dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintLunchUnitsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lunch Units"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintBreakfastUnitsInput"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:inputType="number"
+                android:text="@={blueprintsViewModel.currentBlueprintLunchUnits}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintDinnerUnitsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dinner Unit"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintLunchUnitsInput"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:inputType="number"
+                android:text="@={blueprintsViewModel.currentBlueprintDinnerUnits}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintMorningSnackUnitsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Morning Snack Units"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintDinnerUnitsInput"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:inputType="number"
+                android:text="@={blueprintsViewModel.currentBlueprintMorningSnackUnits}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blueprintEveningSnackUnitsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Evening Snack Units"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintMorningSnackUnitsInput"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:inputType="number"
+                android:text="@={blueprintsViewModel.currentBlueprintEveningSnackUnits}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/crudActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/blueprintEveningSnackUnitsInput"
+            android:text="Action - Blueprint"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
