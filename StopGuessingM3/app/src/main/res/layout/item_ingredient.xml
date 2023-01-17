@@ -40,36 +40,41 @@
                     android:text="Title"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
-                <TextView
-                    android:id="@+id/ingredientCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Supporting text"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/ingredientEdit"
-                        style="?attr/borderlessButtonStyle"
+                    <TextView
+                        android:id="@+id/ingredientCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="A button 1" />
+                        android:layout_marginTop="16dp"
+                        android:text="Category"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/ingredientDelete"
-                        style="?attr/borderlessButtonStyle"
+                    <TextView
+                        android:id="@+id/ingredientAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A button 2" />
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Amount"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+
+                    <TextView
+                        android:id="@+id/ingredientMeasurement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Measurement"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+
                 </LinearLayout>
+
 
             </LinearLayout>
 

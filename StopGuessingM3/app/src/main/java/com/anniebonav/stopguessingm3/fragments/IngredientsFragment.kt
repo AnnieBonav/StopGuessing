@@ -47,7 +47,7 @@ class IngredientsFragment : Fragment() {
         _ingredientsRecycler.layoutManager = linearLayoutManager
 
         model.currentIngredients.observe(context, Observer { ingredients ->
-            _ingredientsRecycler.adapter = IngredientAdapter(context, ingredients, this::onIngredientDeleteClicked, this::onIngredientCardClicked, this::onIngredientEditClicked)
+            _ingredientsRecycler.adapter = IngredientAdapter(context, ingredients, this::onIngredientCardClicked)
         })
 
         Thread{
