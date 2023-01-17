@@ -1,14 +1,12 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.databinding.FragmentBlueprintsBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BlueprintsFragment : Fragment() {
     private var _binding: FragmentBlueprintsBinding? = null

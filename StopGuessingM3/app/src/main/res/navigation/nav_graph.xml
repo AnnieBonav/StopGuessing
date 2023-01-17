@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/BlueprintsFragment"
-        android:name="com.anniebonav.stopguessingm3.BlueprintsFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.BlueprintsFragment"
         android:label="Blueprints"
         tools:layout="@layout/fragment_blueprints" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.anniebonav.stopguessingm3.HomeFragment"
+        android:name="com.anniebonav.stopguessingm3.fragments.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
