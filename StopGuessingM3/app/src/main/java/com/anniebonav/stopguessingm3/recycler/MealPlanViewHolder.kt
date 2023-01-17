@@ -10,7 +10,7 @@ import com.anniebonav.stopguessingm3.MPEditClickFunction
 import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 
-class ViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClick: MPEditClickFunction): RecyclerView.ViewHolder(view) {
+class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClick: MPEditClickFunction): RecyclerView.ViewHolder(view) {
     val mealPlanCard: CardView
     val mealPlanNameLabel: TextView
     val mealPlanDescriptionLabel: TextView

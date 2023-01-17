@@ -11,16 +11,16 @@ import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 
-class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClicked: MPEditClickFunction): RecyclerView.Adapter<ViewHolder>(){
+class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClicked: MPEditClickFunction): RecyclerView.Adapter<MealPlanViewHolder>(){
     private val _mealPlansArrayList: List<MealPlan>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealPlanViewHolder {
         val inflater = LayoutInflater.from(context)
         val view: View = inflater.inflate(R.layout.item_mealplan, parent, false)
-        return ViewHolder(view, onDeleteClick, onCardClick, onEditClicked)
+        return MealPlanViewHolder(view, onDeleteClick, onCardClick, onEditClicked)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MealPlanViewHolder, position: Int) {
         val model: MealPlan = _mealPlansArrayList[position]
         holder.mealPlanNameLabel.setText(model.mealPlanName)
         holder.mealPlanDescriptionLabel.setText(model.mealPlanDescription)
