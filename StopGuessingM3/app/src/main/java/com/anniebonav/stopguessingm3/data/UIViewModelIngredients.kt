@@ -9,8 +9,4 @@ import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 class UIViewModelIngredients(var context: Context): ViewModel() {
     private val db: StopGuessingDatabase = StopGuessingDatabase.getDatabase(context)
     val currentIngredients: LiveData<List<Ingredient>> = db.ingredientDao().getAllLiveData()
-
-    fun insertIngredient(ingredient: Ingredient){
-        db.ingredientDao().insertAll(ingredient)
-    }
 }
