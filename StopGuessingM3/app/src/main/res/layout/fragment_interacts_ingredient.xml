@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:hint="Name"
             app:startIconContentDescription="@string/delete_icon"
-            app:endIconMode="clear_text">
+            app:endIconMode="clear_text"
+            android:layout_marginHorizontal="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:text="@={ingredientsViewModel.currentIngredientName}"
@@ -67,7 +68,8 @@
             style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Category">
+            android:hint="Category"
+            android:layout_marginHorizontal="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/ingredientCategoryInput"
@@ -78,35 +80,59 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ingredientAmountInput"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingredient Amount"
-            app:endIconMode="clear_text">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="@={ingredientsViewModel.currentIngredientAmount}" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ingredientAmountInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingredient Amount"
+                    app:endIconMode="clear_text">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ingredientMeasurementInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Measurement Unit"
-            app:endIconMode="clear_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@={ingredientsViewModel.currentIngredientAmount}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The amount per unit should be discussed with your doctor"
+                    />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ingredientMeasurementInput"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="@={ingredientsViewModel.currentIngredientMeasurement}"/>
+                android:hint="Measurement Unit"
+                app:endIconMode="clear_text">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@={ingredientsViewModel.currentIngredientMeasurement}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/crudActionButton"
