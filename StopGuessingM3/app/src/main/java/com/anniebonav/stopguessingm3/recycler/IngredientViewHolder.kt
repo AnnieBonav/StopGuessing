@@ -8,16 +8,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.IngredientOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 
-class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenClickFunction): RecyclerView.ViewHolder(view) {
-    val ingredientCard: CardView
+class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenClickFunction,private val onEditClick: IngredientOpenClickFunction, private val onDeleteClick: IngredientOpenClickFunction): RecyclerView.ViewHolder(view) {
+    val ingredientCard: CardView //Not using it at the moment
     val ingredientNameLabel: TextView
     val ingredientCategoryLabel: TextView
     val ingredientAmountLabel: TextView
     val ingredientUnitLabel: TextView
 
+    val editIngredientButton: Button
+    val deleteIngredientButton: Button
+
+    /*
     fun openIngredient(ingredientId: Int){
         ingredientCard.setOnClickListener{
             onCardClick(ingredientId)
+        }
+    }*/
+    fun editIngredient(ingredientId: Int){
+        editIngredientButton.setOnClickListener{
+            onEditClick(ingredientId)
+        }
+    }
+
+    fun deleteIngredient(ingredientId: Int){
+        deleteIngredientButton.setOnClickListener{
+            onDeleteClick(ingredientId)
         }
     }
 
@@ -27,5 +42,8 @@ class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenC
         ingredientCategoryLabel = view.findViewById(R.id.ingredientCategory)
         ingredientAmountLabel = view.findViewById(R.id.ingredientAmount)
         ingredientUnitLabel = view.findViewById(R.id.ingredientUnit)
+
+        editIngredientButton = view.findViewById(R.id.editIngredientButton)
+        deleteIngredientButton = view.findViewById(R.id.deleteIngredientButton)
     }
 }

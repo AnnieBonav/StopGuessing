@@ -47,7 +47,7 @@ class IngredientsFragment : Fragment() {
         _ingredientsRecycler.layoutManager = linearLayoutManager
 
         model.currentIngredients.observe(context, Observer { ingredients ->
-            _ingredientsRecycler.adapter = IngredientAdapter(context, ingredients, this::onIngredientCardClicked)
+            _ingredientsRecycler.adapter = IngredientAdapter(context, ingredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
 
         Thread{
@@ -86,6 +86,7 @@ class IngredientsFragment : Fragment() {
         }
     }
 
+    //Not currently using card Clicked
     private fun onIngredientCardClicked(ingredientId: Int){
         openIngredient(ingredientId)
     }

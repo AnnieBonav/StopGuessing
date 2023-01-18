@@ -94,6 +94,7 @@ class InteractsIngredientFragment : Fragment() {
         if(arguments != null){ //If I am sending arguments, it means that I am updating an ingredient and not adding one. This way I reuse my View Model.
             var selectedIngredientId = arguments?.getInt("selectedIngredient")
             binding.crudActionButton.text = "Update Ingredient"
+            binding.ingredientsInstruction.text = "Update Ingredient"
             Thread{
                 val selectedIngredient = ingredientDao.getIngredient(selectedIngredientId!!)
                 Handler(Looper.getMainLooper()).post {
@@ -109,11 +110,16 @@ class InteractsIngredientFragment : Fragment() {
             }
         }else{
             binding.crudActionButton.text = "Add Ingredient"
+            binding.ingredientsInstruction.text = "Add Ingredient"
 
             binding.crudActionButton.setOnClickListener(){
                 CreateIngredient(ingredientDao)
             }
         }
+
+        binding.goBackButton.setOnClickListener({
+            findNavController().navigate(R.id.action_InteractsIngredientFragment_to_IngredientsFragment)
+        })
         return binding.root
     }
 

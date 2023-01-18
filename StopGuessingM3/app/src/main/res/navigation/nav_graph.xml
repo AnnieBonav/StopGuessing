@@ -75,7 +75,9 @@
         android:label="InteractsIngredientFragment" >
         <action
             android:id="@+id/action_InteractsIngredientFragment_to_IngredientsFragment"
-            app:destination="@id/IngredientsFragment" />
+            app:destination="@id/IngredientsFragment"
+            app:popUpTo="@id/IngredientsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/InteractsBlueprintsFragment"
