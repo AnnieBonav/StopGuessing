@@ -21,9 +21,6 @@
         android:label="Stop Guessing"
         tools:layout="@layout/fragment_ingredients">
         <action
-            android:id="@+id/action_IngredientsFragment_to_MealPlansFragment"
-            app:destination="@id/MealPlansFragment" />
-        <action
             android:id="@+id/action_IngredientsFragment_to_InteractsIngredientFragment"
             app:destination="@id/InteractsIngredientFragment" />
     </fragment>
@@ -36,14 +33,8 @@
             android:id="@+id/action_MealPlansFragment_to_InteractsMealPlanFragment"
             app:destination="@id/InteractsMealPlanFragment" />
         <action
-            android:id="@+id/action_MealPlansFragment_to_IngredientsFragment"
-            app:destination="@id/IngredientsFragment" />
-        <action
             android:id="@+id/action_MealPlansFragment_to_ViewMealPlanFragment"
             app:destination="@id/ViewMealPlanFragment" />
-        <action
-            android:id="@+id/action_MealPlansFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/ViewMealPlanFragment"
@@ -63,9 +54,6 @@
         android:label="Blueprints"
         tools:layout="@layout/fragment_blueprints" >
         <action
-            android:id="@+id/action_BlueprintsFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
-        <action
             android:id="@+id/action_BlueprintsFragment_to_InteractsBlueprintsFragment"
             app:destination="@id/InteractsBlueprintsFragment" />
     </fragment>
@@ -74,9 +62,6 @@
         android:name="com.anniebonav.stopguessingm3.fragments.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_HomeFragment_to_BlueprintsFragment"
-            app:destination="@id/BlueprintsFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_MealPlansFragment"
             app:destination="@id/MealPlansFragment" />
@@ -97,4 +82,34 @@
             android:id="@+id/action_InteractsBlueprintsFragment_to_BlueprintsFragment"
             app:destination="@id/BlueprintsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.anniebonav.stopguessingm3.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <action
+        android:id="@+id/action_global_aboutFragment"
+        app:destination="@id/aboutFragment"
+        app:popUpTo="@id/aboutFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_HomeFragment"
+        app:destination="@id/HomeFragment"
+        app:popUpTo="@id/HomeFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_BlueprintsFragment"
+        app:destination="@id/BlueprintsFragment"
+        app:popUpTo="@id/BlueprintsFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_IngredientsFragment"
+        app:destination="@id/IngredientsFragment"
+        app:popUpTo="@id/IngredientsFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_MealPlansFragment"
+        app:destination="@id/MealPlansFragment"
+        app:popUpTo="@id/MealPlansFragment"
+        app:popUpToInclusive="true" />
 </navigation>

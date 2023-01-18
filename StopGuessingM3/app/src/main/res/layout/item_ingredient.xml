@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="0dp"
         tools:layout_editor_absoluteX="8dp"
-        android:background="@drawable/card_stroke_bg"
+        android:background="@drawable/icon_selection"
         >
 
         <LinearLayout
