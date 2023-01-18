@@ -29,4 +29,8 @@ interface MealPlanDao {
 
     @Update
     fun update(vararg users: MealPlan)
+
+    @Transaction
+    @Query("SELECT * FROM mealplan")
+    fun getBlueprintAndMealPlans(): List<BlueprintAndMealPlans>
 }

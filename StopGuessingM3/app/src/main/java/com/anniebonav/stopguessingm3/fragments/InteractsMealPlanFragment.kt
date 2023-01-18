@@ -63,8 +63,8 @@ class InteractsMealPlanFragment : Fragment() {
     }
 
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
-        val mealPlan = MealPlan(null, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
-
+        val mealPlan = MealPlan(null,1, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
+        //Probably this is fake but ok
         Thread {
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
@@ -76,8 +76,8 @@ class InteractsMealPlanFragment : Fragment() {
     }
 
     fun UpdateMealPlan(mealPlanDao: MealPlanDao, selectedMealPLanId: Int){
-        val mealPlan = MealPlan(selectedMealPLanId, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
-
+        val mealPlan = MealPlan(selectedMealPLanId,1, _mealPlanViewModel.currentMealPlanName.value.toString(), _mealPlanViewModel.currentMealPlanDescription.value.toString(), _mealPlanViewModel.currentMealsAmount.value!!.toInt(), _mealPlanViewModel.currentSnacksAmount.value!!.toInt())
+        //TODO: add blueprint id in mealplan information
         Thread {
             mealPlanDao.update(mealPlan)
             Handler(Looper.getMainLooper()).post {
@@ -89,9 +89,7 @@ class InteractsMealPlanFragment : Fragment() {
 
         findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
     }
-
-    //TODO: Need to fix the size of teh card, because it changes iwth the description (as it should) but it makes it cropped after a few lines
-
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

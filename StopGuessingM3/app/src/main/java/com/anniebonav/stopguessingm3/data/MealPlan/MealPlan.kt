@@ -1,15 +1,30 @@
 package com.anniebonav.stopguessingm3.data.MealPlan
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.anniebonav.stopguessingm3.data.Blueprints.Blueprint
 
-@Entity//(tableName = "mealplans")
+@Entity(
+        foreignKeys = [ForeignKey(
+        entity = Blueprint::class,
+        parentColumns = arrayOf("uid"),
+        childColumns = arrayOf("blueprintId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE)]
+)
 data class MealPlan(
-    @PrimaryKey(autoGenerate = true) val uid: Int?, //TODO probably can change thsi to be without the val and only the autogenerate + true
+    @PrimaryKey(autoGenerate = true) val uid: Int?,
+    val blueprintId: Int?,
     @ColumnInfo(name = "name") val mealPlanName: String?,
     @ColumnInfo(name = "description") val mealPlanDescription: String?,
     @ColumnInfo(name = "mealsAmount") val mealsAmount: Int?,
     @ColumnInfo(name = "snacksAmount") val snacksAmount: Int?,
-    //@ColumnInfo(name = "snacksAmount") val dateCreated: Date?
+)
+
+data class BlueprintAndMealPlans(
+    @Embedded val blueprint: Blueprint,
+    @Relation(
+        parentColumn = "uid",
+        entityColumn = "blueprintId"
+    )
+    val mealPlans: List<MealPlan>
 )

@@ -70,7 +70,7 @@ class MealPlansFragment : Fragment() {
     }
 
     private fun createInitialMealPlans(){
-        val initialMealPlan = MealPlan(null, "This is an initial meal plan", "If you want to add another one, click on the + button!", 0, 0)
+        val initialMealPlan = MealPlan(null,1, "This is an initial meal plan",  "If you want to add another one, click on the + button!", 0, 0)
         _mealPlanDAO.insertAll(initialMealPlan)
     }
 
