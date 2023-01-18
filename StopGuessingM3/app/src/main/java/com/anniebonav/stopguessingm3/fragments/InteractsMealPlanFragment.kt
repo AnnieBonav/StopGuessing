@@ -89,7 +89,7 @@ class InteractsMealPlanFragment : Fragment() {
 
         findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
     }
-    
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
