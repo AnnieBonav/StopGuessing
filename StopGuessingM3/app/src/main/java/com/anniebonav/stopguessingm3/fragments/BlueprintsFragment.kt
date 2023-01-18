@@ -19,7 +19,6 @@ import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.data.Blueprints.Blueprint
 import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
-import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 import com.anniebonav.stopguessingm3.data.UIViewModel
 import com.anniebonav.stopguessingm3.data.ViewModelFactoryUI
 import com.anniebonav.stopguessingm3.databinding.FragmentBlueprintsBinding
@@ -40,8 +39,8 @@ class BlueprintsFragment : Fragment() {
         _binding = FragmentBlueprintsBinding.inflate(inflater, container, false)
         _blueprintsRecycler = binding.blueprintsRecycler
 
-        val ingredientsFactory = ViewModelFactoryUI(context);
-        val model = ViewModelProvider(context, ingredientsFactory).get(UIViewModel::class.java)
+        val factory = ViewModelFactoryUI(context);
+        val model = ViewModelProvider(context, factory).get(UIViewModel::class.java)
 
         _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -52,8 +51,8 @@ class BlueprintsFragment : Fragment() {
         })
 
         Thread{
-            val currentIngredients = _blueprintDAO.getBlueprints()
-            if(currentIngredients.isEmpty()){
+            val currentBlueprints = _blueprintDAO.getBlueprints()
+            if(currentBlueprints.isEmpty()){
                 createInitialBlueprint()
             }else{
                 //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
@@ -75,8 +74,8 @@ class BlueprintsFragment : Fragment() {
         _blueprintDAO.insertAll(initialBlueprint)
     }
 
-    private fun onBlueprintCardClicked(mealPlanId: Int){
-        openBlueprint(mealPlanId)
+    private fun onBlueprintCardClicked(blueprintId: Int){
+        openBlueprint(blueprintId)
     }
 
     private fun openBlueprint(blueprintId: Int){

@@ -1,5 +1,6 @@
 package com.anniebonav.stopguessingm3.recycler
 
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -28,6 +29,7 @@ class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDelet
     fun openBlueprint(blueprintId: Int){
         card.setOnClickListener{
             onCardClick(blueprintId)
+            Log.d("Holder", "$blueprintId")
         }
     }
 

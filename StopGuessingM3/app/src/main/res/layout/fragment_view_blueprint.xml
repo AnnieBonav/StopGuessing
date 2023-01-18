@@ -6,14 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ViewBlueprintFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="I am supposed to be a blueprint. Key word: supposed to!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
+        <TextView
+            android:id="@+id/blueprintName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="28dp"
+            android:paddingLeft="16dp"
+            android:text="Blueprint Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+
+            android:textColor="@color/md_theme_light_onSurfaceVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="16dp"
+
+                android:text="Breakfast"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/breakfastUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Breakfast Units"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Lunch Units: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mealPlanDescription" />
+
+            <TextView
+                android:id="@+id/lunchUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Lunch Units"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Dinner Units: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mealPlanDescription" />
+
+            <TextView
+                android:id="@+id/dinnerUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Dinner Units"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Morning Snack Units:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/morningSnackUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Morning Snack Units"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Evening Snack Units: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/eveningSnackUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:text="Evening Snack Units"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
