@@ -1,14 +1,15 @@
 package com.anniebonav.stopguessingm3.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
@@ -18,6 +19,7 @@ import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.data.UIViewModelInteractIngredient
 import com.anniebonav.stopguessingm3.databinding.FragmentInteractsIngredientBinding
+
 
 class InteractsIngredientFragment : Fragment() {
     private var _binding: FragmentInteractsIngredientBinding? = null
@@ -35,6 +37,22 @@ class InteractsIngredientFragment : Fragment() {
         binding.ingredientsViewModel = _ingredientViewModel
 
         val ingredientDao = StopGuessingDatabase.getDatabase(context).ingredientDao()
+
+        //selector
+        val items = arrayOf("Protein", "Carbs", "Fats")
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, items)
+        binding.ingredientCategoryInput.setAdapter(adapter)
+        binding.ingredientCategoryInput.threshold = 1
+        binding.ingredientCategoryInput.setAdapter(adapter)
+        binding.ingredientCategoryInput.setOnItemClickListener{ parent, view, position, id ->
+            if(position == 0){
+                _ingredientViewModel.currentIngredientCategory.value = "protein"
+            }else if (position == 1){
+                _ingredientViewModel.currentIngredientCategory.value = "carbs"
+            }else if (position == 2){
+                _ingredientViewModel.currentIngredientCategory.value = "fats"
+            }
+        }
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating an ingredient and not adding one. This way I reuse my View Model.
             var selectedIngredientId = arguments?.getInt("selectedIngredient")
@@ -62,6 +80,35 @@ class InteractsIngredientFragment : Fragment() {
         return binding.root
     }
 
+
+
+    /*
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.ingredients_categories_menu, menu)
+    }
+
+    // Then, to handle clicks:
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+        return when (item.itemId) {
+            R.id.option_protein -> {
+                Log.d("Selector", "Protein")
+                true
+            }
+            R.id.option_carbs -> {
+                Log.d("Selector", "Carbs")
+                true
+            }
+            R.id.option_fats -> {
+                Log.d("Selector", "Protein")
+                true
+            }
+            else -> super.onContextItemSelected(item)
+        }
+    }
+*/
     fun CreateIngredient(ingredientDAO: IngredientDAO){
         Log.d("Database", "Enters create ingredient")
         val ingredient = Ingredient(null, _ingredientViewModel.currentIngredientName.value.toString(), _ingredientViewModel.currentIngredientCategory.value.toString(), _ingredientViewModel.currentIngredientAmount.value!!.toInt(), _ingredientViewModel.currentIngredientMeasurement.value.toString())

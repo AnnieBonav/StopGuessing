@@ -72,9 +72,9 @@ class IngredientsFragment : Fragment() {
             Ingredient(null, "Rice", "carbs", 500, "grams"),
             Ingredient(null, "Beans", "carbs", 10, "ounces"),
 
-            Ingredient(null, "Avocado", "fat", 100, "grams"),
-            Ingredient(null, "Olive Oil", "fat", 2, "tsp"),
-            Ingredient(null, "Coconut Oil", "fat", 10, "ml")
+            Ingredient(null, "Avocado", "fats", 100, "grams"),
+            Ingredient(null, "Olive Oil", "fats", 2, "tsp"),
+            Ingredient(null, "Coconut Oil", "fats", 10, "ml")
         )
     }
 
