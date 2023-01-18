@@ -16,7 +16,7 @@ class UIViewModelInteractIngredient: ViewModel() {
         MutableLiveData<String>() //TODO Will use them as strings to be able to
     }
 
-    val currentIngredientMeasurement: MutableLiveData<String> by lazy {
+    val currentIngredientUnit: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 }

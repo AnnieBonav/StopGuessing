@@ -68,12 +68,12 @@
                         android:textColor="?android:attr/textColorSecondary" />
 
                     <TextView
-                        android:id="@+id/ingredientMeasurement"
+                        android:id="@+id/ingredientUnit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginLeft="16dp"
-                        android:text="Measurement"
+                        android:text="Unit"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary" />
                     <LinearLayout

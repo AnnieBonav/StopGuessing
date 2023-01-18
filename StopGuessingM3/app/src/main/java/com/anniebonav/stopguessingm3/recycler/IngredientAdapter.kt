@@ -24,7 +24,7 @@ class IngredientAdapter (private val context: Context, _ingredientsArrayList: Li
         holder.ingredientNameLabel.setText(model.ingredientName)
         holder.ingredientCategoryLabel.setText(model.ingredientCategory)
         holder.ingredientAmountLabel.setText(model.ingredientAmount.toString())
-        holder.ingredientMeasurementLabel.setText(model.ingredientMeasurement)
+        holder.ingredientUnitLabel.setText(model.ingredientUnit)
         holder.openIngredient(model.uid!!)
     }
 

@@ -49,6 +49,8 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+
             android:id="@+id/ingredientNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +66,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-
             style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +74,6 @@
 
             <AutoCompleteTextView
                 android:id="@+id/ingredientCategoryInput"
-                android:text="@{ingredientsViewModel.currentIngredientCategory}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"/>
@@ -93,10 +93,11 @@
                 android:layout_marginHorizontal="16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
                     android:id="@+id/ingredientAmountInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingredient Amount"
+                    android:hint="Amount"
                     app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -110,26 +111,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="The amount per unit should be discussed with your doctor"
+                    android:text="The amount per block should be discussed with your doctor"
                     />
 
             </LinearLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ingredientMeasurementInput"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
-                android:hint="Measurement Unit"
-                app:endIconMode="clear_text">
+                android:hint="Unit"
+                android:layout_marginRight="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/ingredientMeasurementInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="@={ingredientsViewModel.currentIngredientMeasurement}"/>
+                    android:inputType="none"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

@@ -13,7 +13,7 @@ class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenC
     val ingredientNameLabel: TextView
     val ingredientCategoryLabel: TextView
     val ingredientAmountLabel: TextView
-    val ingredientMeasurementLabel: TextView
+    val ingredientUnitLabel: TextView
 
     fun openIngredient(ingredientId: Int){
         ingredientCard.setOnClickListener{
@@ -26,6 +26,6 @@ class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenC
         ingredientNameLabel = view.findViewById(R.id.ingredientName)
         ingredientCategoryLabel = view.findViewById(R.id.ingredientCategory)
         ingredientAmountLabel = view.findViewById(R.id.ingredientAmount)
-        ingredientMeasurementLabel = view.findViewById(R.id.ingredientMeasurement)
+        ingredientUnitLabel = view.findViewById(R.id.ingredientUnit)
     }
 }
