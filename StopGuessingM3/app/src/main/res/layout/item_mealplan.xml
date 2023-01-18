@@ -8,7 +8,7 @@
     android:paddingBottom="16dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mealPlanCard"
+        android:id="@+id/mealplanCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -45,15 +45,15 @@
                     android:id="@+id/mealplanTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Title"
+                    android:text="Meal Plan Title"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <TextView
-                    android:id="@+id/mealplanDescription"
+                    android:id="@+id/mealplanBlueprint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Supporting text"
+                    android:text="Blueprint Title"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 

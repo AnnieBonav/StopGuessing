@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.aboutButton).setOnClickListener(){
             navController.navigate(R.id.action_global_aboutFragment)
             _topBarView.text = "About"
-        }
+            _tabsNavigationView.visibility = View.GONE //TODO: Make this better cause odds are there is a navigation bug related to going back
+        } //TODO: Is ther a way if dong a function whenever an action from navigation is fulfilled? Maybe
 
         //Tabs navigation
         _tabsNavigationView = binding.mealsTabs

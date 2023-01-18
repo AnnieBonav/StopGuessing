@@ -13,7 +13,7 @@ import com.anniebonav.stopguessingm3.R
 class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClick: MPEditClickFunction): RecyclerView.ViewHolder(view) {
     val mealPlanCard: CardView
     val mealPlanNameLabel: TextView
-    val mealPlanDescriptionLabel: TextView
+    val mealPlanBlueprintLabel: TextView
     val mealPlanEditButton: Button
     val mealPlanDeleteButton: Button
 
@@ -36,9 +36,9 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
     }
 
     init{
-        mealPlanCard = view.findViewById(R.id.mealPlanCard)
+        mealPlanCard = view.findViewById(R.id.mealplanCard)
         mealPlanNameLabel = view.findViewById(R.id.mealplanTitle)
-        mealPlanDescriptionLabel = view.findViewById(R.id.mealplanDescription)
+        mealPlanBlueprintLabel = view.findViewById(R.id.mealplanBlueprint)
         mealPlanEditButton = view.findViewById(R.id.mealplanEdit)
         mealPlanDeleteButton = view.findViewById(R.id.mealplanDelete)
     }

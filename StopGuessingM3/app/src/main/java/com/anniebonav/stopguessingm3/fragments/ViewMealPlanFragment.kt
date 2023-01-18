@@ -34,7 +34,7 @@ class ViewMealPlanFragment : Fragment() {
             val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
             binding.mealPlanName.text = selectedMealPlan.mealPlanName
             binding.blueprintName.text = blueprint.name
-            //binding.breakfastInformation.text = selectedMealPlan.mealsAmount.toString()
+            binding.breakfastInformation.text = selectedMealPlan.mealPlanBreakfasts.toString()
         }.start()
 
         return binding.root

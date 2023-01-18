@@ -11,7 +11,7 @@ import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 
-class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClicked: MPEditClickFunction): RecyclerView.Adapter<MealPlanViewHolder>(){
+class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<MealPlan>, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClicked: MPEditClickFunction, private val blueprintName: String): RecyclerView.Adapter<MealPlanViewHolder>(){
     private val _mealPlansArrayList: List<MealPlan>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealPlanViewHolder {
@@ -23,7 +23,7 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<M
     override fun onBindViewHolder(holder: MealPlanViewHolder, position: Int) {
         val model: MealPlan = _mealPlansArrayList[position]
         holder.mealPlanNameLabel.setText(model.mealPlanName)
-        holder.mealPlanDescriptionLabel.setText(model.mealPlanDescription)
+        holder.mealPlanBlueprintLabel.setText(blueprintName)
         holder.mealPlanEditButton.setText("Edit")
         holder.mealPlanDeleteButton.setText("Delete")
         holder.deleteMealPlan(model.uid!!) //I know it is going to be an Int

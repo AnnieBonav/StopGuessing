@@ -9,16 +9,7 @@ class UIViewModelAddMealPlan : ViewModel() {
         MutableLiveData<String>()
     }
 
-    val currentMealPlanDescription: MutableLiveData<String> by lazy {
+    val currentMealPlanBlueprint: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
-
-    val currentMealsAmount: MutableLiveData<String> by lazy {
-        MutableLiveData<String>() //TODO Will use them as strings to be able to
-    }
-
-    val currentSnacksAmount: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
 }
