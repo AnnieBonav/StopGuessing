@@ -81,7 +81,7 @@ class BlueprintsFragment : Fragment() {
 
     private fun openBlueprint(blueprintId: Int){
         val bundle = bundleOf("selectedBlueprint" to blueprintId)
-        findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment, bundle) //TODO change to blueprint
+        findNavController().navigate(R.id.action_BlueprintsFragment_to_ViewBlueprintFragment, bundle)
     }
 
     private fun onBlueprintEditClicked(blueprintId: Int ){
@@ -90,7 +90,7 @@ class BlueprintsFragment : Fragment() {
 
     private fun editBlueprint(blueprintId: Int){
         val bundle = bundleOf("selectedBlueprint" to blueprintId)
-        findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment, bundle) //Change
+        findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment, bundle)
     }
 
     private fun onBlueprintDeleteClicked(blueprintId: Int){

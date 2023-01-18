@@ -1,10 +1,11 @@
-package com.anniebonav.stopguessingm3
+package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.anniebonav.stopguessingm3.R
 
 class ViewBlueprintFragment : Fragment() {
     override fun onCreateView(
