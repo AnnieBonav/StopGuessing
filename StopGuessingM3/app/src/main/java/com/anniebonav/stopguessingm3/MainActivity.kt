@@ -1,6 +1,7 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import android.service.controls.actions.FloatAction
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -15,6 +16,7 @@ import android.widget.TextView
 import androidx.navigation.NavDirections
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import org.w3c.dom.Text
 
@@ -43,6 +45,11 @@ class MainActivity : AppCompatActivity() {
 
         //Personal Top Bar
         _topBarView = binding.topBar
+
+        findViewById<FloatingActionButton>(R.id.aboutButton).setOnClickListener(){
+            navController.navigate(R.id.action_global_aboutFragment)
+            _topBarView.text = "About"
+        }
 
         //Tabs navigation
         _tabsNavigationView = binding.mealsTabs
