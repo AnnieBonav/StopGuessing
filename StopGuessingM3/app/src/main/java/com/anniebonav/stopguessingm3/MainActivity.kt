@@ -73,18 +73,17 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.home->{
                     _tabsNavigationView.visibility = View.GONE
-                    navController.navigate(R.id.HomeFragment)
+                    navController.navigate(R.id.action_global_HomeFragment)
                     _topBarView.text = "Home"
-
                     true
                 }
 
                 R.id.meals->{
                     var selectedTab =_tabsNavigationView.selectedTabPosition
                     if(selectedTab == 0){
-                        navController.navigate(R.id.BlueprintsFragment) // I know 0 is blueprint
+                        navController.navigate(R.id.action_global_BlueprintsFragment) // I know 0 is blueprint
                     }else{
-                        navController.navigate(R.id.MealPlansFragment) // I know 0 is blueprint
+                        navController.navigate(R.id.action_global_MealPlansFragment) // I know 0 is blueprint
                     }
 
                     _tabsNavigationView.visibility = View.VISIBLE
@@ -95,9 +94,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.ingredients->{
                     _tabsNavigationView.visibility = View.GONE
-                    navController.navigate(R.id.IngredientsFragment)
+                    navController.navigate(R.id.action_global_IngredientsFragment)
                     _topBarView.text = "Ingredients"
-
                     true
                 }
                 else ->{
