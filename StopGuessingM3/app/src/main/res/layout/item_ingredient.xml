@@ -79,24 +79,25 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp">
-
-                        <ImageView
-                            android:id="@+id/action_delete"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_delete"
-
-                            />
-                        <ImageView
-                            android:id="@+id/action_edit"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_toStartOf="@+id/action_delete"
-                            android:src="@drawable/ic_edit"
-                            />
+                        android:layout_marginEnd="50dp">
 
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/action_edit"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_toStartOf="@+id/action_delete"
+                        android:src="@drawable/ic_edit" />
+
+                    <ImageView
+                        android:id="@+id/action_delete"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_delete"
+
+                        />
+
 
                 </LinearLayout>
 
