@@ -27,6 +27,7 @@ import com.anniebonav.stopguessingm3.recycler.BlueprintAdapter
 class BlueprintsFragment : Fragment() {
     private var _binding: FragmentBlueprintsBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _context: MainActivity
 
     private lateinit var _blueprintsRecycler: RecyclerView
     private lateinit var _blueprintDAO: BlueprintDAO
@@ -35,19 +36,21 @@ class BlueprintsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentBlueprintsBinding.inflate(inflater, container, false)
+
+
         _blueprintsRecycler = binding.blueprintsRecycler
 
-        val factory = ViewModelFactoryUI(context);
-        val model = ViewModelProvider(context, factory).get(UIViewModel::class.java)
+        val factory = ViewModelFactoryUI(_context);
+        val model = ViewModelProvider(_context, factory).get(UIViewModel::class.java)
 
-        _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
+        val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
         _blueprintsRecycler.layoutManager = linearLayoutManager
 
-        model.currentBlueprints.observe(context, Observer { blueprints ->
-            _blueprintsRecycler.adapter = BlueprintAdapter(context, blueprints, this::onBlueprintDeleteClicked, this::onBlueprintCardClicked, this::onBlueprintEditClicked)
+        model.currentBlueprints.observe(_context, Observer { blueprints ->
+            _blueprintsRecycler.adapter = BlueprintAdapter(_context, blueprints, this::onBlueprintDeleteClicked, this::onBlueprintCardClicked, this::onBlueprintEditClicked)
         })
 
         Thread{
@@ -59,6 +62,11 @@ class BlueprintsFragment : Fragment() {
             }
         }.start()
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        _context.openedMeals()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

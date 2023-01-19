@@ -27,6 +27,7 @@ import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
 class MealPlansFragment : Fragment() {
     private var _binding: FragmentMealPlansBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _context: MainActivity
 
     private lateinit var _mealPlansRecycler: RecyclerView
     private lateinit var _mealPlanDAO: MealPlanDao
@@ -35,20 +36,22 @@ class MealPlansFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
+
+
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
-        val mealPlansFactory = ViewModelFactoryUI(context);
-        val model = ViewModelProvider(context, mealPlansFactory).get(UIViewModel::class.java)
+        val mealPlansFactory = ViewModelFactoryUI(_context);
+        val model = ViewModelProvider(_context, mealPlansFactory).get(UIViewModel::class.java)
 
-        _mealPlanDAO = StopGuessingDatabase.getDatabase(context).mealPlanDao()
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        _mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
+        val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
 
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
-        model.currentMealPlans.observe(context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanEditClicked, "this is just a test")
+        model.currentMealPlans.observe(_context, Observer { mealPlans ->
+            _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanEditClicked, "this is just a test")
         })
 
         Thread{
@@ -59,6 +62,11 @@ class MealPlansFragment : Fragment() {
         }.start()
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        _context.openedMeals()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

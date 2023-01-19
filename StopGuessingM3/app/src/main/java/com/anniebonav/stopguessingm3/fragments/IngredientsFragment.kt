@@ -27,6 +27,7 @@ import com.anniebonav.stopguessingm3.recycler.IngredientAdapter
 class IngredientsFragment : Fragment() {
     private var _binding: FragmentIngredientsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var _context: MainActivity
 
     private lateinit var _ingredientsRecycler: RecyclerView
     private lateinit var _ingredientDAO: IngredientDAO
@@ -35,19 +36,19 @@ class IngredientsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         _ingredientsRecycler = binding.ingredientsRecycler
 
-        val ingredientsFactory = ViewModelFactoryUI(context);
-        val model = ViewModelProvider(context, ingredientsFactory).get(UIViewModel::class.java)
+        val ingredientsFactory = ViewModelFactoryUI(_context)
+        val model = ViewModelProvider(_context, ingredientsFactory).get(UIViewModel::class.java)
 
-        _ingredientDAO = StopGuessingDatabase.getDatabase(context).ingredientDao()
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
+        val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
         _ingredientsRecycler.layoutManager = linearLayoutManager
 
-        model.currentIngredients.observe(context, Observer { ingredients ->
-            _ingredientsRecycler.adapter = IngredientAdapter(context, ingredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
+        model.currentIngredients.observe(_context, Observer { ingredients ->
+            _ingredientsRecycler.adapter = IngredientAdapter(_context, ingredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
 
         Thread{
@@ -58,8 +59,8 @@ class IngredientsFragment : Fragment() {
                 //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
             }
         }.start()
-        return binding.root
 
+        return binding.root
     }
 
     private fun createInitialIngredients(){
@@ -77,6 +78,12 @@ class IngredientsFragment : Fragment() {
             Ingredient(null, "Coconut Oil", "fats", 10, "ml")
         )
     }
+
+    override fun onStart() {
+        super.onStart()
+        _context.openedIngredients()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
