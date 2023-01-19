@@ -15,6 +15,9 @@ interface BlueprintDAO {
     @Query("SELECT * FROM blueprint WHERE uid = :blueprintId")
     fun getBlueprint(blueprintId: Int): Blueprint
 
+    @Query("SELECT * FROM blueprint WHERE name = :blueprintName")
+    fun getBlueprint(blueprintName: String): Blueprint
+
     @Query("SELECT * FROM blueprint")
     fun getAllLiveData(): LiveData<List<Blueprint>>
 

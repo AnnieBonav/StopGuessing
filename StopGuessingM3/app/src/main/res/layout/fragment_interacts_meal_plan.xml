@@ -57,7 +57,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={mpViewModel.currentMealPlanBlueprint}"
+                android:text="@={mpViewModel.currentMealPlanDescription}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"/>
