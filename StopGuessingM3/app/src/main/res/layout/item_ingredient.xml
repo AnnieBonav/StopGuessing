@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="0dp"
         tools:layout_editor_absoluteX="8dp"
-        android:background="@drawable/icon_selection"
+        android:background="@drawable/card_stroke_bg"
         >
 
         <LinearLayout
@@ -48,7 +48,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-                    android:gravity="left">
+                    android:gravity="start"
+                    android:orientation="horizontal"
+                    >
 
                     <LinearLayout
                         android:layout_width="0dp"

@@ -6,7 +6,7 @@
         android:color="@color/md_theme_light_surface"
 
         />
-    <solid android:color="#DFDFE0" />
+    <solid android:color="#0000" />
 
     <corners
         android:bottomLeftRadius="8dp"
