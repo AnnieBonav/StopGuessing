@@ -78,7 +78,7 @@ class BlueprintsFragment : Fragment() {
     }
 
     private fun createInitialBlueprint(){
-        val initialBlueprint = Blueprint(null, "This is an initial Blueprint", 3, 2, 1, 0, 1)
+        val initialBlueprint = Blueprint(null, "This is an initial Blueprint", "If you want to create a Blueprint, click on the + button!", 3, 2, 1, 0, 1)
         _blueprintDAO.insertAll(initialBlueprint)
     }
 

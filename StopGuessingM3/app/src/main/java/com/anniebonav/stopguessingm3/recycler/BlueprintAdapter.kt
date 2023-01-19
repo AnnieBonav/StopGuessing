@@ -26,6 +26,7 @@ class BlueprintAdapter (private val context: Context, _blueprintsArrayList: List
         //holder.something comes from ViewHolder variables, that refer to the XML
         //model.something refers to the Blueprint data type
         holder.nameLabel.setText(model.name)
+        holder.descriptionLabel.setText(model.description)
         holder.breakfastUnitsLabel.setText(model.breakfastUnits.toString())
         holder.lunchUnitsLabel.setText(model.lunchUnits.toString())
         holder.dinnerUnitsLabel.setText(model.dinnerUnits.toString())

@@ -8,6 +8,10 @@ class UIViewModelInteractBlueprint: ViewModel() {
         MutableLiveData<String>()
     }
 
+    val description: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
     val breakfastUnits: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }

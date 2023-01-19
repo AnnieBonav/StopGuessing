@@ -68,7 +68,7 @@ class InteractsBlueprintsFragment : Fragment() {
     }
 
     fun CreateBlueprint(blueprintDAO: BlueprintDAO){
-        val blueprint = Blueprint(null, _blueprintViewModel.name.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
+        val blueprint = Blueprint(null, _blueprintViewModel.name.value.toString(), _blueprintViewModel.description.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
 
         Thread {
             blueprintDAO.insertAll(blueprint)
@@ -81,7 +81,7 @@ class InteractsBlueprintsFragment : Fragment() {
     }
 
     fun UpdateBlueprint(blueprintDAO: BlueprintDAO, selectedBlueprintId: Int){
-        val blueprint = Blueprint(selectedBlueprintId, _blueprintViewModel.name.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
+        val blueprint = Blueprint(selectedBlueprintId, _blueprintViewModel.name.value.toString(), _blueprintViewModel.description.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
 
         Thread {
             blueprintDAO.update(blueprint)

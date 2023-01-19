@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Blueprint (
     @PrimaryKey(autoGenerate = true )val uid: Int?,
     @ColumnInfo(name = "name") val name: String?,
+    @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "breakfast_units") val breakfastUnits: Int?,
     @ColumnInfo(name = "lunch_units") val lunchUnits: Int?,
     @ColumnInfo(name = "dinner_units") val dinnerUnits: Int?,

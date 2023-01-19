@@ -14,6 +14,7 @@ import com.anniebonav.stopguessingm3.R
 class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDeleteClickFunction, private val onCardClick: BlueprintOpenClickFunction, private val onEditClick: BlueprintEditClickFunction): RecyclerView.ViewHolder(view) {
     val card: CardView
     val nameLabel: TextView
+    val descriptionLabel: TextView
     val breakfastUnitsLabel: TextView
     val lunchUnitsLabel: TextView
     val dinnerUnitsLabel: TextView
@@ -42,6 +43,7 @@ class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDelet
     init{
         card = view.findViewById(R.id.card)
         nameLabel = view.findViewById(R.id.name)
+        descriptionLabel = view.findViewById(R.id.description)
         breakfastUnitsLabel = view.findViewById(R.id.breakfastUnits)
         lunchUnitsLabel = view.findViewById(R.id.lunchUnits)
         dinnerUnitsLabel = view.findViewById(R.id.dinnerUnits)
