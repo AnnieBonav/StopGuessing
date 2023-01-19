@@ -63,7 +63,7 @@ class IngredientsFragment : Fragment() {
         return binding.root
     }
 
-    private fun createInitialIngredients(){
+    private fun createInitialIngredients(){ //TODO: create them before anything
         _ingredientDAO.insertAll(
             Ingredient(null, "Chicken", "protein", 100, "grams"),
             Ingredient(null, "Ham", "protein", 150, "grams"),

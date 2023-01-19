@@ -16,10 +16,12 @@ import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
+import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 import com.anniebonav.stopguessingm3.data.UIViewModelAddMealPlan
 import com.anniebonav.stopguessingm3.databinding.FragmentInteractsMealPlanBinding
+import kotlin.random.Random
 
 class InteractsMealPlanFragment : Fragment() {
     private var _binding: FragmentInteractsMealPlanBinding? = null
@@ -27,6 +29,7 @@ class InteractsMealPlanFragment : Fragment() {
     private lateinit var _context: MainActivity
     private lateinit var _mealPlanDAO: MealPlanDao
     private lateinit var _blueprintDAO: BlueprintDAO
+    private lateinit var _ingredientDAO: IngredientDAO
 
     private val _mealPlanViewModel: UIViewModelAddMealPlan by viewModels()
 
@@ -42,6 +45,7 @@ class InteractsMealPlanFragment : Fragment() {
 
         _mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
         _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
+        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
@@ -81,7 +85,6 @@ class InteractsMealPlanFragment : Fragment() {
                     binding.selectedBlueprintInput.setAdapter(categoriesAdapter)
                     binding.selectedBlueprintInput.setOnItemClickListener{ parent, _, position, id -> //parent, view, position, id
                         var selectedItem = parent.getItemAtPosition(position).toString()
-                        Log.d("Meals", "Slected: $selectedItem")
                         _mealPlanViewModel.currentMealPlanBlueprint.value = selectedItem
                     }
                 }
@@ -96,16 +99,36 @@ class InteractsMealPlanFragment : Fragment() {
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
         Thread {
             val selectedBlueprint = _blueprintDAO.getBlueprint(_mealPlanViewModel.currentMealPlanBlueprint.value!!)
-
             val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, "Breakfasts", "Lunches", "Dinners")
 
+            val blockString = createBlocksUnit()
+            Log.d("Meal", "BlockString: $blockString")
+
+            /*
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
                 Toast.makeText(_context, "${mealPlan.mealPlanName} successfully created!", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }.start()
 
-        findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+        //findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+    }
+
+    fun createBlocksUnit(): String{
+        val selectedProteinId = selectRandomIngredient("protein")
+        val selectedCarbsId = selectRandomIngredient("carbs")
+        val selectedFatsId = selectRandomIngredient("fats")
+        Log.d("Meal", "Protein: $selectedProteinId  Carbs: $selectedCarbsId   Fats: $selectedFatsId")
+        val blockString = "$selectedProteinId,$selectedCarbsId,$selectedFatsId"
+        return blockString
+    }
+
+    fun selectRandomIngredient(category: String): Int{
+        val categoryIngredients = _ingredientDAO.getIngredientsByCategory(category)
+        val randomNumber = Random.nextInt(0,categoryIngredients.count())
+        val selectedIngredient = categoryIngredients[randomNumber].ingredientName
+        Log.d("Meal", "$randomNumber, $selectedIngredient")
+        return categoryIngredients[randomNumber].uid!!
     }
 
     fun UpdateMealPlan(mealPlanDao: MealPlanDao, selectedMealPLanId: Int){

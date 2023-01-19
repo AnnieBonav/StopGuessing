@@ -11,6 +11,9 @@ interface IngredientDAO {
     @Query("SELECT * FROM ingredient WHERE uid = :ingredientId")
     fun getIngredient(ingredientId: Int): Ingredient
 
+    @Query("SELECT * FROM ingredient WHERE category = :category")
+    fun getIngredientsByCategory(category: String): List<Ingredient>
+
     @Query("SELECT * FROM ingredient")
     fun getAllLiveData(): LiveData<List<Ingredient>>
 
