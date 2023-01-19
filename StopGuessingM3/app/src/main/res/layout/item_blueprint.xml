@@ -162,19 +162,11 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/editButton"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="A button 1" />
-
-                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/deleteButton"
                         style="?attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A button 2" />
+                        android:text="Delete button" />
                 </LinearLayout>
 
             </LinearLayout>

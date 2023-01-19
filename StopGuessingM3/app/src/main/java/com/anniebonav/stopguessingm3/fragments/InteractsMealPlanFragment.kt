@@ -96,8 +96,8 @@ class InteractsMealPlanFragment : Fragment() {
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
         Thread {
             val selectedBlueprint = _blueprintDAO.getBlueprint(_mealPlanViewModel.currentMealPlanBlueprint.value!!)
-            val selectedBlueprintId = selectedBlueprint.uid
-            val mealPlan = MealPlan(null,selectedBlueprintId, _mealPlanViewModel.currentMealPlanName.value.toString(), "Breakfasts", "Lunches", "Dinners")
+
+            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, "Breakfasts", "Lunches", "Dinners")
 
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {

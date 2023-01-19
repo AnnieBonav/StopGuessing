@@ -6,15 +6,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.MPDeleteClickFunction
-import com.anniebonav.stopguessingm3.MPEditClickFunction
 import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 
-class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onEditClick: MPEditClickFunction): RecyclerView.ViewHolder(view) {
+class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction): RecyclerView.ViewHolder(view) {
     val mealPlanCard: CardView
     val mealPlanNameLabel: TextView
     val mealPlanBlueprintLabel: TextView
-    val mealPlanEditButton: Button
     val mealPlanDeleteButton: Button
 
     fun deleteMealPlan(mealPlanId: Int){
@@ -29,17 +27,10 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
         }
     }
 
-    fun editMealPlan(mealPlanId: Int){
-        mealPlanEditButton.setOnClickListener{
-            onEditClick(mealPlanId)
-        }
-    }
-
     init{
         mealPlanCard = view.findViewById(R.id.mealplanCard)
         mealPlanNameLabel = view.findViewById(R.id.mealplanTitle)
         mealPlanBlueprintLabel = view.findViewById(R.id.mealplanBlueprint)
-        mealPlanEditButton = view.findViewById(R.id.mealplanEdit)
         mealPlanDeleteButton = view.findViewById(R.id.mealplanDelete)
     }
 }

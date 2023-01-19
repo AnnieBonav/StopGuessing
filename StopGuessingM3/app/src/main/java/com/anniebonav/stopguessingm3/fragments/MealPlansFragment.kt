@@ -51,7 +51,7 @@ class MealPlansFragment : Fragment() {
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
         model.currentMealPlans.observe(_context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanEditClicked, "this is just a test")
+            _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked)
         })
 
         Thread{
@@ -78,7 +78,7 @@ class MealPlansFragment : Fragment() {
     }
 
     private fun createInitialMealPlans(){
-        val initialMealPlan = MealPlan(null,1, "This is an initial meal plan",  "If you want to add another one, click on the + button!", "Lunches", "Dinners")
+        val initialMealPlan = MealPlan(null,1, "This is an initial meal plan",  "If you want to add another one, click on the + button!", "Breakfast", "Lunches", "Dinners")
         _mealPlanDAO.insertAll(initialMealPlan)
     }
 
