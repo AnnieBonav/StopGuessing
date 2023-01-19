@@ -24,34 +24,30 @@ import com.anniebonav.stopguessingm3.databinding.FragmentInteractsIngredientBind
 class InteractsIngredientFragment : Fragment() {
     private var _binding: FragmentInteractsIngredientBinding? = null
     private val binding get() = _binding!!
+    private lateinit var _context: MainActivity
+
     private val _ingredientViewModel: UIViewModelInteractIngredient by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentInteractsIngredientBinding.inflate(inflater, container,false)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.ingredientsViewModel = _ingredientViewModel
 
-        val ingredientDao = StopGuessingDatabase.getDatabase(context).ingredientDao()
+        val ingredientDao = StopGuessingDatabase.getDatabase(_context).ingredientDao()
 
         //Category Selector
-        val categories = arrayOf("Protein", "Carbs", "Fats")
-        val categoriesAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, categories)
+        val categories = arrayOf("protein", "carbs", "fats")
+        val categoriesAdapter = ArrayAdapter(_context, android.R.layout.simple_list_item_1, categories)
         binding.ingredientCategoryInput.setAdapter(categoriesAdapter)
         binding.ingredientCategoryInput.threshold = 1
         binding.ingredientCategoryInput.setAdapter(categoriesAdapter)
-        binding.ingredientCategoryInput.setOnItemClickListener{ _, _, position, _ -> //parent, view, position, id
-            if(position == 0){
-                _ingredientViewModel.currentIngredientCategory.value = "protein"
-            }else if (position == 1){
-                _ingredientViewModel.currentIngredientCategory.value = "carbs"
-            }else if (position == 2){
-                _ingredientViewModel.currentIngredientCategory.value = "fats"
-            }
+        binding.ingredientCategoryInput.setOnItemClickListener{ parent, _, position, _ -> //parent, view, position, id
+            _ingredientViewModel.currentIngredientCategory.value = parent.getItemAtPosition(position).toString()
         }
 
         //Measurements
@@ -67,7 +63,7 @@ class InteractsIngredientFragment : Fragment() {
 
         //Measurement selector
         val measurements = arrayOf("Cup(s)", "Gram(s)", "Kilogram(s)", "Miligram(s)", "Mililiter(s)", "Ounce(s)", "Tablespoon(s)", "Teaspoon(s)")
-        val measurementsAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, measurements)
+        val measurementsAdapter = ArrayAdapter(_context, android.R.layout.simple_list_item_1, measurements)
         binding.ingredientMeasurementInput.setAdapter(measurementsAdapter)
         binding.ingredientMeasurementInput.threshold = 1
         binding.ingredientMeasurementInput.setAdapter(measurementsAdapter)
@@ -123,43 +119,13 @@ class InteractsIngredientFragment : Fragment() {
         return binding.root
     }
 
-
-
-    /*
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.ingredients_categories_menu, menu)
-    }
-
-    // Then, to handle clicks:
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        return when (item.itemId) {
-            R.id.option_protein -> {
-                Log.d("Selector", "Protein")
-                true
-            }
-            R.id.option_carbs -> {
-                Log.d("Selector", "Carbs")
-                true
-            }
-            R.id.option_fats -> {
-                Log.d("Selector", "Protein")
-                true
-            }
-            else -> super.onContextItemSelected(item)
-        }
-    }
-*/
     fun CreateIngredient(ingredientDAO: IngredientDAO){
-        Log.d("Database", "Enters create ingredient")
         val ingredient = Ingredient(null, _ingredientViewModel.currentIngredientName.value.toString(), _ingredientViewModel.currentIngredientCategory.value.toString(), _ingredientViewModel.currentIngredientAmount.value!!.toInt(), _ingredientViewModel.currentIngredientUnit.value.toString())
 
         Thread {
             ingredientDAO.insertAll(ingredient)
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${ingredient.ingredientName} successfully created!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(_context, "${ingredient.ingredientName} successfully created!", Toast.LENGTH_SHORT).show()
             }
         }.start()
 

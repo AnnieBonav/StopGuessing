@@ -23,20 +23,22 @@ import com.anniebonav.stopguessingm3.databinding.FragmentInteractsMealPlanBindin
 class InteractsMealPlanFragment : Fragment() {
     private var _binding: FragmentInteractsMealPlanBinding? = null
     private val binding get() = _binding!!
+    private lateinit var _context: MainActivity
+
     private val _mealPlanViewModel: UIViewModelAddMealPlan by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentInteractsMealPlanBinding.inflate(inflater, container,false)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mpViewModel = _mealPlanViewModel
 
-        val mealPlanDAO = StopGuessingDatabase.getDatabase(context).mealPlanDao()
-        val blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
+        val mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
+        val blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
@@ -62,21 +64,21 @@ class InteractsMealPlanFragment : Fragment() {
             }
 
             Thread{
-                val blueprints = ArrayList<String>()
-                val currentBlueprints = blueprintDAO.getBlueprints()
-                for(blueprint in currentBlueprints){
-                    blueprints.add(blueprint.name!!)
-                }
-                Log.d("Meals", "$blueprints")
+                val existingBlueprints = blueprintDAO.getBlueprints()
+                val existingBlueprintsNames = ArrayList<String>()
 
-                val categoriesAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, blueprints)
+                for(blueprint in existingBlueprints){
+                    existingBlueprintsNames.add(blueprint.name!!)
+                }
+
+                val categoriesAdapter = ArrayAdapter(_context, android.R.layout.simple_list_item_1, existingBlueprintsNames)
                 Handler(Looper.getMainLooper()).post {
                     binding.selectedBlueprintInput.setAdapter(categoriesAdapter)
                     binding.selectedBlueprintInput.threshold = 1
                     binding.selectedBlueprintInput.setAdapter(categoriesAdapter)
-                    binding.selectedBlueprintInput.setOnItemClickListener{ parent, _, position, _ -> //parent, view, position, id
-                        //val selectedItem = parent.selectedItem.toString()
-                        //Log.d("Meals", "Sleected: $selectedItem")
+                    binding.selectedBlueprintInput.setOnItemClickListener{ parent, _, position, id -> //parent, view, position, id
+                        val selectedItem = parent.getItemAtPosition(position)
+                        Log.d("Meals", "Slected: $selectedItem")
                     }
                 }
             }.start()
@@ -100,7 +102,7 @@ class InteractsMealPlanFragment : Fragment() {
     }
 
     fun UpdateMealPlan(mealPlanDao: MealPlanDao, selectedMealPLanId: Int){
-        //TODO: Implement Update MealPlan
+        //TODO: Implement Update MealPlan, can only update name and description
     }
 
     override fun onDestroyView() {
