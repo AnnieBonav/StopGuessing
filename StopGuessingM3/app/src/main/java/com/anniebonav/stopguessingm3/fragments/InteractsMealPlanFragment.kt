@@ -99,26 +99,50 @@ class InteractsMealPlanFragment : Fragment() {
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
         Thread {
             val selectedBlueprint = _blueprintDAO.getBlueprint(_mealPlanViewModel.currentMealPlanBlueprint.value!!)
-            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, "Breakfasts", "Lunches", "Dinners")
 
-            val blockString = createBlocksUnit()
-            Log.d("Meal", "BlockString: $blockString")
+            val breakfastNeededUnits = selectedBlueprint.breakfastUnits
+            val lunchNeededUnits = selectedBlueprint.lunchUnits
+            val dinnerNeededUnits = selectedBlueprint.dinnerUnits
+            Log.d("Meal", "Blueprint information: B:$breakfastNeededUnits L:$lunchNeededUnits D:$dinnerNeededUnits")
 
-            /*
+
+            var createdBreakfast = createMeal(breakfastNeededUnits!!)
+            var createdLunch = createMeal(lunchNeededUnits!!)
+            var createdDinner = createMeal(dinnerNeededUnits!!)
+
+            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner)
+
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
                 Toast.makeText(_context, "${mealPlan.mealPlanName} successfully created!", Toast.LENGTH_SHORT).show()
-            }*/
+            }
         }.start()
 
-        //findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+        findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+    }
+
+    fun createMeal(neededUnits: Int): String{
+        var finalBlockString = ""
+        for(i in 0 until neededUnits!!){
+            val blockString = createBlocksUnit()
+            if(i == neededUnits!! -1){
+                finalBlockString += blockString
+            }else{
+                finalBlockString += "$blockString,"
+            }
+
+            //Log.d("Meal", "BlockString: $blockString")
+        }
+
+        Log.d("Meal", "FinalBlockString: $finalBlockString")
+        return finalBlockString
     }
 
     fun createBlocksUnit(): String{
         val selectedProteinId = selectRandomIngredient("protein")
         val selectedCarbsId = selectRandomIngredient("carbs")
         val selectedFatsId = selectRandomIngredient("fats")
-        Log.d("Meal", "Protein: $selectedProteinId  Carbs: $selectedCarbsId   Fats: $selectedFatsId")
+        //Log.d("Meal", "Protein: $selectedProteinId  Carbs: $selectedCarbsId   Fats: $selectedFatsId")
         val blockString = "$selectedProteinId,$selectedCarbsId,$selectedFatsId"
         return blockString
     }
@@ -127,7 +151,7 @@ class InteractsMealPlanFragment : Fragment() {
         val categoryIngredients = _ingredientDAO.getIngredientsByCategory(category)
         val randomNumber = Random.nextInt(0,categoryIngredients.count())
         val selectedIngredient = categoryIngredients[randomNumber].ingredientName
-        Log.d("Meal", "$randomNumber, $selectedIngredient")
+        //Log.d("Meal", "$selectedIngredient")
         return categoryIngredients[randomNumber].uid!!
     }
 
