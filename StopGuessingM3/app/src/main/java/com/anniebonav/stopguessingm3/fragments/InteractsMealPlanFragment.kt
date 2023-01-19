@@ -3,10 +3,12 @@ package com.anniebonav.stopguessingm3.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,10 +41,10 @@ class InteractsMealPlanFragment : Fragment() {
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
             binding.crudActionButton.text = "Update Meal Plan"
+
             Thread{
                 val selectedMealPlan = mealPlanDAO.getMealPlan(selectedMealPlanId!!)
                 val blueprint = blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
-
                 Handler(Looper.getMainLooper()).post {
                     _mealPlanViewModel.currentMealPlanName.value = selectedMealPlan.mealPlanName
                     _mealPlanViewModel.currentMealPlanBlueprint.value = blueprint.name
@@ -58,6 +60,28 @@ class InteractsMealPlanFragment : Fragment() {
             binding.crudActionButton.setOnClickListener(){
                 CreateMealPlan(mealPlanDAO)
             }
+
+            Thread{
+                val blueprints = ArrayList<String>()
+                val currentBlueprints = blueprintDAO.getBlueprints()
+                for(blueprint in currentBlueprints){
+                    blueprints.add(blueprint.name!!)
+                }
+                Log.d("Meals", "$blueprints")
+
+                val categoriesAdapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, blueprints)
+                Handler(Looper.getMainLooper()).post {
+                    binding.selectedBlueprintInput.setAdapter(categoriesAdapter)
+                    binding.selectedBlueprintInput.threshold = 1
+                    binding.selectedBlueprintInput.setAdapter(categoriesAdapter)
+                    binding.selectedBlueprintInput.setOnItemClickListener{ parent, _, position, _ -> //parent, view, position, id
+                        //val selectedItem = parent.selectedItem.toString()
+                        //Log.d("Meals", "Sleected: $selectedItem")
+                    }
+                }
+            }.start()
+
+
         }
 
         return binding.root
