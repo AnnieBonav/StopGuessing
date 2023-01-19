@@ -20,6 +20,9 @@ interface IngredientDAO {
     @Query("SELECT * FROM ingredient WHERE uid IN (:ingredientIds)")
     fun loadAllByIds(ingredientIds: IntArray): List<Ingredient>
 
+    @Query("SELECT * FROM ingredient WHERE uid IN (:ingredientIds)")
+    fun loadIngredientsByIds(ingredientIds: List<String>): List<Ingredient>
+
     @Insert
     fun insertAll(vararg ingredients: Ingredient)
 

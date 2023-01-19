@@ -24,94 +24,110 @@
 
             android:textColor="@color/md_theme_light_onSurfaceVariant" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-
-                android:text="Blueprint Name: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
-            <TextView
-                android:id="@+id/blueprintName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingHorizontal="16dp"
-                android:text="Selected Blueprint"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    android:text="Selected Blueprint"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-                android:text="Breakfast: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                <TextView
+                    android:id="@+id/blueprintName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="Selected Blueprint"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/breakfastInformation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingHorizontal="16dp"
-                android:text="Breakfast Information"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="Breakfast: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-                android:text="Lunch: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                <TextView
+                    android:id="@+id/breakfastInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="Breakfast Information"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-                android:text="Dinner: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="Lunch: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-                android:text="Morning snack: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                <TextView
+                    android:id="@+id/lunchInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="Lunch Information"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:paddingLeft="16dp"
-                android:text="Evening snack: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="Dinner: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/dinnerInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="Dinner Information"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="Morning snack: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="Evening snack: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
 
     </LinearLayout>
 
