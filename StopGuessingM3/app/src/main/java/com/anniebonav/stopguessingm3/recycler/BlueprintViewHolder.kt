@@ -15,9 +15,6 @@ class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDelet
     val card: CardView
     val nameLabel: TextView
     val descriptionLabel: TextView
-    val breakfastUnitsLabel: TextView
-    val lunchUnitsLabel: TextView
-    val dinnerUnitsLabel: TextView
     val deleteButton: Button
     val editButton: Button
 
@@ -44,9 +41,6 @@ class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDelet
         card = view.findViewById(R.id.card)
         nameLabel = view.findViewById(R.id.name)
         descriptionLabel = view.findViewById(R.id.description)
-        breakfastUnitsLabel = view.findViewById(R.id.breakfastUnits)
-        lunchUnitsLabel = view.findViewById(R.id.lunchUnits)
-        dinnerUnitsLabel = view.findViewById(R.id.dinnerUnits)
         deleteButton = view.findViewById(R.id.deleteButton)
         editButton = view.findViewById(R.id.editButton)
     }
