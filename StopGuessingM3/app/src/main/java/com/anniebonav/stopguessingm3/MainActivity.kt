@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import android.view.View
 import android.widget.TextView
 import androidx.navigation.NavController
+import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
+import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var _topBarView: TextView
     private lateinit var _navController: NavController
     private lateinit var _aboutButton: FloatingActionButton
+    private lateinit var _ingredientDAO: IngredientDAO
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -34,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         _topBarView = binding.topBar
 
         _aboutButton = binding.aboutButton
-        _aboutButton.setOnClickListener{ _navController.navigate(R.id.action_global_aboutFragment) }
+        _aboutButton.setOnClickListener{ _navController.navigate(R.id.action_global_AboutFragment) }
 
         _tabsNavigationView = binding.mealsTabs
         _tabsNavigationView.visibility = View.GONE //Tabs from meals start hidden
@@ -84,6 +88,34 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        _ingredientDAO = StopGuessingDatabase.getDatabase(applicationContext).ingredientDao()
+        Thread{
+            val currentIngredients = _ingredientDAO.getIngredients()
+            if(currentIngredients.isEmpty()){
+                createInitialIngredients()
+            }else{
+                //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
+            }
+        }.start()
+
+
+    }
+
+    private fun createInitialIngredients(){ //TODO: create them before anything
+        _ingredientDAO.insertAll(
+            Ingredient(null, "Chicken", "protein", 100, "grams"),
+            Ingredient(null, "Ham", "protein", 150, "grams"),
+            Ingredient(null, "Cottage cheese", "protein", 4, "tbsp"),
+
+            Ingredient(null, "Strawberries", "carbs", 2, "cups"),
+            Ingredient(null, "Rice", "carbs", 500, "grams"),
+            Ingredient(null, "Beans", "carbs", 10, "ounces"),
+
+            Ingredient(null, "Avocado", "fats", 100, "grams"),
+            Ingredient(null, "Olive Oil", "fats", 2, "tsp"),
+            Ingredient(null, "Coconut Oil", "fats", 10, "ml")
+        )
     }
 
     fun openedAbout(){

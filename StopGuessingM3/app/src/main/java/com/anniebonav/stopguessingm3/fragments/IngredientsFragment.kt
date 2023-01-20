@@ -51,32 +51,7 @@ class IngredientsFragment : Fragment() {
             _ingredientsRecycler.adapter = IngredientAdapter(_context, ingredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
 
-        Thread{
-            val currentIngredients = _ingredientDAO.getIngredients()
-            if(currentIngredients.isEmpty()){
-                createInitialIngredients()
-            }else{
-                //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
-            }
-        }.start()
-
         return binding.root
-    }
-
-    private fun createInitialIngredients(){ //TODO: create them before anything
-        _ingredientDAO.insertAll(
-            Ingredient(null, "Chicken", "protein", 100, "grams"),
-            Ingredient(null, "Ham", "protein", 150, "grams"),
-            Ingredient(null, "Cottage cheese", "protein", 4, "tbsp"),
-
-            Ingredient(null, "Strawberries", "carbs", 2, "cups"),
-            Ingredient(null, "Rice", "carbs", 500, "grams"),
-            Ingredient(null, "Beans", "carbs", 10, "ounces"),
-
-            Ingredient(null, "Avocado", "fats", 100, "grams"),
-            Ingredient(null, "Olive Oil", "fats", 2, "tsp"),
-            Ingredient(null, "Coconut Oil", "fats", 10, "ml")
-        )
     }
 
     override fun onStart() {

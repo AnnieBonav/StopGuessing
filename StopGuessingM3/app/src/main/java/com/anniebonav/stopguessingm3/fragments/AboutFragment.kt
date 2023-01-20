@@ -22,9 +22,21 @@ class AboutFragment : Fragment() {
         context = activity as MainActivity
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
 
-        binding.closeButton.setOnClickListener({
+        binding.closeButton.setOnClickListener{
             findNavController().navigateUp()
-        })
+        }
+
+        binding.openIngredients.setOnClickListener{
+            findNavController().navigate(R.id.action_AboutFragment_to_IngredientsFragment)
+        }
+
+        binding.openBlueprints.setOnClickListener{
+            findNavController().navigate(R.id.action_AboutFragment_to_BlueprintsFragment)
+        }
+
+        binding.openMealPlans.setOnClickListener{
+            findNavController().navigate(R.id.action_AboutFragment_to_MealPlansFragment)
+        }
         return binding.root
     }
 
