@@ -151,7 +151,7 @@ class InteractsMealPlanFragment : Fragment() {
         val categoryIngredients = _ingredientDAO.getIngredientsByCategory(category)
         val randomNumber = Random.nextInt(0,categoryIngredients.count())
         val selectedIngredient = categoryIngredients[randomNumber].ingredientName
-        //Log.d("Meal", "$selectedIngredient")
+        Log.d("Meal", "$selectedIngredient")
         return categoryIngredients[randomNumber].uid!!
     }
 

@@ -39,6 +39,9 @@ class ViewMealPlanFragment : Fragment() {
             binding.mealPlanName.text = selectedMealPlan.mealPlanName
             binding.blueprintName.text = blueprint.name
 
+            var inside = selectedMealPlan.mealPlanBreakfasts.toString().split(',')
+            Log.d("MealPlan", "$inside")
+
             val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
             val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
             val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
@@ -52,20 +55,24 @@ class ViewMealPlanFragment : Fragment() {
     }
 
     fun createText(ingredients : List<String>): String {
-        //Log.d("MealPlan", "$ingredients")
-        var ingredients = _ingredientDAO.loadIngredientsByIds(ingredients)
-        //Log.d("MealPlan", "$ingredients")
-
+        Log.d("MealPlan", "Ingredieb: $ingredients")
+        var counter = 0
         var ingredientsList = ""
-        var i = 0
-        var units = ingredients.count()/3 //TODO: Make it appear titles
-        for(ingredient in ingredients){
-            if(i ==  0%3){
 
+        while(counter < ingredients.count()){
+            var currentUnit = listOf(ingredients[counter], ingredients[counter+1], ingredients[counter+2])
+            var ingredients = _ingredientDAO.loadIngredientsByIds(currentUnit)
+
+            for(ingredient in ingredients){
+                ingredientsList += ingredient.ingredientAmount.toString() + " " + ingredient.ingredientUnit + " of " + ingredient.ingredientName + "\n"
             }
-            ingredientsList += ingredient.ingredientAmount.toString() + " " + ingredient.ingredientUnit + " of " + ingredient.ingredientName + "\n"
+
+            counter += 3
         }
-        //Log.d("MealPlan", "$ingredientsList")
+        //Log.d("MealPlan", "$ingredients")
+        //var units = ingredients.count()/3 //TODO: Make it appear titles
+
+        Log.d("MealPlan", "$ingredientsList")
         return ingredientsList
     }
 
