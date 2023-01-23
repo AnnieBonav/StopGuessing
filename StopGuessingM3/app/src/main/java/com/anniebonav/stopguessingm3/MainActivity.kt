@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
         _ingredientDAO = StopGuessingDatabase.getDatabase(applicationContext).ingredientDao()
         Thread{
-            val currentIngredients = _ingredientDAO.getIngredients()
+            val currentIngredients = _ingredientDAO.getIngredients(true)
             if(currentIngredients.isEmpty()){
                 createInitialIngredients()
             }else{

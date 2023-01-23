@@ -5,8 +5,8 @@ import androidx.room.*
 
 @Dao
 interface IngredientDAO {
-    @Query("SELECT * FROM ingredient")
-    fun getIngredients(): List<Ingredient>
+    @Query("SELECT * FROM ingredient ORDER BY  CASE WHEN :isAsc = 1 THEN name END ASC, CASE WHEN :isAsc = 0 THEN name END DESC")
+    fun getIngredients(isAsc: Boolean): List<Ingredient>
 
     @Query("SELECT * FROM ingredient WHERE uid = :ingredientId")
     fun getIngredient(ingredientId: Int): Ingredient
