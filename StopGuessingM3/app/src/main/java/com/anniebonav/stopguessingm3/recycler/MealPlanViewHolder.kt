@@ -14,6 +14,7 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
     val mealPlanNameLabel: TextView
     val mealPlanBlueprintLabel: TextView
     val mealPlanDeleteButton: Button
+    val mealPlanStarButton: Button
 
     fun deleteMealPlan(mealPlanId: Int){
         mealPlanDeleteButton.setOnClickListener{
@@ -32,5 +33,6 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
         mealPlanNameLabel = view.findViewById(R.id.mealplanTitle)
         mealPlanBlueprintLabel = view.findViewById(R.id.mealplanBlueprint)
         mealPlanDeleteButton = view.findViewById(R.id.mealplanDelete)
+        mealPlanStarButton = view.findViewById(R.id.mealplanFavorite)
     }
 }

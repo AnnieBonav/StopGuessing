@@ -67,6 +67,10 @@ class ViewMealPlanFragment : Fragment() {
             editMealPlan(selectedMealPlanId!!)
         }
 
+        binding.goBackButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
 
