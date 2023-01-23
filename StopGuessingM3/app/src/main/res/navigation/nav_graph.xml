@@ -135,5 +135,8 @@
         <action
             android:id="@+id/action_ViewBlueprintFragment_to_BlueprintsFragment"
             app:destination="@id/BlueprintsFragment" />
+        <action
+            android:id="@+id/action_ViewBlueprintFragment_to_InteractsBlueprintsFragment"
+            app:destination="@id/InteractsBlueprintsFragment" />
     </fragment>
 </navigation>

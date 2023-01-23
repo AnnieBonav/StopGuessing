@@ -40,6 +40,7 @@ class InteractsBlueprintsFragment : Fragment() {
 
         binding.goBackButton.setOnClickListener(){
             findNavController().navigateUp()
+            Log.d("Blueprint", "Going up?")
         }
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a blueprint and not adding one. This way I reuse my View Model.

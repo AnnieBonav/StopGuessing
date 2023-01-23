@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.databinding.FragmentViewBlueprintBinding
@@ -27,6 +30,10 @@ class ViewBlueprintFragment : Fragment() {
 
         _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
 
+        binding.goBackButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
+
         Thread{
             Log.d("Data", "$selectedBlueprintId")
             val selectedBlueprint = _blueprintDAO.getBlueprint(selectedBlueprintId!!)
@@ -38,6 +45,15 @@ class ViewBlueprintFragment : Fragment() {
             binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
         }.start()
 
+        binding.editIngredientButton.setOnClickListener(){
+            editBlueprint(selectedBlueprintId!!)
+        }
+
         return binding.root
+    }
+
+    private fun editBlueprint(blueprintId: Int){
+        val bundle = bundleOf("selectedBlueprint" to blueprintId)
+        findNavController().navigate(R.id.action_ViewBlueprintFragment_to_InteractsBlueprintsFragment, bundle)
     }
 }

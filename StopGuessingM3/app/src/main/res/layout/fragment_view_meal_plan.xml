@@ -2,28 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ViewMealPlanFragment">
+    tools:context=".fragments.ViewMealPlanFragment"
+    android:layout_marginHorizontal="24dp">
 
-    <TextView
-        android:id="@+id/mealPlanName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="5"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="Meal Plan Name"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:id="@+id/topOptions"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <Button
+            android:id="@+id/goBackButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_baseline_arrow_back_24" />
 
-        android:textColor="@color/md_theme_light_onSurfaceVariant" />
+        <TextView
+            android:id="@+id/mealPlanName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blueprint Name And something else"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintStart_toEndOf="@+id/chevronBack"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/mealPlanName">
+        app:layout_constraintTop_toBottomOf="@+id/topOptions">
 
         <LinearLayout
             android:layout_width="match_parent"
