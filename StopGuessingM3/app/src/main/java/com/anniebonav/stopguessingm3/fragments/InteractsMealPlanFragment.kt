@@ -99,6 +99,19 @@ class InteractsMealPlanFragment : Fragment() {
 
     fun CreateMealPlan(mealPlanDao: MealPlanDao){
         Thread {
+            val existingMealPlans = _mealPlanDAO.getMealPlans()
+            Log.d("UniqueMP", "Unique: $existingMealPlans")
+            var uniqueMealPlan = 0
+            try {
+                val firstMealPlan = existingMealPlans[0].mealPlanName
+                uniqueMealPlan = 0
+                Log.d("UniqueMP", "False Unique: $uniqueMealPlan")
+            }
+            catch(e: Exception){
+                uniqueMealPlan = 1
+                Log.d("UniqueMP", "True Unique: $uniqueMealPlan")
+            }
+
             val selectedBlueprint = _blueprintDAO.getBlueprint(_mealPlanViewModel.currentMealPlanBlueprint.value!!)
 
             val breakfastNeededUnits = selectedBlueprint.breakfastUnits
@@ -115,7 +128,7 @@ class InteractsMealPlanFragment : Fragment() {
             var createdMorningSnack = createMeal(morningSnackNeededUnits!!)
             var createdEveningSnack = createMeal(eveningSnackNeededUnits!!)
 
-            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner, createdMorningSnack, createdEveningSnack, 0)
+            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner, createdMorningSnack, createdEveningSnack, uniqueMealPlan)
 
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {

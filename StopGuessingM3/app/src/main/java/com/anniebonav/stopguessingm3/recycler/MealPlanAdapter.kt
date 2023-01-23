@@ -24,7 +24,11 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<M
         holder.mealPlanNameLabel.setText(model.mealPlanName)
         holder.mealPlanBlueprintLabel.setText(model.mealPlanDescription)
         holder.mealPlanDeleteButton.setText("Delete")
-        holder.mealPlanStarButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_star_24, 0, 0, 0)
+        if(model.mealPlanIsSelected == 0){
+            holder.mealPlanStarButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_star_border_24, 0, 0, 0)
+        }else{
+            holder.mealPlanStarButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_star_24, 0, 0, 0)
+        }
         holder.deleteMealPlan(model.uid!!) //I know it is going to be an Int
         holder.openMealPlan(model.uid)
     }
