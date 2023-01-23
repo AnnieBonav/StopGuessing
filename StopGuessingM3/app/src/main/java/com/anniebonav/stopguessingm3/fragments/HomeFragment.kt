@@ -24,6 +24,9 @@ class HomeFragment : Fragment() {
         _context = activity as MainActivity
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        binding.openMealPlans.setOnClickListener(){
+            findNavController().navigate(R.id.action_HomeFragment_to_MealPlansFragment)
+        }
 
         return binding.root
     }

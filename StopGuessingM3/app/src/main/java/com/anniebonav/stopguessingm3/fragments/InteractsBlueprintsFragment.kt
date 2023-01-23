@@ -38,6 +38,10 @@ class InteractsBlueprintsFragment : Fragment() {
 
         val blueprintDao = StopGuessingDatabase.getDatabase(context).blueprintDao()
 
+        binding.goBackButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
+
         if(arguments != null){ //If I am sending arguments, it means that I am updating a blueprint and not adding one. This way I reuse my View Model.
             var selectedBlueprintId = arguments?.getInt("selectedBlueprint")
             binding.crudActionButton.text = "Update Blueprint"

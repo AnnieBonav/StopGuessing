@@ -1,6 +1,8 @@
 package com.anniebonav.stopguessingm3.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,32 +47,42 @@ class ViewMealPlanFragment : Fragment() {
             val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
             val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
             val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
+            val morningSnackText = createText(selectedMealPlan.mealPlanMorningSnacks.toString().split(","))
+            val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
 
-            binding.breakfastInformation.text = breakfastText
-            binding.lunchInformation.text = lunchText
-            binding.dinnerInformation.text = dinnerText
+            Handler(Looper.getMainLooper()).post {
+
+                binding.breakfastInformation.text = breakfastText
+                binding.lunchInformation.text = lunchText
+                binding.dinnerInformation.text = dinnerText
+                binding.morningSnackInformation.text = morningSnackText
+                binding.eveningSnackInformation.text = eveningSnackText
+            }
         }.start()
 
         return binding.root
     }
 
     fun createText(ingredients : List<String>): String {
-        Log.d("MealPlan", "Ingredieb: $ingredients")
+        var myCount = ingredients.count() //NoteToSelf: WHen the db sends an empty query, there is an element [0] that = ""
         var counter = 0
         var ingredientsList = ""
 
-        while(counter < ingredients.count()){
-            var currentUnit = listOf(ingredients[counter], ingredients[counter+1], ingredients[counter+2])
-            var ingredients = _ingredientDAO.loadIngredientsByIds(currentUnit)
+        if(ingredients[0] != ""){
+            var ingredientsCounter = ingredients.count()
+            while(counter < ingredients.count()){
+                var currentUnit = listOf(ingredients[counter], ingredients[counter+1], ingredients[counter+2])
+                var ingredients = _ingredientDAO.loadIngredientsByIds(currentUnit)
 
-            for(ingredient in ingredients){
-                ingredientsList += ingredient.ingredientAmount.toString() + " " + ingredient.ingredientUnit + " of " + ingredient.ingredientName + "\n"
+                for(ingredient in ingredients){
+                    ingredientsList += ingredient.ingredientAmount.toString() + " " + ingredient.ingredientUnit + " of " + ingredient.ingredientName + "\n"
+                }
+
+                counter += 3
             }
-
-            counter += 3
+            //Log.d("MealPlan", "$ingredients")
+            //var units = ingredients.count()/3 //TODO: Make it appear titles
         }
-        //Log.d("MealPlan", "$ingredients")
-        //var units = ingredients.count()/3 //TODO: Make it appear titles
 
         Log.d("MealPlan", "$ingredientsList")
         return ingredientsList

@@ -19,8 +19,8 @@ data class MealPlan(
     @ColumnInfo(name = "breakfasts") val mealPlanBreakfasts: String?,
     @ColumnInfo(name = "lunches") val mealPlanLunches: String?,
     @ColumnInfo(name = "dinners") val mealPlanDinners: String?,
-    @ColumnInfo(name = "morning_snack") val mealPlanMorningSnack: String?,
-    @ColumnInfo(name = "evening_snack") val mealPlanEveningSnack: String?,
+    @ColumnInfo(name = "morning_snacks") val mealPlanMorningSnacks: String?,
+    @ColumnInfo(name = "evening_snacks") val mealPlanEveningSnacks: String?,
     @ColumnInfo(name = "is_selected") val mealPlanIsSelected: Int?, //Int is either 1 or 0 //TODO: Check if defaultValue = "0" can be used
 )
 

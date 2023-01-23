@@ -57,11 +57,15 @@ class MealPlansFragment : Fragment() {
         Thread{
             val currentMealPlans = _mealPlanDAO.getMealPlans()
             if(currentMealPlans.isEmpty()){
-                binding.initialMealPlan.visibility = View.VISIBLE
-                binding.selectedMealPlanTitle.visibility = View.GONE
+                Handler(Looper.getMainLooper()).post {
+                    binding.initialMealPlan.visibility = View.VISIBLE
+                    binding.selectedMealPlanTitle.visibility = View.GONE
+                }
             }else{
-                binding.initialMealPlan.visibility = View.GONE
-                binding.selectedMealPlanTitle.visibility = View.VISIBLE
+                Handler(Looper.getMainLooper()).post {
+                    binding.initialMealPlan.visibility = View.GONE
+                    binding.selectedMealPlanTitle.visibility = View.VISIBLE
+                }
             }
         }.start()
 
