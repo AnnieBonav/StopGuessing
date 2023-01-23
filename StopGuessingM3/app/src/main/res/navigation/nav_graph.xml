@@ -47,6 +47,9 @@
         <argument
             android:name="selectedMealPlan"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_ViewMealPlanFragment_to_InteractsMealPlanFragment"
+            app:destination="@id/InteractsMealPlanFragment" />
     </fragment>
     <fragment
         android:id="@+id/BlueprintsFragment"

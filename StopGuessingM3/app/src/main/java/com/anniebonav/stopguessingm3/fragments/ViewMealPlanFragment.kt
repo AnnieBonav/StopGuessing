@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
+import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
@@ -60,7 +63,16 @@ class ViewMealPlanFragment : Fragment() {
             }
         }.start()
 
+        binding.editMealPlanButton.setOnClickListener(){
+            editMealPlan(selectedMealPlanId!!)
+        }
+
         return binding.root
+    }
+
+    private fun editMealPlan(mealPlanId: Int){
+        val bundle = bundleOf("selectedMealPlan" to mealPlanId)
+        findNavController().navigate(R.id.action_ViewMealPlanFragment_to_InteractsMealPlanFragment, bundle)
     }
 
     fun createText(ingredients : List<String>): String {

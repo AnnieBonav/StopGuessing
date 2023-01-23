@@ -45,7 +45,7 @@ class ViewBlueprintFragment : Fragment() {
             binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
         }.start()
 
-        binding.editIngredientButton.setOnClickListener(){
+        binding.editBlueprintButton.setOnClickListener(){
             editBlueprint(selectedBlueprintId!!)
         }
 
