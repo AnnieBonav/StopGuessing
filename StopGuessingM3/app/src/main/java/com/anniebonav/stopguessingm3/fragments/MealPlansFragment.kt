@@ -57,7 +57,11 @@ class MealPlansFragment : Fragment() {
         Thread{
             val currentMealPlans = _mealPlanDAO.getMealPlans()
             if(currentMealPlans.isEmpty()){
-                createInitialMealPlans()
+                binding.initialMealPlan.visibility = View.VISIBLE
+                binding.selectedMealPlanTitle.visibility = View.GONE
+            }else{
+                binding.initialMealPlan.visibility = View.GONE
+                binding.selectedMealPlanTitle.visibility = View.VISIBLE
             }
         }.start()
 
@@ -75,11 +79,6 @@ class MealPlansFragment : Fragment() {
         binding.addFab.setOnClickListener {
             findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment)
         }
-    }
-
-    private fun createInitialMealPlans(){
-        val initialMealPlan = MealPlan(null,1, "This is an initial meal plan",  "If you want to add another one, click on the + button!", "Breakfast", "Lunches", "Dinners")
-        _mealPlanDAO.insertAll(initialMealPlan)
     }
 
     private fun onMealPlanCardClicked(mealPlanId: Int){

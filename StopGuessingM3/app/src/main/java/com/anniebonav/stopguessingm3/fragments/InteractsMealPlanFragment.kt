@@ -103,14 +103,18 @@ class InteractsMealPlanFragment : Fragment() {
             val breakfastNeededUnits = selectedBlueprint.breakfastUnits
             val lunchNeededUnits = selectedBlueprint.lunchUnits
             val dinnerNeededUnits = selectedBlueprint.dinnerUnits
-            Log.d("Meal", "Blueprint information: B:$breakfastNeededUnits L:$lunchNeededUnits D:$dinnerNeededUnits")
+            val morningSnackNeededUnits = selectedBlueprint.morningSnackUnits
+            val eveningSnackNeededUnits = selectedBlueprint.eveningSnackUnits
+            Log.d("Meal", "Blueprint information: B:$breakfastNeededUnits L:$lunchNeededUnits D:$dinnerNeededUnits, MS:$morningSnackNeededUnits, ES:$eveningSnackNeededUnits")
 
 
             var createdBreakfast = createMeal(breakfastNeededUnits!!)
             var createdLunch = createMeal(lunchNeededUnits!!)
             var createdDinner = createMeal(dinnerNeededUnits!!)
+            var createdMorningSnack = createMeal(morningSnackNeededUnits!!)
+            var createdEveningSnack = createMeal(eveningSnackNeededUnits!!)
 
-            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner)
+            val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner, createdMorningSnack, createdEveningSnack, 0)
 
             mealPlanDao.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
