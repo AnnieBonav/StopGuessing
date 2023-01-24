@@ -65,9 +65,8 @@ class MainActivity : AppCompatActivity() {
         setDayText()
 
         _mealPlanDAO = StopGuessingDatabase.getDatabase(applicationContext).mealPlanDao()
-        Thread{
-            handleFirstFragment()
-        }.start()
+
+        handleHomeFragment()
 
     }
 
@@ -98,7 +97,8 @@ class MainActivity : AppCompatActivity() {
         _bottomNavigationView.setOnItemSelectedListener{ item ->
             when(item.itemId){
                 R.id.home->{
-                    _navController.navigate(R.id.action_global_HomeFragment)
+                    handleHomeFragment()
+                    //_navController.navigate(R.id.action_global_HomeFragment)
                     true
                 }
                 R.id.meals->{
@@ -128,21 +128,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleFirstFragment(){
-        val currentMealPlans = _mealPlanDAO.getMealPlans()
-        if(currentMealPlans.isNotEmpty()){ //It always starts in Home, so, if it is empty, it does nothing, but if there are meal plans it changes to selected meal plan view
-            val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
-            Handler(Looper.getMainLooper()).post {
-                openSelectedMealPlan(selectedMealPlan.uid!!)
+    private fun handleHomeFragment(){
+        Thread{
+            val currentMealPlans = _mealPlanDAO.getMealPlans()
+            if(currentMealPlans.isNotEmpty()){ //It always starts in Home, so, if it is empty, it does nothing, but if there are meal plans it changes to selected meal plan view
+                val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
+                Handler(Looper.getMainLooper()).post {
+                    openSelectedMealPlan(selectedMealPlan.uid!!)
+                    _titleLayoutView.visibility = View.GONE
+                    openedHome(false)
+                }
+
+            }else{
+                Handler(Looper.getMainLooper()).post {
+                    openEmptyHomeView()
+                    //openedHome(true)
+                }
             }
-            _titleLayoutView.visibility = View.GONE
-        }
+        }.start()
     }
 
     private fun openSelectedMealPlan(mealPlanId: Int){
         val openedFromHome = 1
         val bundle = bundleOf("selectedMealPlan" to mealPlanId, "openedFromHome" to openedFromHome)
-        _navController.navigate(R.id.action_HomeFragment_to_ViewMealPlanFragment, bundle)
+        _navController.navigate(R.id.action_global_ViewMealPlanFragment, bundle)
+    }
+
+    private fun openEmptyHomeView(){
+        _navController.navigate(R.id.action_global_HomeFragment)
     }
 
     private fun setDayText(){
@@ -183,17 +196,30 @@ class MainActivity : AppCompatActivity() {
 
     fun openedAbout(){
         _topBarView.text = "About"
+        _topBarView.visibility = View.GONE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.GONE
         _aboutButton.visibility = View.GONE
     }
 
-    fun openedHome(){
-        _topBarView.text = "Home"
-        _titleLayoutView.visibility = View.VISIBLE
+    fun closedAbout(){
+        _topBarView.visibility = View.VISIBLE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
+    }
+
+    fun openedHome(titleVisible: Boolean){
+        if(titleVisible) _titleLayoutView.visibility = View.VISIBLE
+        else _titleLayoutView.visibility = View.GONE
+
+        _topBarView.text = "Home"
+        _topBarView.visibility = View.VISIBLE
+        _tabsNavigationView.visibility = View.GONE
+        _bottomNavigationView.visibility = View.VISIBLE
+        _aboutButton.visibility = View.VISIBLE
+
+        //handleFirstFragment()
     }
 
     fun openedIngredients(){

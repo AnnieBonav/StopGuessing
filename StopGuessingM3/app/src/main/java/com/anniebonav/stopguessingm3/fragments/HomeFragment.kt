@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_MealPlansFragment)
         }
 
+
         return binding.root
     }
 
@@ -45,6 +46,6 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        _context.openedHome()
+        _context.openedHome(true)
     }
 }

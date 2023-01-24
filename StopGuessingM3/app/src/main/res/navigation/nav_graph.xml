@@ -71,9 +71,6 @@
         <action
             android:id="@+id/action_HomeFragment_to_MealPlansFragment"
             app:destination="@id/MealPlansFragment" />
-        <action
-            android:id="@+id/action_HomeFragment_to_ViewMealPlanFragment"
-            app:destination="@id/ViewMealPlanFragment" />
     </fragment>
     <fragment
         android:id="@+id/InteractsIngredientFragment"
@@ -145,4 +142,7 @@
             android:id="@+id/action_ViewBlueprintFragment_to_InteractsBlueprintsFragment"
             app:destination="@id/InteractsBlueprintsFragment" />
     </fragment>
+    <action
+        android:id="@+id/action_global_ViewMealPlanFragment"
+        app:destination="@id/ViewMealPlanFragment" />
 </navigation>

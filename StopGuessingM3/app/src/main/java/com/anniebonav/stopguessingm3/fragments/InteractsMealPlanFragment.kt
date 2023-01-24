@@ -53,25 +53,28 @@ class InteractsMealPlanFragment : Fragment() {
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
+            binding.mealPlanInstruction.text = "Update Meal Plan"
             binding.crudActionButton.text = "Update Meal Plan"
+            binding.blueprintSelector.visibility = View.GONE
 
             Thread{
                 val selectedMealPlan = _mealPlanDAO.getMealPlan(selectedMealPlanId!!)
                 val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
                 Handler(Looper.getMainLooper()).post {
                     _mealPlanViewModel.currentMealPlanName.value = selectedMealPlan.mealPlanName
+                    _mealPlanViewModel.currentMealPlanDescription.value = selectedMealPlan.mealPlanDescription
                     _mealPlanViewModel.currentMealPlanBlueprint.value = blueprint.name
                 }
             }.start()
 
             binding.crudActionButton.setOnClickListener(){
-                UpdateMealPlan(_mealPlanDAO, selectedMealPlanId!!)
+                UpdateMealPlan(selectedMealPlanId!!)
             }
         }else{
             binding.crudActionButton.text = "Create Meal Plan"
 
             binding.crudActionButton.setOnClickListener(){
-                CreateMealPlan(_mealPlanDAO)
+                CreateMealPlan()
             }
 
             Thread{
@@ -97,7 +100,7 @@ class InteractsMealPlanFragment : Fragment() {
         return binding.root
     }
 
-    fun CreateMealPlan(mealPlanDao: MealPlanDao){
+    fun CreateMealPlan(){
         Thread {
             val existingMealPlans = _mealPlanDAO.getMealPlans()
             Log.d("UniqueMP", "Unique: $existingMealPlans")
@@ -130,13 +133,12 @@ class InteractsMealPlanFragment : Fragment() {
 
             val mealPlan = MealPlan(null, selectedBlueprint.uid, _mealPlanViewModel.currentMealPlanName.value.toString(), selectedBlueprint.name, createdBreakfast, createdLunch, createdDinner, createdMorningSnack, createdEveningSnack, uniqueMealPlan)
 
-            mealPlanDao.insertAll(mealPlan)
+            _mealPlanDAO.insertAll(mealPlan)
             Handler(Looper.getMainLooper()).post {
                 Toast.makeText(_context, "${mealPlan.mealPlanName} successfully created!", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
             }
         }.start()
-
-        findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
     }
 
     fun createMeal(neededUnits: Int): String{
@@ -172,8 +174,17 @@ class InteractsMealPlanFragment : Fragment() {
         return categoryIngredients[randomNumber].uid!!
     }
 
-    fun UpdateMealPlan(mealPlanDao: MealPlanDao, selectedMealPLanId: Int){
-        //TODO: Implement Update MealPlan, can only update name and description
+    fun UpdateMealPlan(selectedMealPLanId: Int){
+        Thread {
+            val currentMealPlan = _mealPlanDAO.getMealPlan(selectedMealPLanId)
+            val updatedMealPlan = MealPlan(currentMealPlan.uid, currentMealPlan.blueprintId, _mealPlanViewModel.currentMealPlanName.toString(), _mealPlanViewModel.currentMealPlanDescription.toString(), currentMealPlan.mealPlanBreakfasts, currentMealPlan.mealPlanLunches, currentMealPlan.mealPlanDinners, currentMealPlan.mealPlanMorningSnacks, currentMealPlan.mealPlanEveningSnacks, currentMealPlan.mealPlanIsSelected)
+
+            _mealPlanDAO.update(currentMealPlan)
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(activity as MainActivity, "${updatedMealPlan.mealPlanName} successfully updated!", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_InteractsMealPlanFragment_to_MealPlansFragment)
+            }
+        }.start()
     }
 
     override fun onDestroyView() {

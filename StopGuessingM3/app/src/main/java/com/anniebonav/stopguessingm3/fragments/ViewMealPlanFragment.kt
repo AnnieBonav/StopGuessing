@@ -21,6 +21,8 @@ import com.anniebonav.stopguessingm3.databinding.FragmentViewMealPlanBinding
 class ViewMealPlanFragment : Fragment() {
     private var _binding: FragmentViewMealPlanBinding? = null
     private val binding get() = _binding!! // This property is only valid between onCreateView and onDestroyView.
+    private lateinit var _context: MainActivity
+
     private lateinit var _mealPlanDao: MealPlanDao
     private lateinit var _blueprintDAO: BlueprintDAO
     private lateinit var _ingredientDAO: IngredientDAO
@@ -29,17 +31,18 @@ class ViewMealPlanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
         var openedFromHome = arguments?.getInt("openedFromHome") //When they key is not found, the value passed is 0
         Log.d("MealPlanFragment", "Opened from home: $openedFromHome")
 
 
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
 
-        _mealPlanDao = StopGuessingDatabase.getDatabase(context).mealPlanDao()
-        _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
-        _ingredientDAO = StopGuessingDatabase.getDatabase(context).ingredientDao()
+        _mealPlanDao = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
+        _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
+        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
 
         //Removes back button if opened with Home
         if(openedFromHome == 1){
@@ -107,6 +110,11 @@ class ViewMealPlanFragment : Fragment() {
             }
         }
         return ingredientsList
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //_context.openedMeals()
     }
 
 }
