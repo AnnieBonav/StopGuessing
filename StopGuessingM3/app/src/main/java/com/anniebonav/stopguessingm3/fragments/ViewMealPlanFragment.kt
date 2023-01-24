@@ -30,6 +30,9 @@ class ViewMealPlanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
+        var openedFromHome = arguments?.getInt("openedFromHome") //When it is not found, the value passed is 0
+        Log.d("MealPlanFragment", "Opened from home: $openedFromHome")
+
 
         val context = activity as MainActivity
         _binding = FragmentViewMealPlanBinding.inflate(inflater, container, false)
@@ -37,6 +40,13 @@ class ViewMealPlanFragment : Fragment() {
         _mealPlanDao = StopGuessingDatabase.getDatabase(context).mealPlanDao()
         _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
         _ingredientDAO = StopGuessingDatabase.getDatabase(context).ingredientDao()
+
+        //Removes back button if opened with Home
+        if(openedFromHome == 1){
+            binding.goBackButton.visibility = View.GONE
+        }else{
+            binding.goBackButton.visibility = View.VISIBLE
+        }
 
         Thread{
             val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)

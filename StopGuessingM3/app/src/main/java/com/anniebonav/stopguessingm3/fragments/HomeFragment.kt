@@ -36,39 +36,11 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_MealPlansFragment)
         }
 
-        Thread{
-            val currentMealPlans = _mealPlanDAO.getMealPlans()
-            if(currentMealPlans.isEmpty()){ //Does check if it is empty
-                binding.noMPLayout.visibility = View.VISIBLE //TODO: Add fragment here
-            }else{
-                binding.noMPLayout.visibility = View.GONE
-            }
-        }.start()
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        binding.addFab.setOnClickListener {
-//            findNavController().navigate(R.id.action_HomeFragment_to_MealPlansFragment)
-//        }
-
-        val dayTitle = view.findViewById<TextView>(R.id.homeTitleDay)
-        val calendar = Calendar.getInstance()
-        val title: String = when (calendar.get(Calendar.DAY_OF_WEEK)) {
-            Calendar.MONDAY -> "Monday!"
-            Calendar.TUESDAY -> "Tuesday!"
-            Calendar.WEDNESDAY -> "Wednesday!"
-            Calendar.THURSDAY -> "Thursday!"
-            Calendar.FRIDAY -> "Friday!"
-            Calendar.SATURDAY -> "Saturday!"
-            Calendar.SUNDAY -> "Sunday!"
-            else -> "Invalid Day"
-        }
-        dayTitle.text = title
     }
 
     override fun onStart() {

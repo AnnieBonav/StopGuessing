@@ -1,27 +1,37 @@
 package com.anniebonav.stopguessingm3
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
+import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 import com.anniebonav.stopguessingm3.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.selects.select
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var _bottomNavigationView: BottomNavigationView
     private lateinit var _tabsNavigationView: TabLayout
     private lateinit var _topBarView: TextView
+    private lateinit var _titleLayoutView: LinearLayout
     private lateinit var _navController: NavController
     private lateinit var _aboutButton: FloatingActionButton
     private lateinit var _ingredientDAO: IngredientDAO
+    private lateinit var _mealPlanDAO: MealPlanDao
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +51,27 @@ class MainActivity : AppCompatActivity() {
         _aboutButton.setOnClickListener{ _navController.navigate(R.id.action_global_AboutFragment) }
 
         _tabsNavigationView = binding.mealsTabs
+        addsTabsNavigation()
+
+        _bottomNavigationView = binding.bottomNavigation
+        addsBottomNavigationListener()
+
+        _ingredientDAO = StopGuessingDatabase.getDatabase(applicationContext).ingredientDao()
+        Thread{
+            addInitialIngredients()
+        }.start()
+
+        _titleLayoutView = binding.titleLayout
+        setDayText()
+
+        _mealPlanDAO = StopGuessingDatabase.getDatabase(applicationContext).mealPlanDao()
+        Thread{
+            handleFirstFragment()
+        }.start()
+
+    }
+
+    private fun addsTabsNavigation(){
         _tabsNavigationView.visibility = View.GONE //Tabs from meals start hidden
 
         _tabsNavigationView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -61,9 +92,9 @@ class MainActivity : AppCompatActivity() {
                 // Handle tab unselect
             }
         })
+    }
 
-        //Bottom navigation
-        _bottomNavigationView = binding.bottomNavigation
+    private fun addsBottomNavigationListener(){
         _bottomNavigationView.setOnItemSelectedListener{ item ->
             when(item.itemId){
                 R.id.home->{
@@ -88,21 +119,49 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        _ingredientDAO = StopGuessingDatabase.getDatabase(applicationContext).ingredientDao()
-        Thread{
-            val currentIngredients = _ingredientDAO.getIngredients(true)
-            if(currentIngredients.isEmpty()){
-                createInitialIngredients()
-            }else{
-                //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
-            }
-        }.start()
-
-
     }
 
-    private fun createInitialIngredients(){ //TODO: create them before anything
+    private fun addInitialIngredients(){
+        val currentIngredients = _ingredientDAO.getIngredients(true)
+        if(currentIngredients.isEmpty()){
+            createInitialIngredients()
+        }
+    }
+
+    private fun handleFirstFragment(){
+        val currentMealPlans = _mealPlanDAO.getMealPlans()
+        if(currentMealPlans.isNotEmpty()){ //It always starts in Home, so, if it is empty, it does nothing, but if there are meal plans it changes to selected meal plan view
+            val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
+            Handler(Looper.getMainLooper()).post {
+                openSelectedMealPlan(selectedMealPlan.uid!!)
+            }
+            _titleLayoutView.visibility = View.GONE
+        }
+    }
+
+    private fun openSelectedMealPlan(mealPlanId: Int){
+        val openedFromHome = 1
+        val bundle = bundleOf("selectedMealPlan" to mealPlanId, "openedFromHome" to openedFromHome)
+        _navController.navigate(R.id.action_HomeFragment_to_ViewMealPlanFragment, bundle)
+    }
+
+    private fun setDayText(){
+        val dayView = binding.homeTitleDay
+        val calendar = Calendar.getInstance()
+        val title: String = when (calendar.get(Calendar.DAY_OF_WEEK)) {
+            Calendar.MONDAY -> "Monday!"
+            Calendar.TUESDAY -> "Tuesday!"
+            Calendar.WEDNESDAY -> "Wednesday!"
+            Calendar.THURSDAY -> "Thursday!"
+            Calendar.FRIDAY -> "Friday!"
+            Calendar.SATURDAY -> "Saturday!"
+            Calendar.SUNDAY -> "Sunday!"
+            else -> "Invalid Day"
+        }
+        dayView.text = title
+    }
+
+    private fun createInitialIngredients(){
         _ingredientDAO.insertAll(
             Ingredient(null, "Chicken", "protein", 100, "grams"),
             Ingredient(null, "Ham", "protein", 150, "grams"),
@@ -118,6 +177,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun createInitialBlueprint(){//TODO: change creation here
+
+    }
+
     fun openedAbout(){
         _topBarView.text = "About"
         _tabsNavigationView.visibility = View.GONE
@@ -127,6 +190,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openedHome(){
         _topBarView.text = "Home"
+        _titleLayoutView.visibility = View.VISIBLE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
@@ -134,6 +198,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openedIngredients(){
         _topBarView.text = "Ingredients"
+        _titleLayoutView.visibility = View.GONE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
@@ -141,6 +206,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openedMeals(){
         _topBarView.text = "Meals"
+        _titleLayoutView.visibility = View.GONE
         _tabsNavigationView.visibility = View.VISIBLE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
