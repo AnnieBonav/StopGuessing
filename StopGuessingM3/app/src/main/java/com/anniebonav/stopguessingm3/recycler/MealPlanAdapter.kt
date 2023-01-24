@@ -24,7 +24,6 @@ class MealPlanAdapter (private val context: Context, _mealPlansArrayList: List<M
         val model: MealPlan = _mealPlansArrayList[position]
         holder.mealPlanNameLabel.setText(model.mealPlanName)
         holder.mealPlanBlueprintLabel.setText(model.mealPlanDescription)
-        holder.mealPlanDeleteButton.setText("Delete")
         if(model.mealPlanIsSelected == 0){
             holder.mealPlanStarButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_star_border_24, 0, 0, 0)
         }else{

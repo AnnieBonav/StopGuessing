@@ -3,6 +3,7 @@ package com.anniebonav.stopguessingm3.recycler
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +16,8 @@ class BlueprintViewHolder (view: View, private val onDeleteClick: BlueprintDelet
     val card: CardView
     val nameLabel: TextView
     val descriptionLabel: TextView
-    val deleteButton: Button
-    val editButton: Button
+    val deleteButton: ImageView
+    val editButton: ImageView
 
     fun deleteBlueprint(blueprintId: Int){
         deleteButton.setOnClickListener{

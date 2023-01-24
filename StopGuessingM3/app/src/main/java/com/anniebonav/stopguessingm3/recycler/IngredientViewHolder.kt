@@ -2,6 +2,7 @@ package com.anniebonav.stopguessingm3.recycler
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +16,8 @@ class IngredientViewHolder (view: View, private val onCardClick: IngredientOpenC
     val ingredientAmountLabel: TextView
     val ingredientUnitLabel: TextView
 
-    val editIngredientButton: Button
-    val deleteIngredientButton: Button
+    val editIngredientButton: ImageView
+    val deleteIngredientButton: ImageView
 
     /*
     fun openIngredient(ingredientId: Int){

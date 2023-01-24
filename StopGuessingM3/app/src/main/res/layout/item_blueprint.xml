@@ -66,19 +66,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <Button
-                            android:id="@+id/editButton"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            app:icon="@drawable/ic_edit"
-                            />
-
-                        <Button
+                        <ImageView
                             android:id="@+id/deleteButton"
-                            android:layout_width="50dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_height="50dp"
-                            app:icon="@drawable/ic_delete"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_delete"
+                            />
+                        <ImageView
+                            android:id="@+id/editButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_edit"
                             />
                     </LinearLayout>
 

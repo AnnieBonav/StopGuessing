@@ -27,8 +27,6 @@ class BlueprintAdapter (private val context: Context, _blueprintsArrayList: List
         //model.something refers to the Blueprint data type
         holder.nameLabel.setText(model.name)
         holder.descriptionLabel.setText(model.description)
-        holder.editButton.setText("Edit")
-        holder.deleteButton.setText("Delete")
 
         holder.deleteBlueprint(model.uid!!) //I know it is going to be an Int, these are the functions in my holder
         holder.openBlueprint(model.uid)

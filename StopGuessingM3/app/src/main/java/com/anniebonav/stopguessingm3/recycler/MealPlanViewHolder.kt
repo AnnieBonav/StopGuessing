@@ -2,6 +2,7 @@ package com.anniebonav.stopguessingm3.recycler
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
     val mealPlanCard: CardView
     val mealPlanNameLabel: TextView
     val mealPlanBlueprintLabel: TextView
-    val mealPlanDeleteButton: Button
+    val mealPlanDeleteButton: ImageView
     val mealPlanStarButton: Button
 
     fun deleteMealPlan(mealPlanId: Int){

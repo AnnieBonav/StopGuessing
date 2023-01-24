@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AboutFragment">
+    tools:context=".fragments.AboutFragment"
+    android:layout_marginHorizontal="24dp"
+    >
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/closeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
-        android:layout_marginRight="24dp"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_close_24"
-        android:contentDescription="close"
+        android:contentDescription="@string/close"
         />
 
     <ScrollView
@@ -39,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_marginTop="32dp"
                 android:textAppearance="?attr/textAppearanceHeadline5" />
 
@@ -57,18 +56,17 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_baseline_warning_amber_24"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_gravity="center"
-                    />
+                    android:contentDescription="@string/warning_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following The Zone diet should be discussed with your doctor."
+                    android:text="@string/disclaimer"
                     android:textColor="@color/md_theme_light_secondary"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="italic"
-
                     />
             </LinearLayout>
 
@@ -77,8 +75,8 @@
                 android:id="@+id/step1_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="1) Review and add ingredients"
+                android:layout_gravity="start"
+                android:text="@string/about_first_title"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_marginTop="32dp" />
 
@@ -86,7 +84,7 @@
                 android:id="@+id/step1_paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Look at the amounts of the ingredients and change them based on your doctors recommendations, or add your personal new ones."
+                android:text="@string/about_first_par"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/md_theme_light_onSurfaceVariant"
@@ -96,7 +94,7 @@
                 android:id="@+id/openIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingredients"
+                android:text="@string/about_first_button"
                 android:paddingVertical="13dp"
                 android:layout_marginTop="24dp" />
 
@@ -104,8 +102,8 @@
                 android:id="@+id/step2_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="2) Create blueprints"
+                android:layout_gravity="start"
+                android:text="@string/about_second_title"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_marginTop="32dp"
                 android:textColor="@color/md_theme_light_onSurfaceVariant"
@@ -115,7 +113,7 @@
                 android:id="@+id/step2_paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create blueprints based on your personal goals or use the predefined one."
+                android:text="@string/about_second_par"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_marginTop="4dp"/>
 
@@ -123,7 +121,7 @@
                 android:id="@+id/openBlueprints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Blueprints"
+                android:text="@string/about_second_button"
                 android:paddingVertical="13dp"
                 android:layout_marginTop="24dp"
                 />
@@ -132,8 +130,8 @@
                 android:id="@+id/step3_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="3) Generate a meal plan"
+                android:layout_gravity="start"
+                android:text="@string/about_third_title"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_marginTop="32dp" />
 
@@ -141,7 +139,7 @@
                 android:id="@+id/step3_paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Now you can generate a meal plan based on one of the blueprints and follow it to meet your goals."
+                android:text="@string/about_third_par"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/md_theme_light_onSurfaceVariant"/>
@@ -150,7 +148,7 @@
                 android:id="@+id/openMealPlans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meal Plans"
+                android:text="@string/about_third_button"
                 android:paddingVertical="13dp"
                 android:layout_marginTop="24dp" />
         </LinearLayout>
