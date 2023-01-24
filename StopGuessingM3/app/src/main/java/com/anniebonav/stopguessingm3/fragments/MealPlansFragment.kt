@@ -87,7 +87,7 @@ class MealPlansFragment : Fragment() {
     }
 
     private fun onMealPlanFavoriteClicked(mealPlanId: Int){
-        Thread{
+        Thread{ //TODO: change selected meal plan when current selected meal plan is deleted
             var mealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
             if(mealPlan.mealPlanIsSelected == 0){
                 val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
