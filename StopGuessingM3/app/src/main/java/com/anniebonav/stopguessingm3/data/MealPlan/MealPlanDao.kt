@@ -18,6 +18,9 @@ interface MealPlanDao {
     @Query("SELECT * FROM mealplan WHERE uid IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): List<MealPlan>
 
+    @Query("SELECT * FROM mealplan WHERE is_selected = 1")
+    fun getSelectedMealPlan(): MealPlan //I know only one is selected
+
     @Insert
     fun insertAll(vararg users: MealPlan)
 

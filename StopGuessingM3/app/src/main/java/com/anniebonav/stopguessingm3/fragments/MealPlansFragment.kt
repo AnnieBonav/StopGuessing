@@ -3,6 +3,7 @@ package com.anniebonav.stopguessingm3.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,7 +52,7 @@ class MealPlansFragment : Fragment() {
         _mealPlansRecycler.layoutManager = linearLayoutManager
 
         model.currentMealPlans.observe(_context, Observer { mealPlans ->
-            _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked)
+            _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanFavoriteClicked)
         })
 
         Thread{
@@ -83,6 +84,21 @@ class MealPlansFragment : Fragment() {
         binding.addFab.setOnClickListener {
             findNavController().navigate(R.id.action_MealPlansFragment_to_InteractsMealPlanFragment)
         }
+    }
+
+    private fun onMealPlanFavoriteClicked(mealPlanId: Int){
+        Thread{
+            var mealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
+            if(mealPlan.mealPlanIsSelected == 0){
+                val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
+                val changesSelectedMealPlan = MealPlan(selectedMealPlan.uid, selectedMealPlan.blueprintId, selectedMealPlan.mealPlanName, selectedMealPlan.mealPlanDescription, selectedMealPlan.mealPlanBreakfasts, selectedMealPlan.mealPlanLunches, selectedMealPlan.mealPlanDinners, selectedMealPlan.mealPlanMorningSnacks, selectedMealPlan.mealPlanEveningSnacks, 0)
+                _mealPlanDAO.update(changesSelectedMealPlan) //Deselect the selected one
+
+                //Select the new selected
+                val newMealPlan = MealPlan(mealPlan.uid, mealPlan.blueprintId, mealPlan.mealPlanName, mealPlan.mealPlanDescription, mealPlan.mealPlanBreakfasts, mealPlan.mealPlanLunches, mealPlan.mealPlanDinners, mealPlan.mealPlanMorningSnacks, mealPlan.mealPlanEveningSnacks, 1)
+                _mealPlanDAO.update(newMealPlan) //Deselect the selected one
+            }
+        }.start()
     }
 
     private fun onMealPlanCardClicked(mealPlanId: Int){

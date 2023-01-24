@@ -1,5 +1,6 @@
 package com.anniebonav.stopguessingm3
 
+typealias MPFavoriteClickFunction = (Int) -> Unit
 typealias MPDeleteClickFunction = (Int) -> Unit
 typealias MPOpenClickFunction = (Int) -> Unit
 

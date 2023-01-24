@@ -6,10 +6,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.anniebonav.stopguessingm3.MPDeleteClickFunction
+import com.anniebonav.stopguessingm3.MPFavoriteClickFunction
 import com.anniebonav.stopguessingm3.MPOpenClickFunction
 import com.anniebonav.stopguessingm3.R
 
-class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction): RecyclerView.ViewHolder(view) {
+class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFunction, private val onCardClick: MPOpenClickFunction, private val onFavoriteClick: MPFavoriteClickFunction): RecyclerView.ViewHolder(view) {
     val mealPlanCard: CardView
     val mealPlanNameLabel: TextView
     val mealPlanBlueprintLabel: TextView
@@ -25,6 +26,12 @@ class MealPlanViewHolder (view: View, private val onDeleteClick: MPDeleteClickFu
     fun openMealPlan(mealPlanId: Int){
         mealPlanCard.setOnClickListener{
             onCardClick(mealPlanId)
+        }
+    }
+
+    fun favoriteMealPlan(mealPlanId: Int){
+        mealPlanStarButton.setOnClickListener{
+            onFavoriteClick(mealPlanId)
         }
     }
 
