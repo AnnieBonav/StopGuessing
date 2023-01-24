@@ -23,22 +23,23 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:src="@drawable/hungry_cat"
+            android:contentDescription="@string/hungry_cat_img"
             />
         <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="It looks like you have no meal plan selected. Select one to see it here."
+            android:text="@string/mealplan_missing"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:textColor="@color/md_theme_light_outline"
+            android:textColor="@color/md_theme_light_onSurfaceVariant"
             />
 
         <Button
             android:id="@+id/openMealPlans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meal Plans"
+            android:text="@string/mealplans_button"
             android:paddingVertical="13dp"
             android:layout_marginTop="24dp" />
 

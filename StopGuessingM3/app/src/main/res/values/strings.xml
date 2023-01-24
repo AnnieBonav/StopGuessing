@@ -5,13 +5,18 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
+    <string name="back">Back</string>
     <string name="home">Home</string>
     <string name="close">Close</string>
     <string name="previous">Previous</string>
     <string name="delete_icon">Delete</string>
     <string name="about_button">About StopGuessing</string>
+    <string name="add_new">Add new</string>
+    <string name="mealplans_button">Meal Plans</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
 
-<!--    About view-->
+<!--    Fragment About -->
     <string name="warning_icon">Warning</string>
     <string name="disclaimer">Following The Zone diet should be discussed with your doctor.</string>
     <string name="about_first_title">1) Review and add ingredients</string>
@@ -22,12 +27,26 @@
     <string name="about_second_button">Blueprints</string>
     <string name="about_third_title">3) Generate a meal plan</string>
     <string name="about_third_par">Now you can generate a meal plan based on one of the blueprints and follow it to meet your goals.</string>
-    <string name="about_third_button">Meal Plans</string>
 
 <!--    Home view -->
     <string name="happy">Happy</string>
     <string name="blueprints_tab">Blueprints</string>
     <string name="mealplans_tab">Meal Plans</string>
+    <string name="mealplan_missing">It looks like you have no meal plan selected. Select one to see it here.</string>
+    <string name="hungry_cat_img">Hungry cat</string>
+
+<!--    Fragment blueprints-->
+    <string name="basic_blueprint_title">Basic blueprint</string>
+
+<!--    fragment interacts blueprints-->
+    <string name="new_blueprint_title">Add Blueprint</string>
+
+    <!--    fragment interacts blueprints-->
+    <string name="new_ingredient_title">Add Ingredient</string>
+    <string name="category_dropdown">Category</string>
+    <string name="amount_input">Amount</string>
+    <string name="amount_subtext">The amount per block should be discussed with your doctor</string>
+    <string name="unit_dropdown">Unit</string>
 
 
 </resources>

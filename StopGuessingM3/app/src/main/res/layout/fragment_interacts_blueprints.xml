@@ -44,10 +44,10 @@
                         android:id="@+id/ingredientsInstruction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Blueprint"
+                        android:text="@string/new_blueprint_title"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                         app:layout_constraintStart_toEndOf="@+id/chevronBack"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginStart="25dp"
                         android:layout_gravity="center"
                         />
                 </LinearLayout>
@@ -56,7 +56,7 @@
                     android:id="@+id/blueprintNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     app:layout_constraintTop_toBottomOf="@+id/customTopBar"
                     app:startIconContentDescription="@string/delete_icon"
                     app:endIconMode="clear_text">
@@ -72,7 +72,7 @@
                     android:id="@+id/blueprintDescriptionInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description"
+                    android:hint="@string/description"
                     app:layout_constraintTop_toBottomOf="@+id/divider"
                     app:endIconMode="clear_text">
 

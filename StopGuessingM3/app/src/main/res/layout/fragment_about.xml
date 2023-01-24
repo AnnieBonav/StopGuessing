@@ -148,7 +148,7 @@
                 android:id="@+id/openMealPlans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_third_button"
+                android:text="@string/mealplans_button"
                 android:paddingVertical="13dp"
                 android:layout_marginTop="24dp" />
         </LinearLayout>

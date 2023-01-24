@@ -18,7 +18,7 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         android:textColor="@color/md_theme_light_onSurfaceVariant"
         android:layout_marginTop="32dp"
-        android:text="Basic blueprint"
+        android:text="@string/basic_blueprint_title"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -42,8 +42,9 @@
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="24dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_marginEnd="24dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_new" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
