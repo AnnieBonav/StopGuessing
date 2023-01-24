@@ -49,28 +49,7 @@ class ViewMealPlanFragment : Fragment() {
         }
 
         Thread{
-            val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)
-            val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
-            binding.mealPlanName.text = selectedMealPlan.mealPlanName
-            binding.blueprintName.text = blueprint.name
-
-            var inside = selectedMealPlan.mealPlanBreakfasts.toString().split(',')
-            Log.d("MealPlan", "$inside")
-
-            val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
-            val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
-            val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
-            val morningSnackText = createText(selectedMealPlan.mealPlanMorningSnacks.toString().split(","))
-            val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
-
-            Handler(Looper.getMainLooper()).post {
-
-                binding.breakfastInformation.text = breakfastText
-                binding.lunchInformation.text = lunchText
-                binding.dinnerInformation.text = dinnerText
-                binding.morningSnackInformation.text = morningSnackText
-                binding.eveningSnackInformation.text = eveningSnackText
-            }
+            fillMealPlanInformation(selectedMealPlanId!!)
         }.start()
 
         binding.editMealPlanButton.setOnClickListener(){
@@ -82,6 +61,31 @@ class ViewMealPlanFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun fillMealPlanInformation(selectedMealPlanId: Int){
+        val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)
+        val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
+        binding.mealPlanName.text = selectedMealPlan.mealPlanName
+        binding.blueprintName.text = blueprint.name
+
+        var inside = selectedMealPlan.mealPlanBreakfasts.toString().split(',')
+        Log.d("MealPlan", "$inside")
+
+        val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
+        val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
+        val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
+        val morningSnackText = createText(selectedMealPlan.mealPlanMorningSnacks.toString().split(","))
+        val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
+
+        Handler(Looper.getMainLooper()).post {
+
+            binding.breakfastInformation.text = breakfastText
+            binding.lunchInformation.text = lunchText
+            binding.dinnerInformation.text = dinnerText
+            binding.morningSnackInformation.text = morningSnackText
+            binding.eveningSnackInformation.text = eveningSnackText
+        }
     }
 
     private fun editMealPlan(mealPlanId: Int){
