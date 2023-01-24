@@ -99,7 +99,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
-                    android:text="Breakfast: "
+                    android:textColor="@color/md_theme_light_onPrimaryContainer"
+                    android:text="Breakfast"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
                 <TextView
@@ -117,7 +118,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
-                    android:text="Lunch: "
+                    android:text="Lunch"
+                    android:textColor="@color/md_theme_light_onPrimaryContainer"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <TextView
@@ -135,7 +137,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
-                    android:text="Dinner: "
+                    android:text="Dinner"
+                    android:textColor="@color/md_theme_light_onPrimaryContainer"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <TextView
@@ -153,8 +156,10 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
-                    android:text="Morning snack: "
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                    android:text="Morning snack"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/md_theme_light_secondary"
+                    />
 
                 <TextView
                     android:id="@+id/morningSnackInformation"
@@ -171,7 +176,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
-                    android:text="Evening snack: "
+                    android:text="Evening snack"
+                    android:textColor="@color/md_theme_light_secondary"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
                 <TextView
@@ -182,6 +188,13 @@
                     android:paddingHorizontal="16dp"
                     android:text="Dinner Information"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <Button
+                    android:id="@+id/selectMealPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select this mealplan"
+                    android:paddingVertical="13dp"
+                    android:layout_marginTop="24dp" />
 
             </LinearLayout>
 

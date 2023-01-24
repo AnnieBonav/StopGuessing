@@ -33,7 +33,9 @@
                     android:id="@+id/goBackButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:icon="@drawable/ic_baseline_arrow_back_24" />
+                    app:icon="@drawable/ic_baseline_arrow_back_24"
+                    android:contentDescription="go back"
+                    />
 
                 <TextView
                     android:id="@+id/blueprintName"
@@ -58,6 +60,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:icon="@drawable/ic_edit"
+                    android:contentDescription="edit"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -67,11 +70,12 @@
             android:layout_height="match_parent"
             >
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -88,15 +92,31 @@
                         android:text="Breakfast"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-                    <TextView
-                        android:id="@+id/breakfastUnits"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="Breakfast Units"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        >
+                        <TextView
+                            android:id="@+id/breakfastUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Breakfast Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        <TextView
+                            android:id="@+id/bUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -109,21 +129,36 @@
                         android:layout_marginTop="16dp"
                         android:layout_weight="1"
                         android:paddingLeft="16dp"
-                        android:text="Lunch Units: "
+                        android:text="Lunch"
                         android:textColor="@color/md_theme_light_onPrimaryContainer"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/mealPlanDescription" />
 
-                    <TextView
-                        android:id="@+id/lunchUnits"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="Lunch Units"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        >
+                        <TextView
+                            android:id="@+id/lunchUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Lunch Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        <TextView
+                            android:id="@+id/lUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -137,21 +172,35 @@
                         android:layout_marginTop="16dp"
                         android:layout_weight="1"
                         android:paddingLeft="16dp"
-                        android:text="Dinner Units: "
+                        android:text="Dinner"
                         android:textColor="@color/md_theme_light_onPrimaryContainer"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/mealPlanDescription" />
 
-                    <TextView
-                        android:id="@+id/dinnerUnits"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="Dinner Units"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        >
+                        <TextView
+                            android:id="@+id/dinnerUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Dinner Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        <TextView
+                            android:id="@+id/dUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -167,19 +216,35 @@
                         android:layout_marginTop="16dp"
                         android:layout_weight="1"
                         android:paddingLeft="16dp"
-                        android:text="Morning Snack Units:"
+                        android:text="Morning Snack"
                         android:textColor="@color/md_theme_light_secondary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-                    <TextView
-                        android:id="@+id/morningSnackUnits"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="Morning Snack Units"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        >
+                        <TextView
+                            android:id="@+id/morningSnackUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Morning Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        <TextView
+                            android:id="@+id/mUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
 
@@ -193,19 +258,35 @@
                         android:layout_marginTop="16dp"
                         android:layout_weight="1"
                         android:paddingLeft="16dp"
-                        android:text="Evening Snack Units: "
+                        android:text="Evening Snack"
                         android:textColor="@color/md_theme_light_secondary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-                    <TextView
-                        android:id="@+id/eveningSnackUnits"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="Evening Snack Units"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        >
+                        <TextView
+                            android:id="@+id/eveningSnackUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Evening Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        <TextView
+                            android:id="@+id/eUnits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            android:text="Units"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <Button
                     android:id="@+id/deleteIngredientButton"

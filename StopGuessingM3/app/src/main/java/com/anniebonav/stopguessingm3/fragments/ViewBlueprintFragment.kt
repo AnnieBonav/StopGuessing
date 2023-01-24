@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
-import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
 import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.databinding.FragmentViewBlueprintBinding
@@ -30,33 +27,17 @@ class ViewBlueprintFragment : Fragment() {
 
         _blueprintDAO = StopGuessingDatabase.getDatabase(context).blueprintDao()
 
-        binding.goBackButton.setOnClickListener(){
-            findNavController().navigateUp()
-        }
-
         Thread{
-            fillBlueprintInformation(selectedBlueprintId!!)
+            Log.d("Data", "$selectedBlueprintId")
+            val selectedBlueprint = _blueprintDAO.getBlueprint(selectedBlueprintId!!)
+            binding.blueprintName.text = selectedBlueprint.name
+            binding.breakfastUnits.text = selectedBlueprint.breakfastUnits.toString()
+            binding.lunchUnits.text = selectedBlueprint.lunchUnits.toString()
+            binding.dinnerUnits.text = selectedBlueprint.dinnerUnits.toString()
+            binding.morningSnackUnits.text = selectedBlueprint.morningSnackUnits.toString()
+            binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
         }.start()
 
-        binding.editBlueprintButton.setOnClickListener(){
-            editBlueprint(selectedBlueprintId!!)
-        }
-
         return binding.root
-    }
-
-    private fun fillBlueprintInformation(selectedBlueprintId: Int){
-        val selectedBlueprint = _blueprintDAO.getBlueprint(selectedBlueprintId!!)
-        binding.blueprintName.text = selectedBlueprint.name
-        binding.breakfastUnits.text = selectedBlueprint.breakfastUnits.toString()
-        binding.lunchUnits.text = selectedBlueprint.lunchUnits.toString()
-        binding.dinnerUnits.text = selectedBlueprint.dinnerUnits.toString()
-        binding.morningSnackUnits.text = selectedBlueprint.morningSnackUnits.toString()
-        binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
-    }
-
-    private fun editBlueprint(blueprintId: Int){
-        val bundle = bundleOf("selectedBlueprint" to blueprintId)
-        findNavController().navigate(R.id.action_ViewBlueprintFragment_to_InteractsBlueprintsFragment, bundle)
     }
 }
