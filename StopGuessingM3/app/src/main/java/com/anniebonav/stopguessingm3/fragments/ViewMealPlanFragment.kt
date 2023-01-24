@@ -30,7 +30,7 @@ class ViewMealPlanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
-        var openedFromHome = arguments?.getInt("openedFromHome") //When it is not found, the value passed is 0
+        var openedFromHome = arguments?.getInt("openedFromHome") //When they key is not found, the value passed is 0
         Log.d("MealPlanFragment", "Opened from home: $openedFromHome")
 
 
@@ -69,9 +69,6 @@ class ViewMealPlanFragment : Fragment() {
         binding.mealPlanName.text = selectedMealPlan.mealPlanName
         binding.blueprintName.text = blueprint.name
 
-        var inside = selectedMealPlan.mealPlanBreakfasts.toString().split(',')
-        Log.d("MealPlan", "$inside")
-
         val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
         val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
         val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
@@ -93,13 +90,11 @@ class ViewMealPlanFragment : Fragment() {
         findNavController().navigate(R.id.action_ViewMealPlanFragment_to_InteractsMealPlanFragment, bundle)
     }
 
-    fun createText(ingredients : List<String>): String {
-        var myCount = ingredients.count() //NoteToSelf: WHen the db sends an empty query, there is an element [0] that = ""
+    fun createText(ingredients : List<String>): String { //NoteToSelf: When the db sends an empty List query, there is an element [0] that = ""
         var counter = 0
         var ingredientsList = ""
 
         if(ingredients[0] != ""){
-            var ingredientsCounter = ingredients.count()
             while(counter < ingredients.count()){
                 var currentUnit = listOf(ingredients[counter], ingredients[counter+1], ingredients[counter+2])
                 var ingredients = _ingredientDAO.loadIngredientsByIds(currentUnit)
@@ -110,11 +105,7 @@ class ViewMealPlanFragment : Fragment() {
 
                 counter += 3
             }
-            //Log.d("MealPlan", "$ingredients")
-            //var units = ingredients.count()/3 //TODO: Make it appear titles
         }
-
-        Log.d("MealPlan", "$ingredientsList")
         return ingredientsList
     }
 

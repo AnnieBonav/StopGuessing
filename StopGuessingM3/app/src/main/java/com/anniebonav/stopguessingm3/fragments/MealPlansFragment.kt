@@ -56,21 +56,25 @@ class MealPlansFragment : Fragment() {
         })
 
         Thread{
-            val currentMealPlans = _mealPlanDAO.getMealPlans()
-            if(currentMealPlans.isEmpty()){
-                Handler(Looper.getMainLooper()).post {
-                    binding.initialMealPlan.visibility = View.VISIBLE
-                    binding.selectedMealPlanTitle.visibility = View.GONE
-                }
-            }else{
-                Handler(Looper.getMainLooper()).post {
-                    binding.initialMealPlan.visibility = View.GONE
-                    binding.selectedMealPlanTitle.visibility = View.VISIBLE
-                }
-            }
+            handleInitialMealPlan()
         }.start()
 
         return binding.root
+    }
+
+    private fun handleInitialMealPlan(){
+        val currentMealPlans = _mealPlanDAO.getMealPlans()
+        if(currentMealPlans.isEmpty()){
+            Handler(Looper.getMainLooper()).post {
+                binding.initialMealPlan.visibility = View.VISIBLE
+                binding.selectedMealPlanTitle.visibility = View.GONE
+            }
+        }else{
+            Handler(Looper.getMainLooper()).post {
+                binding.initialMealPlan.visibility = View.GONE
+                binding.selectedMealPlanTitle.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onStart() {

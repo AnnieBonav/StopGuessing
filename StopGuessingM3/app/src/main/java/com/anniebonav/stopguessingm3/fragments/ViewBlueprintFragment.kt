@@ -35,14 +35,7 @@ class ViewBlueprintFragment : Fragment() {
         }
 
         Thread{
-            Log.d("Data", "$selectedBlueprintId")
-            val selectedBlueprint = _blueprintDAO.getBlueprint(selectedBlueprintId!!)
-            binding.blueprintName.text = selectedBlueprint.name
-            binding.breakfastUnits.text = selectedBlueprint.breakfastUnits.toString()
-            binding.lunchUnits.text = selectedBlueprint.lunchUnits.toString()
-            binding.dinnerUnits.text = selectedBlueprint.dinnerUnits.toString()
-            binding.morningSnackUnits.text = selectedBlueprint.morningSnackUnits.toString()
-            binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
+            fillBlueprintInformation(selectedBlueprintId!!)
         }.start()
 
         binding.editBlueprintButton.setOnClickListener(){
@@ -50,6 +43,16 @@ class ViewBlueprintFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun fillBlueprintInformation(selectedBlueprintId: Int){
+        val selectedBlueprint = _blueprintDAO.getBlueprint(selectedBlueprintId!!)
+        binding.blueprintName.text = selectedBlueprint.name
+        binding.breakfastUnits.text = selectedBlueprint.breakfastUnits.toString()
+        binding.lunchUnits.text = selectedBlueprint.lunchUnits.toString()
+        binding.dinnerUnits.text = selectedBlueprint.dinnerUnits.toString()
+        binding.morningSnackUnits.text = selectedBlueprint.morningSnackUnits.toString()
+        binding.eveningSnackUnits.text = selectedBlueprint.eveningSnackUnits.toString()
     }
 
     private fun editBlueprint(blueprintId: Int){
