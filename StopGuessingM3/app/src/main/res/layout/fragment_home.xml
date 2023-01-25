@@ -22,6 +22,7 @@
         >
         <ImageView
             android:id="@+id/hungryCatImg"
+            android:layout_marginTop="50dp"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:src="@drawable/hungry_cat"

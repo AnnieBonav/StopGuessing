@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         val view = binding.root
         setContentView(view)
+        supportActionBar?.hide()
 
         _navController = findNavController(R.id.nav_host_fragment_content_main)
 

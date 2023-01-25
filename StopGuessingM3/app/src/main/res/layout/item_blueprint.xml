@@ -33,58 +33,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/md_theme_light_background"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="16dp">
 
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Blueprint name"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   >
+                   <TextView
+                       android:id="@+id/name"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Blueprint name"
+                       android:textAppearance="?attr/textAppearanceHeadline6" />
+                   <TextView
+                       android:id="@+id/description"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="16dp"
+                       android:text="Description"
+                       android:textAppearance="?attr/textAppearanceBody2"
+                       android:textColor="?android:attr/textColorSecondary" />
 
-                <LinearLayout
+               </LinearLayout><LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:gravity="start"
-                    android:orientation="horizontal"
-                    >
+                    android:gravity="end">
 
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Description"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/deleteButton"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_delete"
-                            />
-                        <ImageView
-                            android:id="@+id/editButton"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_edit"
-                            />
-                    </LinearLayout>
-
+                    <ImageView
+                        android:id="@+id/deleteButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_delete"
+                        />
+                    <ImageView
+                        android:id="@+id/editButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_edit"
+                        />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!-- Buttons -->
 
         </LinearLayout>
 

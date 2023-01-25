@@ -145,24 +145,6 @@
             android:text="@string/mealplans_button"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{ingredientsViewModel.currentIngredientCategory}"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-            android:layout_marginStart="25dp"
-            android:layout_gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{ingredientsViewModel.currentIngredientUnit}"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-            android:layout_marginStart="25dp"
-            android:layout_gravity="center"
-            />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
