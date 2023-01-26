@@ -45,6 +45,8 @@ class InteractsBlueprintsFragment : Fragment() {
         if(arguments != null){ //If I am sending arguments, it means that I am updating a blueprint and not adding one. This way I reuse my View Model.
             var selectedBlueprintId = arguments?.getInt("selectedBlueprint")
             binding.crudActionButton.text = "Update Blueprint"
+            binding.ingredientsInstruction.text = "Update Blueprint"
+
             Thread{
                 val selectedBlueprint = _blueprintDao.getBlueprint(selectedBlueprintId!!)
                 Handler(Looper.getMainLooper()).post {
@@ -69,6 +71,11 @@ class InteractsBlueprintsFragment : Fragment() {
                 CRUDBlueprint(null)
             }
         }
+
+        binding.goBackButton.setOnClickListener({
+            findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
+        })
+
         return binding.root
     }
 
