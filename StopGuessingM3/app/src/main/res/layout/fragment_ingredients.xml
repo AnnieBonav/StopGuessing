@@ -12,10 +12,10 @@
         android:id="@+id/ingredientsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check out your ingredients!"
+        android:text="Ingredients"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         />
