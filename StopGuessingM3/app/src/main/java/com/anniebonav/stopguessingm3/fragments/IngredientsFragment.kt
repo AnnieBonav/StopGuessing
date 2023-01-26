@@ -115,14 +115,30 @@ class IngredientsFragment : Fragment() {
     }
 
     private fun deleteIngredient(ingredientId: Int){
-        Thread{
-            val deletedIngredient = _ingredientDAO.getIngredient(ingredientId)
-            _ingredientDAO.delete(deletedIngredient)
+        val builder = AlertDialog.Builder(_context)
+        builder.setMessage("Are you sure you want to delete this ingredient?")
+        builder.setPositiveButton("Yes"){ p0, p1 ->
+            Log.d("Annie", "Before")
+            lifecycleScope.launch {
+                Thread{
+                    val deletedIngredient = _ingredientDAO.getIngredient(ingredientId)
+                    _ingredientDAO.delete(deletedIngredient)
 
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${deletedIngredient.ingredientName} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(activity as MainActivity, "${deletedIngredient.ingredientName} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    }
+                }.start()
+                onResume()
             }
-        }.start()
+            p0.dismiss()
+        }
+        builder.setNegativeButton("No"){p0, p1 ->
+            Log.d("Annie", "Dismiss")
+            p0.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onDestroyView() {
