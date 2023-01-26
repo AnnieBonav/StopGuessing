@@ -1,5 +1,6 @@
 package com.anniebonav.stopguessingm3.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
@@ -23,6 +25,7 @@ import com.anniebonav.stopguessingm3.data.MealPlan.MealPlan
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
 import com.anniebonav.stopguessingm3.recycler.MealPlanAdapter
 import com.anniebonav.stopguessingm3.databinding.FragmentMealPlansBinding
+import kotlinx.coroutines.launch
 
 
 class MealPlansFragment : Fragment() {
@@ -133,14 +136,28 @@ class MealPlansFragment : Fragment() {
     }
 
     private fun deleteMealPlan(mealPlanId: Int){
-        Thread{
-            val deletedMealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
-            _mealPlanDAO.delete(deletedMealPlan)
+        val builder = AlertDialog.Builder(_context)
+        builder.setMessage("Are you sure you want to delete this Meal Plan?")
+        builder.setPositiveButton("Yes"){ p0, p1 ->
+            lifecycleScope.launch {
+                Thread{
+                    val deletedMealPlan = _mealPlanDAO.getMealPlan(mealPlanId)
+                    _mealPlanDAO.delete(deletedMealPlan)
 
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${deletedMealPlan.mealPlanName} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(activity as MainActivity, "${deletedMealPlan.mealPlanName} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    }
+                }.start()
+                onResume()
             }
-        }.start()
+            p0.dismiss()
+        }
+        builder.setNegativeButton("No"){p0, p1 ->
+            p0.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onDestroyView() {
