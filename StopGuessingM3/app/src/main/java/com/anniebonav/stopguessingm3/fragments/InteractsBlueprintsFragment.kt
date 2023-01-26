@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.room.Dao
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
@@ -24,7 +23,7 @@ class InteractsBlueprintsFragment : Fragment() {
     private var _binding: FragmentInteractsBlueprintsBinding? = null
     private val binding get() = _binding!!
     private val _blueprintViewModel: UIViewModelInteractBlueprint by viewModels()
-        //private lateinit var blueprintDao: BlueprintDAO //Can do code cleanup
+    private lateinit var _blueprintDao: BlueprintDAO //Can do code cleanup
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,7 @@ class InteractsBlueprintsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.blueprintsViewModel = _blueprintViewModel
 
-        val blueprintDao = StopGuessingDatabase.getDatabase(context).blueprintDao()
+        _blueprintDao = StopGuessingDatabase.getDatabase(context).blueprintDao()
 
         binding.goBackButton.setOnClickListener(){
             findNavController().navigateUp()
@@ -47,10 +46,11 @@ class InteractsBlueprintsFragment : Fragment() {
             var selectedBlueprintId = arguments?.getInt("selectedBlueprint")
             binding.crudActionButton.text = "Update Blueprint"
             Thread{
-                val selectedBlueprint = blueprintDao.getBlueprint(selectedBlueprintId!!)
+                val selectedBlueprint = _blueprintDao.getBlueprint(selectedBlueprintId!!)
                 Handler(Looper.getMainLooper()).post {
                     //.name and .breakfast come from the UIViewModelInteractBlueprint = and .name .breakfastUnits (from selectedBlueprint) are the Blueprint.kt values
                     _blueprintViewModel.name.value = selectedBlueprint.name
+                    _blueprintViewModel.description.value = selectedBlueprint.description
                     _blueprintViewModel.breakfastUnits.value = selectedBlueprint.breakfastUnits.toString()
                     _blueprintViewModel.lunchUnits.value = selectedBlueprint.lunchUnits.toString()
                     _blueprintViewModel.dinnerUnits.value = selectedBlueprint.dinnerUnits.toString()
@@ -60,19 +60,19 @@ class InteractsBlueprintsFragment : Fragment() {
             }.start()
 
             binding.crudActionButton.setOnClickListener(){
-                UpdateBlueprint(blueprintDao, selectedBlueprintId!!)
+                CRUDBlueprint(selectedBlueprintId!!)
             }
         }else{
             binding.crudActionButton.text = "Add Blueprint"
 
             binding.crudActionButton.setOnClickListener(){
-                CreateBlueprint(blueprintDao)
+                CRUDBlueprint(null)
             }
         }
         return binding.root
     }
 
-    fun CreateBlueprint(blueprintDAO: BlueprintDAO){
+    fun CRUDBlueprint(selectedBlueprintId: Int?){ //If it exists, it will update and not create
         var nameInput = "No name"
         var descriptionInput = "No description"
 
@@ -82,60 +82,56 @@ class InteractsBlueprintsFragment : Fragment() {
         var morningSnackUnitsInput = 0
         var eveningSnackUnitsInput = 0
 
-        if(_blueprintViewModel.name.value != null){
+        if(_blueprintViewModel.name.value != null && _blueprintViewModel.name.value != ""){
             nameInput = _blueprintViewModel.name.value.toString()
         }
 
-        if(_blueprintViewModel.description.value != null){
+        if(_blueprintViewModel.description.value != null && _blueprintViewModel.description.value != ""){
             descriptionInput = _blueprintViewModel.description.value.toString()
         }
 
-        if(_blueprintViewModel.breakfastUnits.value != null){
+        // I need to check that it is not null because when you just deleted the number it appears as ""
+        if(_blueprintViewModel.breakfastUnits.value != null && _blueprintViewModel.breakfastUnits.value != ""){
             breakfastUnitsInput = _blueprintViewModel.breakfastUnits.value!!.toInt()
         }
 
-        if(_blueprintViewModel.lunchUnits.value != null){
+        if(_blueprintViewModel.lunchUnits.value != null  && _blueprintViewModel.lunchUnits.value != ""){
             lunchUnitsInput = _blueprintViewModel.lunchUnits.value!!.toInt()
         }
 
-        if(_blueprintViewModel.dinnerUnits.value != null){
+        if(_blueprintViewModel.dinnerUnits.value != null && _blueprintViewModel.dinnerUnits.value != ""){
             dinnerUnitsInput = _blueprintViewModel.dinnerUnits.value!!.toInt()
         }
 
-        if(_blueprintViewModel.morningSnackUnits.value != null){
+        if(_blueprintViewModel.morningSnackUnits.value != null && _blueprintViewModel.morningSnackUnits.value != ""){
             morningSnackUnitsInput = _blueprintViewModel.morningSnackUnits.value!!.toInt()
         }
 
-        if(_blueprintViewModel.eveningSnackUnits.value != null){
+        if(_blueprintViewModel.eveningSnackUnits.value != null && _blueprintViewModel.eveningSnackUnits.value != ""){
             eveningSnackUnitsInput = _blueprintViewModel.eveningSnackUnits.value!!.toInt()
         }
 
 
-        val blueprint = Blueprint(null, nameInput, descriptionInput, breakfastUnitsInput, lunchUnitsInput, dinnerUnitsInput, morningSnackUnitsInput, eveningSnackUnitsInput)
+        val blueprint = Blueprint(selectedBlueprintId, nameInput, descriptionInput, breakfastUnitsInput, lunchUnitsInput, dinnerUnitsInput, morningSnackUnitsInput, eveningSnackUnitsInput)
 
-        Thread {
-            blueprintDAO.insertAll(blueprint)
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${blueprint.name} successfully created!", Toast.LENGTH_SHORT).show()
-            }
-        }.start()
+        if(selectedBlueprintId != null){ //Update
+            Thread {
+                _blueprintDao.update(blueprint)
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(activity as MainActivity, "${blueprint.name} successfully updated!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
+                }
+            }.start()
+        }else{
+            Thread {
+                _blueprintDao.insertAll(blueprint)
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(activity as MainActivity, "${blueprint.name} successfully created!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
+                }
+                }.start()
+        }
 
-        findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
-    }
-
-    fun UpdateBlueprint(blueprintDAO: BlueprintDAO, selectedBlueprintId: Int){
-        val blueprint = Blueprint(selectedBlueprintId, _blueprintViewModel.name.value.toString(), _blueprintViewModel.description.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
-
-        Thread {
-            blueprintDAO.update(blueprint)
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${blueprint.name} successfully updated!", Toast.LENGTH_SHORT).show()
-            }
-        }.start()
-
-        //TODO: IN general, add data proof and stuff related to the database
-
-        findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
     }
 
     override fun onDestroyView() {
