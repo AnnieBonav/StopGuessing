@@ -67,12 +67,12 @@ class MealPlansFragment : Fragment() {
             if(currentMealPlans.isEmpty()){
                 Handler(Looper.getMainLooper()).post {
                     binding.initialMealPlan.visibility = View.VISIBLE
-                    binding.selectedMealPlanTitle.visibility = View.GONE
+                    //binding.selectedMealPlanTitle.visibility = View.GONE
                 }
             }else{
                 Handler(Looper.getMainLooper()).post {
                     binding.initialMealPlan.visibility = View.GONE
-                    binding.selectedMealPlanTitle.visibility = View.VISIBLE
+                    //binding.selectedMealPlanTitle.visibility = View.VISIBLE
                 }
             }
             Handler(Looper.getMainLooper()).post {
