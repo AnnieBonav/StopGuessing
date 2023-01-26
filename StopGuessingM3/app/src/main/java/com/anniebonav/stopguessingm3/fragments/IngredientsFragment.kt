@@ -1,8 +1,10 @@
 package com.anniebonav.stopguessingm3.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +26,7 @@ import com.anniebonav.stopguessingm3.data.UIViewModel
 import com.anniebonav.stopguessingm3.data.ViewModelFactoryUI
 import com.anniebonav.stopguessingm3.databinding.FragmentIngredientsBinding
 import com.anniebonav.stopguessingm3.recycler.IngredientAdapter
+import kotlinx.coroutines.launch
 
 class IngredientsFragment : Fragment() {
     private var _binding: FragmentIngredientsBinding? = null
@@ -52,6 +56,26 @@ class IngredientsFragment : Fragment() {
 
             _ingredientsRecycler.adapter = IngredientAdapter(_context, sortedIngredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
+
+        binding.actionButton.setOnClickListener(){
+            val builder = AlertDialog.Builder(_context)
+            builder.setMessage("Are you sure you want to delete this ingredient?")
+            builder.setPositiveButton("Yes"){ p0, p1 ->
+                Log.d("Annie", "Before")
+                lifecycleScope.launch {
+                    Log.d("Annie", "Deleted")
+                    onResume()
+                }
+                p0.dismiss()
+            }
+            builder.setNegativeButton("No"){p0, p1 ->
+                Log.d("Annie", "Dismiss")
+                p0.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
 
         return binding.root
     }
