@@ -57,6 +57,8 @@ class IngredientsFragment : Fragment() {
             _ingredientsRecycler.adapter = IngredientAdapter(_context, sortedIngredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
 
+        /*
+        //Popup example
         binding.actionButton.setOnClickListener(){
             val builder = AlertDialog.Builder(_context)
             builder.setMessage("Are you sure you want to delete this ingredient?")
@@ -75,7 +77,7 @@ class IngredientsFragment : Fragment() {
 
             val dialog = builder.create()
             dialog.show()
-        }
+        }*/
 
         return binding.root
     }

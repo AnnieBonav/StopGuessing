@@ -73,7 +73,45 @@ class InteractsBlueprintsFragment : Fragment() {
     }
 
     fun CreateBlueprint(blueprintDAO: BlueprintDAO){
-        val blueprint = Blueprint(null, _blueprintViewModel.name.value.toString(), _blueprintViewModel.description.value.toString(), _blueprintViewModel.breakfastUnits.value!!.toInt(), _blueprintViewModel.lunchUnits.value!!.toInt(), _blueprintViewModel.dinnerUnits.value!!.toInt(), _blueprintViewModel.morningSnackUnits.value!!.toInt(), _blueprintViewModel.eveningSnackUnits.value!!.toInt())
+        var nameInput = "No name"
+        var descriptionInput = "No description"
+
+        var breakfastUnitsInput = 0
+        var lunchUnitsInput = 0
+        var dinnerUnitsInput = 0
+        var morningSnackUnitsInput = 0
+        var eveningSnackUnitsInput = 0
+
+        if(_blueprintViewModel.name.value != null){
+            nameInput = _blueprintViewModel.name.value.toString()
+        }
+
+        if(_blueprintViewModel.description.value != null){
+            descriptionInput = _blueprintViewModel.description.value.toString()
+        }
+
+        if(_blueprintViewModel.breakfastUnits.value != null){
+            breakfastUnitsInput = _blueprintViewModel.breakfastUnits.value!!.toInt()
+        }
+
+        if(_blueprintViewModel.lunchUnits.value != null){
+            lunchUnitsInput = _blueprintViewModel.lunchUnits.value!!.toInt()
+        }
+
+        if(_blueprintViewModel.dinnerUnits.value != null){
+            dinnerUnitsInput = _blueprintViewModel.dinnerUnits.value!!.toInt()
+        }
+
+        if(_blueprintViewModel.morningSnackUnits.value != null){
+            morningSnackUnitsInput = _blueprintViewModel.morningSnackUnits.value!!.toInt()
+        }
+
+        if(_blueprintViewModel.eveningSnackUnits.value != null){
+            eveningSnackUnitsInput = _blueprintViewModel.eveningSnackUnits.value!!.toInt()
+        }
+
+
+        val blueprint = Blueprint(null, nameInput, descriptionInput, breakfastUnitsInput, lunchUnitsInput, dinnerUnitsInput, morningSnackUnitsInput, eveningSnackUnitsInput)
 
         Thread {
             blueprintDAO.insertAll(blueprint)
