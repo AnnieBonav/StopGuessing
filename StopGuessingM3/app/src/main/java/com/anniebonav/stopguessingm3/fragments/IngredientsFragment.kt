@@ -118,7 +118,6 @@ class IngredientsFragment : Fragment() {
         val builder = AlertDialog.Builder(_context)
         builder.setMessage("Are you sure you want to delete this ingredient?")
         builder.setPositiveButton("Yes"){ p0, p1 ->
-            Log.d("Annie", "Before")
             lifecycleScope.launch {
                 Thread{
                     val deletedIngredient = _ingredientDAO.getIngredient(ingredientId)
@@ -133,7 +132,6 @@ class IngredientsFragment : Fragment() {
             p0.dismiss()
         }
         builder.setNegativeButton("No"){p0, p1 ->
-            Log.d("Annie", "Dismiss")
             p0.dismiss()
         }
 

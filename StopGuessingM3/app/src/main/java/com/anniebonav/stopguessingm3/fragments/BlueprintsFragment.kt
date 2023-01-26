@@ -1,8 +1,10 @@
 package com.anniebonav.stopguessingm3.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +26,7 @@ import com.anniebonav.stopguessingm3.data.UIViewModel
 import com.anniebonav.stopguessingm3.data.ViewModelFactoryUI
 import com.anniebonav.stopguessingm3.databinding.FragmentBlueprintsBinding
 import com.anniebonav.stopguessingm3.recycler.BlueprintAdapter
+import kotlinx.coroutines.launch
 
 class BlueprintsFragment : Fragment() {
     private var _binding: FragmentBlueprintsBinding? = null
@@ -92,14 +96,28 @@ class BlueprintsFragment : Fragment() {
     }
 
     private fun deleteBlueprint(blueprintId: Int){
-        Thread{
-            val deletedBlueprint = _blueprintDAO.getBlueprint(blueprintId)
-            _blueprintDAO.delete(deletedBlueprint)
+        val builder = AlertDialog.Builder(_context)
+        builder.setMessage("Are you sure you want to delete this Blueprint?")
+        builder.setPositiveButton("Yes"){ p0, p1 ->
+            lifecycleScope.launch {
+                Thread{
+                    val deletedBlueprint = _blueprintDAO.getBlueprint(blueprintId)
+                    _blueprintDAO.delete(deletedBlueprint)
 
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${deletedBlueprint.name} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(activity as MainActivity, "${deletedBlueprint.name} successfully deleted!", Toast.LENGTH_SHORT).show()
+                    }
+                }.start()
+                onResume()
             }
-        }.start()
+            p0.dismiss()
+        }
+        builder.setNegativeButton("No"){p0, p1 ->
+            p0.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onDestroyView() {
