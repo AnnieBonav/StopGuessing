@@ -53,20 +53,12 @@ class BlueprintsFragment : Fragment() {
             _blueprintsRecycler.adapter = BlueprintAdapter(_context, blueprints, this::onBlueprintDeleteClicked, this::onBlueprintCardClicked, this::onBlueprintEditClicked)
         })
 
-        Thread{
-            val currentBlueprints = _blueprintDAO.getBlueprints()
-            if(currentBlueprints.isEmpty()){
-                createInitialBlueprint()
-            }else{
-                //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
-            }
-        }.start()
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        _context.openedMeals()
+        _context.openedBlueprints()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,11 +67,6 @@ class BlueprintsFragment : Fragment() {
         binding.addFab.setOnClickListener {
             findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment)
         }
-    }
-
-    private fun createInitialBlueprint(){
-        val initialBlueprint = Blueprint(null, "This is an initial Blueprint", "If you want to create a Blueprint, click on the + button!", 3, 2, 1, 0, 1)
-        _blueprintDAO.insertAll(initialBlueprint)
     }
 
     private fun onBlueprintCardClicked(blueprintId: Int){

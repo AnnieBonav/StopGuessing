@@ -3,6 +3,7 @@ package com.anniebonav.stopguessingm3
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -12,6 +13,8 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.anniebonav.stopguessingm3.data.Blueprints.Blueprint
+import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.data.MealPlan.MealPlanDao
@@ -25,13 +28,13 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var _bottomNavigationView: BottomNavigationView
-    private lateinit var _tabsNavigationView: TabLayout
-    private lateinit var _topBarView: TextView
+    lateinit var _tabsNavigationView: TabLayout
     private lateinit var _titleLayoutView: LinearLayout
     private lateinit var _navController: NavController
     private lateinit var _aboutButton: FloatingActionButton
     private lateinit var _ingredientDAO: IngredientDAO
     private lateinit var _mealPlanDAO: MealPlanDao
+    private lateinit var _blueprintDAO: BlueprintDAO
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +48,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         _navController = findNavController(R.id.nav_host_fragment_content_main)
-
-        _topBarView = binding.topBar
 
         _aboutButton = binding.aboutButton
         _aboutButton.setOnClickListener{ _navController.navigate(R.id.action_global_AboutFragment) }
@@ -62,13 +63,23 @@ class MainActivity : AppCompatActivity() {
             addInitialIngredients()
         }.start()
 
-        _titleLayoutView = binding.titleLayout
+        _titleLayoutView = binding.dateLayout
+        _titleLayoutView.visibility = View.VISIBLE
         setDayText()
+
+        _blueprintDAO = StopGuessingDatabase.getDatabase(applicationContext).blueprintDao()
+        Thread{
+            val currentBlueprints = _blueprintDAO.getBlueprints()
+            if(currentBlueprints.isEmpty()){
+                createInitialBlueprint()
+            }else{
+                //_ingredientDAO.delete(_ingredientDAO.getIngredient(1))
+            }
+        }.start()
 
         _mealPlanDAO = StopGuessingDatabase.getDatabase(applicationContext).mealPlanDao()
 
         handleHomeFragment()
-
     }
 
     private fun addsTabsNavigation(){
@@ -133,6 +144,7 @@ class MainActivity : AppCompatActivity() {
         Thread{
             val currentMealPlans = _mealPlanDAO.getMealPlans()
             if(currentMealPlans.isNotEmpty()){ //It always starts in Home, so, if it is empty, it does nothing, but if there are meal plans it changes to selected meal plan view
+
                 val selectedMealPlan = _mealPlanDAO.getSelectedMealPlan()
                 Handler(Looper.getMainLooper()).post {
                     openSelectedMealPlan(selectedMealPlan.uid!!)
@@ -191,31 +203,34 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun createInitialBlueprint(){//TODO: change creation here
-
+    private fun createInitialBlueprint(){
+        val initialBlueprint = Blueprint(null, "This is an initial Blueprint", "If you want to create a Blueprint, click on the + button!", 3, 2, 1, 0, 1)
+        _blueprintDAO.insertAll(initialBlueprint)
     }
 
     fun openedAbout(){
-        _topBarView.text = "About"
-        _topBarView.visibility = View.GONE
+        _titleLayoutView.visibility = View.GONE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.GONE
         _aboutButton.visibility = View.GONE
     }
 
     fun closedAbout(){
-        _topBarView.visibility = View.VISIBLE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
     }
 
     fun openedHome(titleVisible: Boolean){
-        if(titleVisible) _titleLayoutView.visibility = View.VISIBLE
-        else _titleLayoutView.visibility = View.GONE
+        if(titleVisible){
+            Log.d("I am here", "Visible")
+            _titleLayoutView.visibility = View.VISIBLE
+        }
+        else{
+            Log.d("I am here", "Else")
+            _titleLayoutView.visibility = View.GONE
+        }
 
-        _topBarView.text = "Home"
-        _topBarView.visibility = View.VISIBLE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
         _aboutButton.visibility = View.VISIBLE
@@ -224,18 +239,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openedIngredients(){
-        _topBarView.text = "Ingredients"
+        Log.d("I am here", "Ingredients")
         _titleLayoutView.visibility = View.GONE
         _tabsNavigationView.visibility = View.GONE
         _bottomNavigationView.visibility = View.VISIBLE
-        _aboutButton.visibility = View.VISIBLE
+        _aboutButton.visibility = View.GONE
     }
 
-    fun openedMeals(){
-        _topBarView.text = "Meals"
+    fun openedMealPlans(){
+        Log.d("I am here", "MealPlans")
         _titleLayoutView.visibility = View.GONE
         _tabsNavigationView.visibility = View.VISIBLE
         _bottomNavigationView.visibility = View.VISIBLE
-        _aboutButton.visibility = View.VISIBLE
+        _aboutButton.visibility = View.GONE
+        //_tabsNavigationView.selectTab(_tabsNavigationView.getTabAt(1))
+    }
+
+    fun openedBlueprints(){
+        Log.d("I am here", "Blueprints")
+        _titleLayoutView.visibility = View.GONE
+        _tabsNavigationView.visibility = View.VISIBLE
+        _bottomNavigationView.visibility = View.VISIBLE
+        _aboutButton.visibility = View.GONE
+        _tabsNavigationView.selectTab(_tabsNavigationView.getTabAt(0))
+    }
+
+    fun changeSelection(selected: Int){
+        _tabsNavigationView.selectTab(_tabsNavigationView.getTabAt(selected))
     }
 }

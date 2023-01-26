@@ -65,9 +65,6 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.addFab.setOnClickListener {
-            findNavController().navigate(R.id.action_IngredientsFragment_to_InteractsIngredientFragment)
-        }
     }
 
     //Not currently using card Clicked

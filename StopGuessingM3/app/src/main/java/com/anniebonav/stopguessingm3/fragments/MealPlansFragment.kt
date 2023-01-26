@@ -38,8 +38,6 @@ class MealPlansFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _context = activity as MainActivity
-
-
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
         _mealPlansRecycler = binding.mpRecycler
 
@@ -55,31 +53,38 @@ class MealPlansFragment : Fragment() {
             _mealPlansRecycler.adapter = MealPlanAdapter(_context, mealPlans, this::onMealPlanDeleteClicked, this::onMealPlanCardClicked, this::onMealPlanFavoriteClicked)
         })
 
-        Thread{
-            handleInitialMealPlan()
-        }.start()
+        handleInitialMealPlan()
 
         return binding.root
     }
 
     private fun handleInitialMealPlan(){
-        val currentMealPlans = _mealPlanDAO.getMealPlans()
-        if(currentMealPlans.isEmpty()){
-            Handler(Looper.getMainLooper()).post {
-                binding.initialMealPlan.visibility = View.VISIBLE
-                binding.selectedMealPlanTitle.visibility = View.GONE
+        Thread{
+            val currentMealPlans = _mealPlanDAO.getMealPlans()
+            if(currentMealPlans.isEmpty()){
+                Handler(Looper.getMainLooper()).post {
+                    binding.initialMealPlan.visibility = View.VISIBLE
+                    binding.selectedMealPlanTitle.visibility = View.GONE
+                }
+            }else{
+                Handler(Looper.getMainLooper()).post {
+                    binding.initialMealPlan.visibility = View.GONE
+                    binding.selectedMealPlanTitle.visibility = View.VISIBLE
+                }
             }
-        }else{
             Handler(Looper.getMainLooper()).post {
-                binding.initialMealPlan.visibility = View.GONE
-                binding.selectedMealPlanTitle.visibility = View.VISIBLE
+                _context.changeSelection(1) //Needs to be inside this thread cause binding fails when stuff from the parent is called before all the stuff from the fragment is finished
+                //So it first needs to be after the child stuff and then it needs to be on the thread and then on a handler to be on the main loop
             }
-        }
+        }.start()
     }
 
     override fun onStart() {
         super.onStart()
-        _context.openedMeals()
+        _context.openedMealPlans()
+        //Cannot call parent stuff here when child stuff is done elsewhere because it cries
+        //Exampel: _context._tabsNavigationView.selectTab(_context._tabsNavigationView.getTabAt(1))
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

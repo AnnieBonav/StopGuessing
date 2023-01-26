@@ -69,8 +69,6 @@ class ViewMealPlanFragment : Fragment() {
     private fun fillMealPlanInformation(selectedMealPlanId: Int){
         val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)
         val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
-        binding.mealPlanName.text = selectedMealPlan.mealPlanName
-        binding.blueprintName.text = blueprint.name
 
         val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
         val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
@@ -79,6 +77,8 @@ class ViewMealPlanFragment : Fragment() {
         val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
 
         Handler(Looper.getMainLooper()).post {
+            binding.mealPlanName.text = selectedMealPlan.mealPlanName
+            binding.blueprintName.text = blueprint.name
 
             binding.breakfastInformation.text = breakfastText
             binding.lunchInformation.text = lunchText
