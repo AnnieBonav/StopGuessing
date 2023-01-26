@@ -68,7 +68,7 @@ class BlueprintsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.addFab.setOnClickListener {
+        binding.createBlueprint.setOnClickListener {
             findNavController().navigate(R.id.action_BlueprintsFragment_to_InteractsBlueprintsFragment)
         }
     }

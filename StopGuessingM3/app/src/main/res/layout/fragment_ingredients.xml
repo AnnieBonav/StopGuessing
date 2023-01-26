@@ -34,4 +34,16 @@
         android:layout_marginHorizontal="8dp"
         tools:listitem="@layout/item_ingredient"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_new" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
