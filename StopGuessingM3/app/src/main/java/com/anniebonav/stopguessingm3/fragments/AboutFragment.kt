@@ -24,10 +24,16 @@ class AboutFragment : Fragment() {
         _context = activity as MainActivity
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.closeButton.setOnClickListener{
             Handler(Looper.getMainLooper()).post {
                 _context.closedAbout()
-                findNavController().navigateUp() //TODO: if stack is home, then change there
+                findNavController().navigateUp()
             }
         }
 
@@ -42,7 +48,6 @@ class AboutFragment : Fragment() {
         binding.openMealPlans.setOnClickListener{
             findNavController().navigate(R.id.action_AboutFragment_to_MealPlansFragment)
         }
-        return binding.root
     }
 
     override fun onStart() {

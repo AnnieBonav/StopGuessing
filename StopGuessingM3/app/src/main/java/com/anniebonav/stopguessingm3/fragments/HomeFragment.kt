@@ -29,18 +29,17 @@ class HomeFragment : Fragment() {
     ): View {
         _context = activity as MainActivity
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         _mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
 
-        binding.openMealPlans.setOnClickListener(){
-            //findNavController().navigate(R.id.action_global_BlueprintsFragment)
-            findNavController().navigate(R.id.action_global_MealPlansFragment)
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.openMealPlans.setOnClickListener(){
+            findNavController().navigate(R.id.action_global_MealPlansFragment)
+        }
     }
 
     override fun onStart() {

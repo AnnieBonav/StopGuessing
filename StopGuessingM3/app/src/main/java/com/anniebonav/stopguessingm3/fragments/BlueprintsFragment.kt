@@ -42,14 +42,13 @@ class BlueprintsFragment : Fragment() {
     ): View? {
         _context = activity as MainActivity
         _binding = FragmentBlueprintsBinding.inflate(inflater, container, false)
-
+        _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
 
         _blueprintsRecycler = binding.blueprintsRecycler
 
         val factory = ViewModelFactoryUI(_context);
         val model = ViewModelProvider(_context, factory).get(UIViewModel::class.java)
 
-        _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
         val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
         _blueprintsRecycler.layoutManager = linearLayoutManager
 

@@ -27,14 +27,14 @@ class ViewMealPlanFragment : Fragment() {
     private lateinit var _blueprintDAO: BlueprintDAO
     private lateinit var _ingredientDAO: IngredientDAO
 
+    private var _selectedMealPlanId: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
+        _selectedMealPlanId = arguments?.getInt("selectedMealPlan")!!
         var openedFromHome = arguments?.getInt("openedFromHome") //When they key is not found, the value passed is 0
-        Log.d("MealPlanFragment", "Opened from home: $openedFromHome")
 
 
         _context = activity as MainActivity
@@ -51,41 +51,46 @@ class ViewMealPlanFragment : Fragment() {
             binding.goBackButton.visibility = View.VISIBLE
         }
 
-        Thread{
-            fillMealPlanInformation(selectedMealPlanId!!)
-        }.start()
+        fillMealPlanInformation()
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.editMealPlanButton.setOnClickListener(){
-            editMealPlan(selectedMealPlanId!!)
+            editMealPlan(_selectedMealPlanId!!)
         }
 
         binding.goBackButton.setOnClickListener(){
             findNavController().navigateUp()
         }
-
-        return binding.root
     }
 
-    private fun fillMealPlanInformation(selectedMealPlanId: Int){
-        val selectedMealPlan = _mealPlanDao.getMealPlan(selectedMealPlanId!!)
-        val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
+    private fun fillMealPlanInformation(){
+        Thread{
+            val selectedMealPlan = _mealPlanDao.getMealPlan(_selectedMealPlanId!!)
+            val blueprint = _blueprintDAO.getBlueprint(selectedMealPlan.blueprintId!!)
 
-        val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
-        val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
-        val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
-        val morningSnackText = createText(selectedMealPlan.mealPlanMorningSnacks.toString().split(","))
-        val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
+            val breakfastText = createText(selectedMealPlan.mealPlanBreakfasts.toString().split(","))
+            val lunchText = createText(selectedMealPlan.mealPlanLunches.toString().split(","))
+            val dinnerText = createText(selectedMealPlan.mealPlanDinners.toString().split(","))
+            val morningSnackText = createText(selectedMealPlan.mealPlanMorningSnacks.toString().split(","))
+            val eveningSnackText = createText(selectedMealPlan.mealPlanEveningSnacks.toString().split(","))
 
-        Handler(Looper.getMainLooper()).post {
-            binding.mealPlanName.text = selectedMealPlan.mealPlanName
-            binding.blueprintName.text = blueprint.name
+            Handler(Looper.getMainLooper()).post {
+                binding.mealPlanName.text = selectedMealPlan.mealPlanName
+                binding.blueprintName.text = blueprint.name
 
-            binding.breakfastInformation.text = breakfastText
-            binding.lunchInformation.text = lunchText
-            binding.dinnerInformation.text = dinnerText
-            binding.morningSnackInformation.text = morningSnackText
-            binding.eveningSnackInformation.text = eveningSnackText
-        }
+                binding.breakfastInformation.text = breakfastText
+                binding.lunchInformation.text = lunchText
+                binding.dinnerInformation.text = dinnerText
+                binding.morningSnackInformation.text = morningSnackText
+                binding.eveningSnackInformation.text = eveningSnackText
+            }
+        }.start()
+
     }
 
     private fun editMealPlan(mealPlanId: Int){

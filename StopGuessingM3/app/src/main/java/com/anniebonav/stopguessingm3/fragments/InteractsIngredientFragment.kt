@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.anniebonav.stopguessingm3.MainActivity
 import com.anniebonav.stopguessingm3.R
 import com.anniebonav.stopguessingm3.StopGuessingDatabase
+import com.anniebonav.stopguessingm3.data.Blueprints.BlueprintDAO
 import com.anniebonav.stopguessingm3.data.Ingredients.Ingredient
 import com.anniebonav.stopguessingm3.data.Ingredients.IngredientDAO
 import com.anniebonav.stopguessingm3.data.UIViewModelInteractIngredient
@@ -27,6 +28,7 @@ class InteractsIngredientFragment : Fragment() {
     private lateinit var _context: MainActivity
 
     private val _ingredientViewModel: UIViewModelInteractIngredient by viewModels()
+    private lateinit var _ingredientDAO: IngredientDAO //Can do code cleanup
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +40,7 @@ class InteractsIngredientFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.ingredientsViewModel = _ingredientViewModel
 
-        val ingredientDao = StopGuessingDatabase.getDatabase(_context).ingredientDao()
+        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
 
         //Category Selector
         val categories = arrayOf("protein", "carbs", "fats")
@@ -92,7 +94,7 @@ class InteractsIngredientFragment : Fragment() {
             binding.crudActionButton.text = "Update Ingredient"
             binding.ingredientsInstruction.text = "Update Ingredient"
             Thread{
-                val selectedIngredient = ingredientDao.getIngredient(selectedIngredientId!!)
+                val selectedIngredient = _ingredientDAO.getIngredient(selectedIngredientId!!)
                 Handler(Looper.getMainLooper()).post {
                     _ingredientViewModel.currentIngredientName.value = selectedIngredient.ingredientName
                     _ingredientViewModel.currentIngredientCategory.value = selectedIngredient.ingredientCategory
@@ -102,21 +104,27 @@ class InteractsIngredientFragment : Fragment() {
             }.start()
 
             binding.crudActionButton.setOnClickListener(){
-                UpdateIngredient(ingredientDao, selectedIngredientId!!)
+                UpdateIngredient(_ingredientDAO, selectedIngredientId!!)
             }
         }else{
             binding.crudActionButton.text = "Add Ingredient"
             binding.ingredientsInstruction.text = "Add Ingredient"
 
             binding.crudActionButton.setOnClickListener(){
-                CreateIngredient(ingredientDao)
+                CreateIngredient(_ingredientDAO)
             }
         }
 
-        binding.goBackButton.setOnClickListener({
-            findNavController().navigate(R.id.action_InteractsIngredientFragment_to_IngredientsFragment)
-        })
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.goBackButton.setOnClickListener{
+            findNavController().navigateUp()
+        }
     }
 
     fun CreateIngredient(ingredientDAO: IngredientDAO){

@@ -42,12 +42,13 @@ class MealPlansFragment : Fragment() {
     ): View? {
         _context = activity as MainActivity
         _binding = FragmentMealPlansBinding.inflate(inflater, container, false)
+
+        _mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
         _mealPlansRecycler = binding.mpRecycler
 
         val mealPlansFactory = ViewModelFactoryUI(_context);
         val model = ViewModelProvider(_context, mealPlansFactory).get(UIViewModel::class.java)
 
-        _mealPlanDAO = StopGuessingDatabase.getDatabase(_context).mealPlanDao()
         val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
 
         _mealPlansRecycler.layoutManager = linearLayoutManager

@@ -47,10 +47,6 @@ class InteractsMealPlanFragment : Fragment() {
         _blueprintDAO = StopGuessingDatabase.getDatabase(_context).blueprintDao()
         _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
 
-        binding.goBackButton.setOnClickListener(){
-            findNavController().navigateUp()
-        }
-
         if(arguments != null){ //If I am sending arguments, it means that I am updating a meal pLan and not adding one. This way I reusse my View Model.
             var selectedMealPlanId = arguments?.getInt("selectedMealPlan")
             binding.mealPlanInstruction.text = "Update Meal Plan"
@@ -98,6 +94,14 @@ class InteractsMealPlanFragment : Fragment() {
             }.start()
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.goBackButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
     }
 
     fun CreateMealPlan(){

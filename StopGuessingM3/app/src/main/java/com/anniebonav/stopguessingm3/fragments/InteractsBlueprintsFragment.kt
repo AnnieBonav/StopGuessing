@@ -22,6 +22,8 @@ import com.anniebonav.stopguessingm3.databinding.FragmentInteractsBlueprintsBind
 class InteractsBlueprintsFragment : Fragment() {
     private var _binding: FragmentInteractsBlueprintsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var _context: MainActivity
+
     private val _blueprintViewModel: UIViewModelInteractBlueprint by viewModels()
     private lateinit var _blueprintDao: BlueprintDAO //Can do code cleanup
 
@@ -29,18 +31,15 @@ class InteractsBlueprintsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val context = activity as MainActivity
+        _context = activity as MainActivity
         _binding = FragmentInteractsBlueprintsBinding.inflate(inflater, container,false)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.blueprintsViewModel = _blueprintViewModel
 
-        _blueprintDao = StopGuessingDatabase.getDatabase(context).blueprintDao()
+        _blueprintDao = StopGuessingDatabase.getDatabase(_context).blueprintDao()
 
-        binding.goBackButton.setOnClickListener(){
-            findNavController().navigateUp()
-            Log.d("Blueprint", "Going up?")
-        }
+
 
         if(arguments != null){ //If I am sending arguments, it means that I am updating a blueprint and not adding one. This way I reuse my View Model.
             var selectedBlueprintId = arguments?.getInt("selectedBlueprint")
@@ -72,11 +71,15 @@ class InteractsBlueprintsFragment : Fragment() {
             }
         }
 
-        binding.goBackButton.setOnClickListener({
-            findNavController().navigate(R.id.action_InteractsBlueprintsFragment_to_BlueprintsFragment)
-        })
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.goBackButton.setOnClickListener{
+            findNavController().navigateUp()
+        }
     }
 
     fun CRUDBlueprint(selectedBlueprintId: Int?){ //If it exists, it will update and not create

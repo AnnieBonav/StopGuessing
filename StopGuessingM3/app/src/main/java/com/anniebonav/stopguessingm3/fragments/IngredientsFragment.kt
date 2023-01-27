@@ -42,12 +42,13 @@ class IngredientsFragment : Fragment() {
     ): View? {
         _context = activity as MainActivity
         _binding = FragmentIngredientsBinding.inflate(inflater, container, false)
+        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
+
         _ingredientsRecycler = binding.ingredientsRecycler
 
         val ingredientsFactory = ViewModelFactoryUI(_context)
         val model = ViewModelProvider(_context, ingredientsFactory).get(UIViewModel::class.java)
 
-        _ingredientDAO = StopGuessingDatabase.getDatabase(_context).ingredientDao()
         val linearLayoutManager = LinearLayoutManager(_context, LinearLayoutManager.VERTICAL, false)
         _ingredientsRecycler.layoutManager = linearLayoutManager
 
@@ -57,28 +58,6 @@ class IngredientsFragment : Fragment() {
             _ingredientsRecycler.adapter = IngredientAdapter(_context, sortedIngredients, this::onIngredientCardClicked, this::onIngredientEditClicked, this::onIngredientDeleteClicked)
         })
 
-        /*
-        //Popup example
-        binding.actionButton.setOnClickListener(){
-            val builder = AlertDialog.Builder(_context)
-            builder.setMessage("Are you sure you want to delete this ingredient?")
-            builder.setPositiveButton("Yes"){ p0, p1 ->
-                Log.d("Annie", "Before")
-                lifecycleScope.launch {
-                    Log.d("Annie", "Deleted")
-                    onResume()
-                }
-                p0.dismiss()
-            }
-            builder.setNegativeButton("No"){p0, p1 ->
-                Log.d("Annie", "Dismiss")
-                p0.dismiss()
-            }
-
-            val dialog = builder.create()
-            dialog.show()
-        }*/
-
         return binding.root
     }
 
@@ -86,7 +65,6 @@ class IngredientsFragment : Fragment() {
         super.onStart()
         _context.openedIngredients()
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,7 +74,6 @@ class IngredientsFragment : Fragment() {
         }
     }
 
-    //Not currently using card Clicked
     private fun onIngredientCardClicked(ingredientId: Int){
         openIngredient(ingredientId)
     }
@@ -149,3 +126,25 @@ class IngredientsFragment : Fragment() {
         _binding = null
     }
 }
+
+/*
+        //Popup example
+        binding.actionButton.setOnClickListener(){
+            val builder = AlertDialog.Builder(_context)
+            builder.setMessage("Are you sure you want to delete this ingredient?")
+            builder.setPositiveButton("Yes"){ p0, p1 ->
+                Log.d("Annie", "Before")
+                lifecycleScope.launch {
+                    Log.d("Annie", "Deleted")
+                    onResume()
+                }
+                p0.dismiss()
+            }
+            builder.setNegativeButton("No"){p0, p1 ->
+                Log.d("Annie", "Dismiss")
+                p0.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        }*/
