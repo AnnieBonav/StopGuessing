@@ -146,7 +146,7 @@ class InteractsIngredientFragment : Fragment() {
         Thread {
             ingredientDAO.update(ingredient)
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(activity as MainActivity, "${ingredient.ingredientName} successfully updated!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity as MainActivity, "${ingredient.ingredientName} successfully updated!", Toast.LENGTH_SHORT).show()
             }
         }.start()
 
