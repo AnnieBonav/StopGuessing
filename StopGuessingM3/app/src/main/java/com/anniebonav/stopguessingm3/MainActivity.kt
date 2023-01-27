@@ -28,7 +28,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var _bottomNavigationView: BottomNavigationView
-    lateinit var _tabsNavigationView: TabLayout
+    private lateinit var _tabsNavigationView: TabLayout
     private lateinit var _titleLayoutView: LinearLayout
     private lateinit var _navController: NavController
     private lateinit var _aboutButton: FloatingActionButton

@@ -289,7 +289,7 @@
 
                 </LinearLayout>
                 <Button
-                    android:id="@+id/deleteIngredientButton"
+                    android:id="@+id/deleteBlueprintButton"
                     android:layout_width="100dp"
                     android:layout_marginLeft="8dp"
                     android:layout_height="50dp"
