@@ -40,6 +40,7 @@ android {
 
 
 dependencies {
+    implementation 'androidx.core:core-ktx:+'
     def room_version = "2.4.3"
     def activity_version = "1.6.1"
     def fragment_version = "1.5.5"
